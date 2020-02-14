@@ -144,15 +144,24 @@ namespace Lotto
             {
                 StartBTN.Enabled = true;
             }
+            int.TryParse(AntalDrag.Text, out int limit);
+            if (limit > 9999999)
+            {
+                AntalDrag.Text = "9999999";
+            }
         }
 
         // Denna metod anropas när användaren trycker på startknappen.
         private void StartBTN_Click(object sender, EventArgs e)
         {
+
             // Ifall beräkningen tar lång tid, inaktivaveras start-knappen
             // för säkerhets skull så att användaren inte "köar" fler beräkningar.
+            // Verkar som det går att klicka ändå, hittar ingen lösning på detta...
+            StatusLabel.Text = "Arbetar...";
             StartBTN.Enabled = false;
-            
+            StartBTN.Click -= StartBTN_Click;
+
             // Eftersom AntalDrag redan blivit "verifierad" i AdjustInput-metoden
             // behöver vi inget try-ctach här.
             int antalDrag;
@@ -204,7 +213,11 @@ namespace Lotto
             FemRatt.Text = antal5Ratt.ToString();
             SexRatt.Text = antal6Ratt.ToString();
             SjuRatt.Text = antal7Ratt.ToString();
+
+            StatusLabel.Text = "";
+            StartBTN.Click += StartBTN_Click;
             StartBTN.Enabled = true;
+
         }
     }
 }

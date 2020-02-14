@@ -46,6 +46,8 @@
             this.SexRatt = new System.Windows.Forms.TextBox();
             this.SjuRatt = new System.Windows.Forms.TextBox();
             this.FelmeddelandeLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.StatusLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StartBTN
@@ -206,12 +208,33 @@
             this.FelmeddelandeLabel.Size = new System.Drawing.Size(0, 20);
             this.FelmeddelandeLabel.TabIndex = 18;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.DarkGray;
+            this.label1.Location = new System.Drawing.Point(197, 129);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(115, 20);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "(Max 9999999)";
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.ForeColor = System.Drawing.Color.DarkGray;
+            this.StatusLabel.Location = new System.Drawing.Point(476, 140);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(0, 20);
+            this.StatusLabel.TabIndex = 20;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(811, 243);
+            this.Controls.Add(this.StatusLabel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.FelmeddelandeLabel);
             this.Controls.Add(this.SjuRatt);
             this.Controls.Add(this.SexRatt);
@@ -257,6 +280,8 @@
         private System.Windows.Forms.TextBox SexRatt;
         private System.Windows.Forms.TextBox SjuRatt;
         private System.Windows.Forms.Label FelmeddelandeLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label StatusLabel;
     }
 }
 
