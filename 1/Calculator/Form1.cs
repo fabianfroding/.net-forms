@@ -5,7 +5,7 @@ namespace Calculator
 {
     public partial class MainForm : Form
     {
-        double value = 0; // Värdet som trycks in av användaren.
+        double value = 0; // Värdet som matas in av användaren.
         string operation = ""; // Variabel för att lagra vilket räknesätt som klickades.
         bool operationPressed = false; // Variabel för att avgöra om räknesätt-knappen har använts.
 
@@ -26,15 +26,28 @@ namespace Calculator
 
             // Återställ att räknesätts.knappen har tryks så vi kan tillåta fler inmatningar.
             operationPressed = false;
-            ResultTextBox.Text += (sender as Button).Text;
+
+            // Logik för att hantera försök av inmatning av flera decimaler.
+            if ((sender as Button).Text == ",")
+            {
+                if (!ResultTextBox.Text.Contains(","))
+                {
+                    ResultTextBox.Text += (sender as Button).Text;
+                }
+            }
+            else
+            {
+                ResultTextBox.Text += (sender as Button).Text;
+            }
+            
         }
 
         // Event-hanterare för klick på alla räknesätt-knappar.
         private void BTNOperator_Click(object sender, EventArgs e)
         {
             operation = (sender as Button).Text; // Lagra räknesättet i variabel.
-            value = double.Parse(ResultTextBox.Text);
 
+            value = double.Parse(ResultTextBox.Text);
             // Sätt operationPressed till true för att förhindra att den tidigare inmatade numret
             // ligger kvar och ett nytt nummer kan matas in
             operationPressed = true;
@@ -55,7 +68,7 @@ namespace Calculator
         // Eventhanterare för klick på lika-med-knappen.
         private void BTNEqual_Click(object sender, EventArgs e)
         {
-            // Töm ekvatins-textrutan då vi utför beräkningen.
+            // Töm ekvations-textrutan då vi utför beräkningen.
             EquationLabel.Text = "";
             // Switch-case statement för att hantera de olika räknesätten.
            switch (operation)
@@ -81,7 +94,6 @@ namespace Calculator
                 default:
                     break;
             }
-            
                 
         }
     }
