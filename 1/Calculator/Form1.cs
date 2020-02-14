@@ -94,6 +94,7 @@ namespace Calculator
                 default:
                     break;
             }
+            value = 0;
                 
         }
     }
