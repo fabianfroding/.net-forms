@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TextEditor
 {
     public partial class MainForm : Form
     {
-        private bool modified;
+        
+        private bool modified; // Sätts till true när text ändras.
         
         public MainForm()
         {
             InitializeComponent();
+            this.Text = "New File";
             modified = false;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            saveFileBeforeClosing();
+            // TODO: If user chooses to save current file before creating new one
+            // It is saved, but new one isnt created.
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -33,6 +30,7 @@ namespace TextEditor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // TODO save file bfore closing
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Text files (.txt)|*.txt";
             ofd.Title = "Open File";
@@ -45,6 +43,12 @@ namespace TextEditor
             this.Text = Path.GetFileName(ofd.FileName);
             modified = false;
         }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileBeforeClosing();
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -58,6 +62,36 @@ namespace TextEditor
             }
             this.Text = Path.GetFileName(sfd.FileName);
             modified = false;
+        }
+
+        // Denna funktion anropas när användaren försöker öppna, stänga eller
+        // skapa en ny fil och frågar om potentiella ändringar önskas sparas.
+        // Detta sker endast om den nuvarande filen är ändrad*.
+        private void saveFileBeforeClosing()
+        {
+            if (modified)
+            {
+                DialogResult dR = MessageBox.Show("Save your changes to current file?", "Save changes?", MessageBoxButtons.YesNoCancel);
+                if (dR == DialogResult.Yes)
+                {
+                    saveToolStripMenuItem.PerformClick();
+                }
+                else if (dR == DialogResult.No)
+                {
+                    // Om användaren valt att skapa ny eller stänga en fil så sätter vi
+                    // titeln till "New File".
+                    // Om användaren valt att öppna en existerande fil så gör det inget
+                    // att titeln sätts till "New File" eftersom den kommer överskridas
+                    // av den nya filmens namn i funktionen som anropat denna funktion.
+                    this.Text = "New File";
+                    clearText();
+                }
+            }
+            else
+            {
+                this.Text = "New File";
+                clearText();
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,6 +136,16 @@ namespace TextEditor
                 this.Text = this.Text + "*";
                 modified = true;
             }
+        }
+
+        private void clearText()
+        {
+            // I vissa fall vill vi rensa texten, t.ex. när vi stänger eller skapar
+            // ny fil. För att förhindra att texten tolkas som att den ändras så 
+            // sätter vi modified temporärt till true.
+            modified = true;
+            richTextBox1.Clear();
+            modified = false;
         }
     }
 }
