@@ -6,8 +6,10 @@ namespace TextEditor
 {
     public partial class MainForm : Form
     {
-        
-        private bool modified; // Sätts till true när text ändras.
+
+        // modified sätts till true när text ändras och till false när en fil inte har
+        // några ändringar.
+        private bool modified;
         
         public MainForm()
         {
@@ -18,9 +20,13 @@ namespace TextEditor
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileBeforeClosing();
-            // TODO: If user chooses to save current file before creating new one
-            // It is saved, but new one isnt created.
+            if (saveFileBeforeClosing() == "yes")
+            {
+                // Om användaren valt att spara en modifierad* fil innan en ny skapas
+                // så rensar vi textrutan och sätter titeln till new file.
+                clearText();
+                this.Text = "New File";
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -30,18 +36,23 @@ namespace TextEditor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO save file bfore closing
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Text files (.txt)|*.txt";
-            ofd.Title = "Open File";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            // Om användaren väljer något annat än "cancel" hoppar vi helt över
+            // att öppna dialogen för att öppna existerande fil.
+            string option = saveFileBeforeClosing();
+            if (option != "cancel" || option == null)
             {
-                System.IO.StreamReader sr = new System.IO.StreamReader(ofd.FileName);
-                richTextBox1.Text = sr.ReadToEnd();
-                sr.Close();
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Text files (.txt)|*.txt";
+                ofd.Title = "Open File";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    System.IO.StreamReader sr = new System.IO.StreamReader(ofd.FileName);
+                    richTextBox1.Text = sr.ReadToEnd();
+                    sr.Close();
+                    this.Text = Path.GetFileName(ofd.FileName);
+                    modified = false;
+                }
             }
-            this.Text = Path.GetFileName(ofd.FileName);
-            modified = false;
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,15 +70,18 @@ namespace TextEditor
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(sfd.FileName);
                 sw.Write(richTextBox1.Text);
                 sw.Close();
+                this.Text = Path.GetFileName(sfd.FileName);
+                modified = false;
             }
-            this.Text = Path.GetFileName(sfd.FileName);
-            modified = false;
+            
         }
 
         // Denna funktion anropas när användaren försöker öppna, stänga eller
         // skapa en ny fil och frågar om potentiella ändringar önskas sparas.
         // Detta sker endast om den nuvarande filen är ändrad*.
-        private void saveFileBeforeClosing()
+        // Återger true om användaren svarar Ja, och false om användaren svarar
+        // Nej eller Cancel.
+        private string saveFileBeforeClosing()
         {
             if (modified)
             {
@@ -75,6 +89,7 @@ namespace TextEditor
                 if (dR == DialogResult.Yes)
                 {
                     saveToolStripMenuItem.PerformClick();
+                    return "yes";
                 }
                 else if (dR == DialogResult.No)
                 {
@@ -85,12 +100,18 @@ namespace TextEditor
                     // av den nya filmens namn i funktionen som anropat denna funktion.
                     this.Text = "New File";
                     clearText();
+                    return "no";
+                }
+                else
+                {
+                    return "cancel";
                 }
             }
             else
             {
                 this.Text = "New File";
                 clearText();
+                return null;
             }
         }
 
