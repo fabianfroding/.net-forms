@@ -157,7 +157,36 @@ namespace TextEditor
                 this.Text = this.Text + "*";
                 modified = true;
             }
+            updateStatsRTB();
         }
+
+        private void updateStatsRTB()
+        {
+            StatsRTB.Text = $"Bokstäver {countLetters(true)}" +
+                $"\nBokstäver (utan mellanslag): {countLetters(false)}";
+        }
+
+        private int countLetters(bool includeSpaces)
+        {
+            int count = 0;
+            if (includeSpaces)
+            {
+                count = richTextBox1.Text.Length;
+            }
+            else
+            {
+                for (int i = 0; i < richTextBox1.Text.Length; i++)
+                {
+                    if (richTextBox1.Text[i] != ' ')
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        
 
         private void clearText()
         {
