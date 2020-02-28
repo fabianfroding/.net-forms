@@ -6,32 +6,35 @@ namespace TextEditor
 {
     public partial class MainForm : Form
     {
+        private bool modified; // Håller info om filen är redigerad eller "orörd".
+        private bool newFile; // Sparar info om filen är ny eller existerande.
+        private FileHandler fileHandler;
+        private StringHandler stringHandler; // Klass som hanterar string-uppgifter.
 
-        // modified sätts till true när text ändras och till false när en fil inte har
-        // några ändringar.
-        private bool modified;
-        
         public MainForm()
         {
             InitializeComponent();
-            this.Text = "New File";
+            fileHandler = new FileHandler();
+            stringHandler = new StringHandler();
+            this.Text = "New File.txt";
             modified = false;
+            newFile = true;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileBeforeClosing() == "yes")
+            string temp = saveFileBeforeClosing();
+            if (temp == "yes")
             {
-                // Om användaren valt att spara en modifierad* fil innan en ny skapas
+                // Om användaren valt att spara en redigerad* fil innan en ny skapas
                 // så rensar vi textrutan och sätter titeln till new file.
                 clearText();
-                this.Text = "New File";
+                this.Text = "New File.txt";
             }
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            if (temp != "cancel")
+            {
+                newFile = true;
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,28 +55,69 @@ namespace TextEditor
                     this.Text = Path.GetFileName(ofd.FileName);
                     modified = false;
                 }
+                newFile = false;
             }
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileBeforeClosing();
+            if (saveFileBeforeClosing() != "cancel")
+            {
+                newFile = true;
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (newFile)
+            {
+                saveAsToolStripMenuItem.PerformClick();
+            }
+            else
+            {
+                try
+                {
+                    this.Text = this.Text.Replace("*", "");
+                    //System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), this.Text);
+                    fileHandler.saveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + this.Text, richTextBox1.Text);
+                    modified = false;
+                    newFile = false;
+                }
+                catch (UnauthorizedAccessException uAE)
+                {
+                    System.Diagnostics.Debug.Write("Access to save location is denied");
+                }
+            }
+            
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Text files (.txt)|*.txt";
             sfd.Title = "Save File";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                System.IO.StreamWriter sw = new System.IO.StreamWriter(sfd.FileName);
-                sw.Write(richTextBox1.Text);
-                sw.Close();
+                fileHandler.saveFile(sfd.FileName, richTextBox1.Text);
                 this.Text = Path.GetFileName(sfd.FileName);
                 modified = false;
+                newFile = false;
             }
-            
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (!modified)
+            {
+                this.Text = this.Text + "*";
+                modified = true;
+            }
+            updateStatsRTB();
         }
 
         // Denna funktion anropas när användaren försöker öppna, stänga eller
@@ -98,7 +142,7 @@ namespace TextEditor
                     // Om användaren valt att öppna en existerande fil så gör det inget
                     // att titeln sätts till "New File" eftersom den kommer överskridas
                     // av den nya filmens namn i funktionen som anropat denna funktion.
-                    this.Text = "New File";
+                    this.Text = "New File.txt";
                     clearText();
                     return "no";
                 }
@@ -109,17 +153,31 @@ namespace TextEditor
             }
             else
             {
-                this.Text = "New File";
+                this.Text = "New File.txt";
                 clearText();
                 return null;
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        // Uppdaterar texten i rutan som visar antal bokstäver, ord och rader.
+        private void updateStatsRTB()
         {
-            saveToolStripMenuItem.PerformClick();
+            StatsRTB.Text = $"Bokstäver {stringHandler.countLetters(richTextBox1.Text, true)}" +
+                $"\nBokstäver (utan mellanslag): {stringHandler.countLetters(richTextBox1.Text, false)}";
         }
 
+        private void clearText()
+        {
+            // I vissa fall vill vi rensa texten, t.ex. när vi stänger eller skapar
+            // ny fil. För att förhindra att texten tolkas som att den ändras så 
+            // sätter vi modified temporärt till true.
+            modified = true;
+            richTextBox1.Clear();
+            modified = false;
+        }
+
+        // ==================================================
+        // Grundläggade text-funktioner.
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.Undo();
@@ -149,53 +207,7 @@ namespace TextEditor
         {
             richTextBox1.SelectAll();
         }
+        // ==================================================
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (!modified)
-            {
-                this.Text = this.Text + "*";
-                modified = true;
-            }
-            updateStatsRTB();
-        }
-
-        private void updateStatsRTB()
-        {
-            StatsRTB.Text = $"Bokstäver {countLetters(true)}" +
-                $"\nBokstäver (utan mellanslag): {countLetters(false)}";
-        }
-
-        private int countLetters(bool includeSpaces)
-        {
-            int count = 0;
-            if (includeSpaces)
-            {
-                count = richTextBox1.Text.Length;
-            }
-            else
-            {
-                for (int i = 0; i < richTextBox1.Text.Length; i++)
-                {
-                    if (richTextBox1.Text[i] != ' ')
-                    {
-                        count++;
-                    }
-                }
-            }
-            return count;
-        }
-
-        
-
-        private void clearText()
-        {
-            // I vissa fall vill vi rensa texten, t.ex. när vi stänger eller skapar
-            // ny fil. För att förhindra att texten tolkas som att den ändras så 
-            // sätter vi modified temporärt till true.
-            modified = true;
-            richTextBox1.Clear();
-            modified = false;
-        }
     }
 }
