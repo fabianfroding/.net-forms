@@ -85,7 +85,7 @@ namespace TextEditor
                 }
                 catch (UnauthorizedAccessException uAE)
                 {
-                    System.Diagnostics.Debug.Write("Access to save location is denied");
+                    System.Diagnostics.Debug.Write("Problem when saving file: " + uAE.Message);
                 }
             }
             
@@ -163,7 +163,8 @@ namespace TextEditor
         private void updateStatsRTB()
         {
             StatsRTB.Text = $"Bokstäver {stringHandler.countLetters(richTextBox1.Text, true)}" +
-                $"\nBokstäver (utan mellanslag): {stringHandler.countLetters(richTextBox1.Text, false)}";
+                $"\nBokstäver (utan mellanslag): {stringHandler.countLetters(richTextBox1.Text, false)}" +
+                $"\nOrd: {stringHandler.countWords(richTextBox1.Text)}";
         }
 
         private void clearText()
