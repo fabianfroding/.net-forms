@@ -61,8 +61,16 @@ namespace TextEditor
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileBeforeClosing() != "cancel")
+            string temp = saveFileBeforeClosing();
+            if (temp != "cancel")
             {
+                newFile = true;
+            }
+            if (temp == "yes")
+            {
+                clearText();
+                this.Text = "New File.txt";
+                modified = false;
                 newFile = true;
             }
         }
@@ -78,8 +86,7 @@ namespace TextEditor
                 try
                 {
                     this.Text = this.Text.Replace("*", "");
-                    //System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), this.Text);
-                    fileHandler.saveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + this.Text, richTextBox1.Text);
+                    fileHandler.saveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + this.Text, richTextBox1.Text);
                     modified = false;
                     newFile = false;
                 }
