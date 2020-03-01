@@ -171,7 +171,8 @@ namespace TextEditor
         {
             StatsRTB.Text = $"Bokstäver {stringHandler.countLetters(richTextBox1.Text, true)}" +
                 $"\nBokstäver (utan mellanslag): {stringHandler.countLetters(richTextBox1.Text, false)}" +
-                $"\nOrd: {stringHandler.countWords(richTextBox1.Text)}";
+                $"\nOrd: {stringHandler.countWords(richTextBox1.Text)}" +
+                $"\nRader: {stringHandler.countLines(richTextBox1.Text)}";
         }
 
         private void clearText()

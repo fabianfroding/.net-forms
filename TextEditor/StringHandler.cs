@@ -26,6 +26,8 @@ public class StringHandler
         return count;
     }
 
+    // Skapade en egen algorithm här som tar hänsyn till flera konsekutiva mellanslag
+    // eftersom .Split-funktionen ej gör det.
     public int countWords(string s)
     {
         int length = s.Length;
@@ -71,8 +73,15 @@ public class StringHandler
     // Maybe needs to take a file.
     public int countLines(string s)
     {
-
-        return 0;
+        int count = 1;
+        foreach (var c in s)
+        {
+            if (c == '\n' || c == '\r')
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
