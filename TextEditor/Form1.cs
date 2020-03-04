@@ -21,6 +21,14 @@ namespace TextEditor
             newFile = true;
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Eftersom logiken om att spara ny eller existerande fil redan finns i
+            // saveToolStripMenuItem_Click, så kan vi återanvända den här genom
+            // att helt enkelt anropa funktionen.
+            saveToolStripMenuItem.PerformClick();
+        }
+
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string temp = saveFileBeforeClosing();
@@ -216,6 +224,7 @@ namespace TextEditor
         {
             richTextBox1.SelectAll();
         }
+
         // ==================================================
 
     }
