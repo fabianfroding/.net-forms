@@ -19,6 +19,11 @@ namespace TextEditor
             this.Text = "New File.txt";
             modified = false;
             newFile = true;
+
+            // Initialisering av drag and drop for richTextBox1.
+            richTextBox1.EnableAutoDragDrop = true;
+            this.richTextBox1.DragEnter += new DragEventHandler(this.richTextBox1_DragEnter);
+            this.richTextBox1.DragDrop += new DragEventHandler(richTextBox1_DragDrop);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -57,7 +62,7 @@ namespace TextEditor
                 ofd.Title = "Open File";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    System.IO.StreamReader sr = new System.IO.StreamReader(ofd.FileName);
+                    StreamReader sr = new StreamReader(ofd.FileName);
                     richTextBox1.Text = sr.ReadToEnd();
                     sr.Close();
                     this.Text = Path.GetFileName(ofd.FileName);
@@ -223,6 +228,38 @@ namespace TextEditor
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.SelectAll();
+        }
+
+        // ==================================================
+
+        // ==================================================
+        // Drag and drop funktioner.
+
+        private void richTextBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void richTextBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files)
+            {
+                System.Diagnostics.Debug.WriteLine(file);
+                /*
+                StreamReader sr = new StreamReader(file);
+                richTextBox1.Text = sr.ReadToEnd();
+                sr.Close();
+                this.Text = Path.GetFileName(file);
+                modified = false;
+                newFile = false;
+                */
+            }
+            
+        }
         }
 
         // ==================================================
