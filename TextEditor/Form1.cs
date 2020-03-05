@@ -10,6 +10,7 @@ namespace TextEditor
         private bool newFile; // Sparar info om filen är ny eller existerande.
         private FileHandler fileHandler;
         private StringHandler stringHandler; // Klass som hanterar string-uppgifter.
+        private string currentText; // Sparar text innan drag and drop aktiveras.
 
         public MainForm()
         {
@@ -21,7 +22,7 @@ namespace TextEditor
             newFile = true;
 
             // Initialisering av drag and drop for richTextBox1.
-            richTextBox1.EnableAutoDragDrop = true;
+            richTextBox1.AllowDrop = true;
             this.richTextBox1.DragEnter += new DragEventHandler(this.richTextBox1_DragEnter);
             this.richTextBox1.DragDrop += new DragEventHandler(richTextBox1_DragDrop);
         }
@@ -239,30 +240,35 @@ namespace TextEditor
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                e.Effect = DragDropEffects.Copy;
+                currentText = richTextBox1.Text;
+                System.Diagnostics.Debug.WriteLine(currentText);
             }
         }
 
         private void richTextBox1_DragDrop(object sender, DragEventArgs e)
         {
+            
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            foreach (string file in files)
+
+            // Eftersom vi endast vill öppna en fil tar vi bara file[0].
+            if (files.Length == 1)
             {
-                System.Diagnostics.Debug.WriteLine(file);
-                /*
-                StreamReader sr = new StreamReader(file);
+                StreamReader sr = new StreamReader(files[0]);
                 richTextBox1.Text = sr.ReadToEnd();
                 sr.Close();
-                this.Text = Path.GetFileName(file);
-                modified = false;
+
+                this.Text = Path.GetFileName(files[0]);
                 newFile = false;
-                */
+                modified = false;
+                this.Text = this.Text.Replace("*", "");
             }
-            
+            else
+            {
+                MessageBox.Show("Endast en fil kan laddas per gång");
+            }
         }
-        }
+    }
 
         // ==================================================
 
-    }
 }
