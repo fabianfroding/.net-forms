@@ -8,9 +8,10 @@ namespace TextEditor
     {
         private bool modified; // Håller info om filen är redigerad eller "orörd".
         private bool newFile; // Sparar info om filen är ny eller existerande.
-        private FileHandler fileHandler;
+        private FileHandler fileHandler; // Klass som var tänkt hantera fil-upgifter.
         private StringHandler stringHandler; // Klass som hanterar string-uppgifter.
         private string currentText; // Sparar text innan drag and drop aktiveras.
+        private bool fileDropped = false; // En variabel för att veta om en fil "droppats".
 
         public MainForm()
         {
@@ -23,16 +24,21 @@ namespace TextEditor
 
             // Initialisering av drag and drop for richTextBox1.
             richTextBox1.AllowDrop = true;
-            this.richTextBox1.DragEnter += new DragEventHandler(this.richTextBox1_DragEnter);
             this.richTextBox1.DragDrop += new DragEventHandler(richTextBox1_DragDrop);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Eftersom logiken om att spara ny eller existerande fil redan finns i
-            // saveToolStripMenuItem_Click, så kan vi återanvända den här genom
-            // att helt enkelt anropa funktionen.
-            saveToolStripMenuItem.PerformClick();
+            // Om befintlig fil är redigerad anropar vi saveAs funktionen,
+            // annars bara save (den sparas direkt).
+            if (modified)
+            {
+                saveAsToolStripMenuItem.PerformClick();
+            }
+            else
+            {
+                saveAsToolStripMenuItem.PerformClick();
+            }
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -133,11 +139,13 @@ namespace TextEditor
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            if (!modified)
+            if (!modified && !fileDropped)
             {
                 this.Text = this.Text + "*";
                 modified = true;
+                
             }
+            fileDropped = false;
             updateStatsRTB();
         }
 
@@ -235,37 +243,56 @@ namespace TextEditor
 
         // ==================================================
         // Drag and drop funktioner.
-
-        private void richTextBox1_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                currentText = richTextBox1.Text;
-                System.Diagnostics.Debug.WriteLine(currentText);
-            }
-        }
-
         private void richTextBox1_DragDrop(object sender, DragEventArgs e)
         {
-            
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-            // Eftersom vi endast vill öppna en fil tar vi bara file[0].
-            if (files.Length == 1)
+            try
             {
-                StreamReader sr = new StreamReader(files[0]);
-                richTextBox1.Text = sr.ReadToEnd();
-                sr.Close();
-
-                this.Text = Path.GetFileName(files[0]);
-                newFile = false;
-                modified = false;
-                this.Text = this.Text.Replace("*", "");
+                // Eftersom vi endast vill öppna en fil tar vi bara file[0].
+                if (files.Length == 1)
+                {
+                    StreamReader sr = new StreamReader(files[0]);
+                    if (ModifierKeys.HasFlag(Keys.Control))
+                    {
+                        richTextBox1.Text += sr.ReadToEnd();
+                        newFile = false;
+                        modified = true;
+                    }
+                    else if (ModifierKeys.HasFlag(Keys.Shift))
+                    {
+                        richTextBox1.Text = richTextBox1.Text.Insert(richTextBox1.SelectionStart, sr.ReadToEnd());
+                        newFile = false;
+                        modified = true;
+                    }
+                    else
+                    {
+                        // Av någon anledning så läggs * i filnamnet till när en fil "droppas", även
+                        // om modified sätt till true och sedan sätts tillbaka.
+                        // Var tvungen att åtgärda detta genom en ytterligare variabel som adderar
+                        // ännu mer onödig logik och komplexitet till programmet.
+                        // Hade säkert gått att förenkla men hade ej tid till att finslipa detta.
+                        // I slutänden fungerar programmet och det är huvudsaken.
+                        fileDropped = true;
+                        richTextBox1.Text = sr.ReadToEnd();
+                        this.Text = Path.GetFileName(files[0]);
+                        newFile = false;
+                        modified = false;
+                    }
+                    sr.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Endast en fil kan laddas.");
+                }
+                
+                
             }
-            else
+            catch (NullReferenceException nRE)
             {
-                MessageBox.Show("Endast en fil kan laddas per gång");
+                System.Diagnostics.Debug.WriteLine("Problem opening file: " + nRE.Message);
             }
+            
+            
         }
     }
 
