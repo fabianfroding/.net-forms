@@ -8,15 +8,12 @@ namespace TextEditor
     {
         private bool modified; // Håller info om filen är redigerad eller "orörd".
         private bool newFile; // Sparar info om filen är ny eller existerande.
-        private FileHandler fileHandler; // Klass som var tänkt hantera fil-upgifter.
         private StringHandler stringHandler; // Klass som hanterar string-uppgifter.
-        private string currentText; // Sparar text innan drag and drop aktiveras.
         private bool fileDropped = false; // En variabel för att veta om en fil "droppats".
 
         public MainForm()
         {
             InitializeComponent();
-            fileHandler = new FileHandler();
             stringHandler = new StringHandler();
             this.Text = "New File.txt";
             modified = false;
@@ -27,20 +24,33 @@ namespace TextEditor
             this.richTextBox1.DragDrop += new DragEventHandler(richTextBox1_DragDrop);
         }
 
+        // Stängning med X-rutan.
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Om befintlig fil är redigerad anropar vi saveAs funktionen,
-            // annars bara save (den sparas direkt).
+            // Om den befintliga filen är redigerad frågar vi användaren om filen önskas
+            // sparas.
+            // Om användaren svarar ja och det är en ny fil som inte "existerar", finns
+            // möjlighet att "spara som", annars om filen redan existerar sparas den
+            // direkt till den existerande filen.
             if (modified)
             {
-                saveAsToolStripMenuItem.PerformClick();
+                DialogResult dR = MessageBox.Show("Spara fil innan programmet stängs?", "Spara", MessageBoxButtons.YesNo);
+                if (dR == DialogResult.Yes)
+                {
+                    if (newFile)
+                    {
+                        saveAsToolStripMenuItem.PerformClick();
+                    }
+                    else
+                    {
+                        saveToolStripMenuItem.PerformClick();
+                    }
+                }
             }
-            else
-            {
-                saveAsToolStripMenuItem.PerformClick();
-            }
+            
         }
 
+        // New File
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string temp = saveFileBeforeClosing();
@@ -57,6 +67,7 @@ namespace TextEditor
             }
         }
 
+        // Open File
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Om användaren väljer något annat än "cancel" hoppar vi helt över
@@ -79,6 +90,7 @@ namespace TextEditor
             }
         }
 
+        // Close File
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string temp = saveFileBeforeClosing();
@@ -95,6 +107,7 @@ namespace TextEditor
             }
         }
 
+        // Save File
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (newFile)
@@ -106,7 +119,7 @@ namespace TextEditor
                 try
                 {
                     this.Text = this.Text.Replace("*", "");
-                    fileHandler.saveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + this.Text, richTextBox1.Text);
+                    saveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + this.Text, richTextBox1.Text);
                     modified = false;
                     newFile = false;
                 }
@@ -118,6 +131,7 @@ namespace TextEditor
             
         }
 
+        // Save File As
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -125,18 +139,20 @@ namespace TextEditor
             sfd.Title = "Save File";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                fileHandler.saveFile(sfd.FileName, richTextBox1.Text);
+                saveFile(sfd.FileName, richTextBox1.Text);
                 this.Text = Path.GetFileName(sfd.FileName);
                 modified = false;
                 newFile = false;
             }
         }
 
+        // Exit
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        // Ändring av text i textrutan
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
             if (!modified && !fileDropped)
@@ -152,8 +168,10 @@ namespace TextEditor
         // Denna funktion anropas när användaren försöker öppna, stänga eller
         // skapa en ny fil och frågar om potentiella ändringar önskas sparas.
         // Detta sker endast om den nuvarande filen är ändrad*.
-        // Återger true om användaren svarar Ja, och false om användaren svarar
-        // Nej eller Cancel.
+        // Återger "yes" om användaren svarar Ja, och "no" om användaren svarar
+        // Nej och "cancel" om användaren ångrar sig.
+        // Beroende på valet så återges en av dessa strings för att programmet ska veta
+        // vilken uppgift som ska utföras.
         private string saveFileBeforeClosing()
         {
             if (modified)
@@ -197,6 +215,7 @@ namespace TextEditor
                 $"\nRader: {stringHandler.countLines(richTextBox1.Text)}";
         }
 
+        // Rensing av textbox.
         private void clearText()
         {
             // I vissa fall vill vi rensa texten, t.ex. när vi stänger eller skapar
@@ -207,39 +226,13 @@ namespace TextEditor
             modified = false;
         }
 
-        // ==================================================
-        // Grundläggade text-funktioner.
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        // Sparar en fil.
+        private void saveFile(string fileName, string text)
         {
-            richTextBox1.Undo();
+            StreamWriter sw = new StreamWriter(fileName);
+            sw.Write(text);
+            sw.Close();
         }
-
-        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Redo();
-        }
-
-        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Cut();
-        }
-
-        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Copy();
-        }
-
-        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Paste();
-        }
-
-        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.SelectAll();
-        }
-
-        // ==================================================
 
         // ==================================================
         // Drag and drop funktioner.
@@ -284,18 +277,49 @@ namespace TextEditor
                 {
                     MessageBox.Show("Endast en fil kan laddas.");
                 }
-                
-                
+
+
             }
             catch (NullReferenceException nRE)
             {
                 System.Diagnostics.Debug.WriteLine("Problem opening file: " + nRE.Message);
             }
-            
-            
+
+
         }
-    }
 
         // ==================================================
+        // Grundläggade text-funktioner.
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Redo();
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Cut();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Copy();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Paste();
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+        }
+        // ==================================================
+    }
 
 }

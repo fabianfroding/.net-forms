@@ -70,7 +70,6 @@ public class StringHandler
         return count;
     }
 
-    // Maybe needs to take a file.
     public int countLines(string s)
     {
         int count = 1;
