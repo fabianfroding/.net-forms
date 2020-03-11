@@ -8,12 +8,21 @@ namespace MediaShop.Models
 {
     class Product
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public double price { get; set; }
+        private int id { get; set; }
+        private string name { get; set; }
+        private double price { get; set; }
+        private Type type { get; set; }
 
         public Product()
         {
+        }
+
+        enum Type
+        {
+            BOOK,
+            CD,
+            DVD,
+            GAME
         }
     }
 }
