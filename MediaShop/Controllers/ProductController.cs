@@ -1,19 +1,14 @@
-﻿using MediaShop.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediaShop.Repositories;
 
 namespace MediaShop
 {
     class ProductController
     {
-        private ProductService productService;
+        private ProductRepository productRepository;
 
         public ProductController()
         {
-            productService = new ProductService();
+            productRepository = new ProductRepository();
         }
     }
 }

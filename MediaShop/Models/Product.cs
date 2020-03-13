@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaShop.Models
+﻿namespace MediaShop.Models
 {
     class Product
     {
-        private int id { get; set; }
-        private string name { get; set; }
-        private double price { get; set; }
-        private Type type { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public double price { get; set; }
+        public Type type { get; set; }
 
         public Product()
         {
         }
 
-        enum Type
+        public enum Type
         {
             BOOK,
             CD,
