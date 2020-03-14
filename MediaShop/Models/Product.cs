@@ -5,6 +5,7 @@
         public int id { get; set; }
         public string name { get; set; }
         public double price { get; set; }
+        public int stock { get; set; }
         public Type type { get; set; }
 
         public Product()
@@ -16,7 +17,8 @@
             BOOK,
             CD,
             DVD,
-            GAME
+            GAME,
+            OTHER
         }
     }
 }
