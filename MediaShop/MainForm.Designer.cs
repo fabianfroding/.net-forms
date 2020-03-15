@@ -30,6 +30,8 @@
         {
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.BTNExit = new System.Windows.Forms.Button();
+            this.BTNNewProduct = new System.Windows.Forms.Button();
+            this.ListBoxProducts = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // BTNExit
@@ -47,11 +49,32 @@
             this.BTNExit.UseVisualStyleBackColor = false;
             this.BTNExit.Click += new System.EventHandler(this.BTNExit_Click);
             // 
+            // BTNNewProduct
+            // 
+            this.BTNNewProduct.Location = new System.Drawing.Point(56, 81);
+            this.BTNNewProduct.Name = "BTNNewProduct";
+            this.BTNNewProduct.Size = new System.Drawing.Size(127, 40);
+            this.BTNNewProduct.TabIndex = 1;
+            this.BTNNewProduct.Text = "New Product";
+            this.BTNNewProduct.UseVisualStyleBackColor = true;
+            // 
+            // ListBoxProducts
+            // 
+            this.ListBoxProducts.FormattingEnabled = true;
+            this.ListBoxProducts.ItemHeight = 20;
+            this.ListBoxProducts.Location = new System.Drawing.Point(265, 81);
+            this.ListBoxProducts.Name = "ListBoxProducts";
+            this.ListBoxProducts.Size = new System.Drawing.Size(250, 324);
+            this.ListBoxProducts.TabIndex = 3;
+            this.ListBoxProducts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxProducts_MouseDoubleClick);
+            // 
             // UI
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(1089, 627);
+            this.Controls.Add(this.ListBoxProducts);
+            this.Controls.Add(this.BTNNewProduct);
             this.Controls.Add(this.BTNExit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UI";
@@ -65,6 +88,8 @@
 
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button BTNExit;
+        private System.Windows.Forms.Button BTNNewProduct;
+        private System.Windows.Forms.ListBox ListBoxProducts;
     }
 }
 
