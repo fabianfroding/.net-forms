@@ -10,22 +10,19 @@ namespace MediaShop.Repositories
         void InitPlaceholderData()
         {
             Product product1 = new Product();
-            product1.id = 1;
             product1.name = "The Legend of Zelda: Breath of the Wild";
             product1.price = 699;
-            product1.type = Product.Type.GAME;
+            product1.productType = Product.ProductType.GAME;
 
             Product product2 = new Product();
-            product2.id = 2;
             product2.name = "Wacom One 13\"";
             product2.price = 4390;
-            product2.type = Product.Type.OTHER;
+            product2.productType = Product.ProductType.OTHER;
 
             Product product3 = new Product();
-            product3.id = 3;
             product3.name = "Mad Max: Fury Road";
             product3.price = 99;
-            product3.type = Product.Type.DVD;
+            product3.productType = Product.ProductType.DVD;
 
             products.Add(product1);
             products.Add(product2);

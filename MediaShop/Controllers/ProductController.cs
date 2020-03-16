@@ -17,5 +17,11 @@ namespace MediaShop
         {
             return productRepository.GetAll();
         }
+
+        public bool Add(Product product)
+        {
+            productRepository.Add(product);
+            return true;
+        }
     }
 }

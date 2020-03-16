@@ -1,4 +1,5 @@
 ﻿using MediaShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -12,13 +13,14 @@ namespace MediaShop
             InitializeComponent();
             productController = new ProductController();
             ListProducts();
+            ListProductTypes();
         }
 
         public void ListProducts()
         {
-            List<Product> products = productController.ListProducts();
+            ListBoxProducts.Items.Clear();
             ListBoxProducts.BeginUpdate();
-            foreach (Product product in products)
+            foreach (Product product in productController.ListProducts())
             {
                 ListBoxProducts.Items.Add(product);
             }
@@ -33,8 +35,31 @@ namespace MediaShop
             if (index != ListBox.NoMatches)
             {
                 Product product = (Product)ListBoxProducts.Items[index];
-                System.Diagnostics.Debug.WriteLine(product.name);
+                System.Diagnostics.Debug.WriteLine(product.name + " " + product.price + " " + product.productType);
             }
+        }
+
+        public void ListProductTypes()
+        {
+            ListBoxProductTypes.Items.Clear();
+            ListBoxProductTypes.BeginUpdate();
+            foreach (var productType in Enum.GetValues(typeof(Product.ProductType)))
+            {
+                ListBoxProductTypes.Items.Add(productType);
+            }
+            ListBoxProductTypes.EndUpdate();
+        }
+
+        private void BTNNewProduct_Click(object sender, EventArgs e)
+        {
+            Product product = new Product();
+            product.name = TextBoxNewProductName.Text;
+            double.TryParse(TextBoxNewProductPrice.Text, out double productPrice);
+            product.price = productPrice;
+            product.productType = (Product.ProductType)ListBoxProductTypes.SelectedItem;
+
+            productController.Add(product);
+            ListProducts();
         }
 
         private void BTNExit_Click(object sender, System.EventArgs e)
