@@ -1,47 +1,42 @@
 ﻿using MediaShop.Models;
+using System.IO;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace MediaShop.Repositories
 {
     class ProductRepository : IProductRepository
     {
-        private List<Product> products;
-
-        void InitPlaceholderData()
-        {
-            Product product1 = new Product();
-            product1.name = "The Legend of Zelda: Breath of the Wild";
-            product1.price = 699;
-            product1.productType = Product.ProductType.GAME;
-
-            Product product2 = new Product();
-            product2.name = "Wacom One 13\"";
-            product2.price = 4390;
-            product2.productType = Product.ProductType.OTHER;
-
-            Product product3 = new Product();
-            product3.name = "Mad Max: Fury Road";
-            product3.price = 99;
-            product3.productType = Product.ProductType.DVD;
-
-            products.Add(product1);
-            products.Add(product2);
-            products.Add(product3);
-        }
+        private string dbPath = @"..\..\Repositories\Data\dbProducts.txt";
 
         public ProductRepository()
         {
-            products = new List<Product>();
-            InitPlaceholderData();
         }
 
         public Product GetById(int id)
         {
-            foreach (Product product in products)
+            List<string> lines = File.ReadAllLines(dbPath).ToList();
+
+            //TODO: Check if id matches etc
+            foreach (string line in lines)
             {
-                if (product.id == id)
+                if (line != "")
                 {
-                    return product;
+                    string[] entries = line.Split('|');
+
+                    Product product = new Product();
+                    int.TryParse(entries[0], out int productId);
+                    product.id = productId;
+                    product.name = entries[1];
+                    double.TryParse(entries[2], out double productPrice);
+                    product.price = productPrice;
+                    int.TryParse(entries[3], out int productStock);
+                    product.stock = productStock;
+                    Enum.TryParse(entries[4], out Product.ProductType productType);
+                    product.productType = productType;
+
+
                 }
             }
             return null;
@@ -49,26 +44,46 @@ namespace MediaShop.Repositories
 
         public List<Product> GetAll()
         {
-            return products;
+            List<Product> _products = new List<Product>();
+            List<string> lines = File.ReadAllLines(dbPath).ToList();
+
+            foreach(string line in lines)
+            {
+                if (line != "")
+                {
+                    string[] entries = line.Split('|');
+
+                    Product product = new Product();
+                    int.TryParse(entries[0], out int productId);
+                    product.id = productId;
+                    product.name = entries[1];
+                    double.TryParse(entries[2], out double productPrice);
+                    product.price = productPrice;
+                    int.TryParse(entries[3], out int productStock);
+                    product.stock = productStock;
+                    Enum.TryParse(entries[4], out Product.ProductType productType);
+                    product.productType = productType;
+
+                    _products.Add(product);
+                }
+            }
+            return _products;
         }
 
         public bool Add(Product product)
         {
-            products.Add(product);
+            string data = product.id + "|" + product.name + "|" + product.price + "|" + product.stock + "|" + product.productType + "\n";
+
+            StreamWriter sw = File.AppendText(dbPath);
+            sw.WriteLine(data);
+            sw.Close();
+
             return true;
         }
 
         public bool Remove(int id)
         {
-            foreach (Product product in products)
-            {
-                if (product.id == id)
-                {
-                    products.Remove(product);
-                    return true;
-                }
-            }
-            return false;
+            return true;
         }
 
         public bool Update(int id)
