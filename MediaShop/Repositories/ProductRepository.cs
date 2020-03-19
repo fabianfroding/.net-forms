@@ -18,25 +18,27 @@ namespace MediaShop.Repositories
         {
             List<string> lines = File.ReadAllLines(dbPath).ToList();
 
-            //TODO: Check if id matches etc
             foreach (string line in lines)
             {
                 if (line != "")
                 {
                     string[] entries = line.Split('|');
-
-                    Product product = new Product();
                     int.TryParse(entries[0], out int productId);
-                    product.id = productId;
-                    product.name = entries[1];
-                    double.TryParse(entries[2], out double productPrice);
-                    product.price = productPrice;
-                    int.TryParse(entries[3], out int productStock);
-                    product.stock = productStock;
-                    Enum.TryParse(entries[4], out Product.ProductType productType);
-                    product.productType = productType;
 
+                    if (id == productId)
+                    {
+                        Product product = new Product();
+                        product.id = productId;
+                        product.name = entries[1];
+                        double.TryParse(entries[2], out double productPrice);
+                        product.price = productPrice;
+                        int.TryParse(entries[3], out int productStock);
+                        product.stock = productStock;
+                        Enum.TryParse(entries[4], out Product.ProductType productType);
+                        product.productType = productType;
 
+                        return product;
+                    }
                 }
             }
             return null;

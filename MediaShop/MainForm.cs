@@ -53,7 +53,7 @@ namespace MediaShop
         private void BTNNewProduct_Click(object sender, EventArgs e)
         {
             Product product = new Product();
-            product.name = TextBoxNewProductName.Text;
+            product.name = TextBoxNewProductName.Text.Replace("|", "");
             double.TryParse(TextBoxNewProductPrice.Text, out double productPrice);
             product.price = productPrice;
             product.productType = (Product.ProductType)ListBoxProductTypes.SelectedItem;
