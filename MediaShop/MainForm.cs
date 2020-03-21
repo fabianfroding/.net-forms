@@ -35,7 +35,7 @@ namespace MediaShop
             if (index != ListBox.NoMatches)
             {
                 Product product = (Product)ListBoxProducts.Items[index];
-                System.Diagnostics.Debug.WriteLine(product.name + " " + product.price + " " + product.productType);
+                System.Diagnostics.Debug.WriteLine(product.ToString());
             }
         }
 
@@ -52,13 +52,17 @@ namespace MediaShop
 
         private void BTNNewProduct_Click(object sender, EventArgs e)
         {
-            Product product = new Product();
+            NewProductForm inputForm = new NewProductForm();
+            inputForm.ShowDialog();
+            
+            //TODO: Move to NewProductForm.
+            /*Product product = new Product();
             product.name = TextBoxNewProductName.Text.Replace("|", "");
             double.TryParse(TextBoxNewProductPrice.Text, out double productPrice);
             product.price = productPrice;
             product.productType = (Product.ProductType)ListBoxProductTypes.SelectedItem;
 
-            productController.Add(product);
+            productController.Add(product);*/
             ListProducts();
         }
 

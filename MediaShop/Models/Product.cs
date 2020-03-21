@@ -25,5 +25,17 @@
             GAME,
             OTHER
         }
+
+
+        public override string ToString()
+        {
+            string s = "";
+            s += name + " (Id: " + id + ") " + "[" + productType + "]\n";
+            s += price + " SEK\n";
+            s += stock + " in stock\n";
+            s += unitsSold + " units sold\n";
+            s += "Sold on " + dateSold;
+            return s;
+        }
     }
 }

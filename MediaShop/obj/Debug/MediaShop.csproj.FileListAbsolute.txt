@@ -7,3 +7,4 @@ C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.Propert
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.csproj.GenerateResource.cache
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.exe
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.pdb
+C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.NewProductForm.resources

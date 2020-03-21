@@ -109,7 +109,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UI";
+            this.Text = "MainForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 
