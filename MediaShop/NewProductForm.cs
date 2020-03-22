@@ -15,18 +15,30 @@ namespace MediaShop
             ListProductTypes();
         }
 
+        // Denna metod skapar en ny instans av en Produkt baserat på inputs från användaren.
+        // Användarens inputs valideras och sedan skickas produkten till controller- och 
+        // repository lagret och sparas ned till fil.
         private void BTNAddProduct_Click(object sender, EventArgs e)
         {
-            //TODO: Validate inputs.
+            if (isInputValid())
+            {
+                Product product = new Product();
 
-            Product product = new Product();
-            product.name = TextBoxName.Text.Replace("|", "");
-            double.TryParse(TextBoxPrice.Text, out double productPrice);
-            product.price = productPrice;
-            product.productType = (Product.ProductType)ComboBoxProductTypes.SelectedItem;
-            productController.Add(product);
+                // Här tas | bort eftersom den används som separator för klassens attributes i
+                // lagringsfilen.
+                product.name = TextBoxName.Text.Replace("|", "");
 
-            Form.ActiveForm.Close();
+                double.TryParse(TextBoxPrice.Text, out double productPrice);
+                product.price = productPrice;
+                product.productType = (Product.ProductType)ComboBoxProductTypes.SelectedItem;
+                productController.Add(product);
+
+                Form.ActiveForm.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid input");
+            }
         }
 
         private void BTNCancel_Click(object sender, EventArgs e)
@@ -43,6 +55,25 @@ namespace MediaShop
                 ComboBoxProductTypes.Items.Add(productType);
             }
             ComboBoxProductTypes.EndUpdate();
+        }
+
+        // Denna metod kollar så att användaren inte matar inte felaktiga värden som t.ex. bokstäver
+        // i produktens pris.
+        private bool isInputValid()
+        {
+            if (string.IsNullOrEmpty(TextBoxName.Text) || string.IsNullOrEmpty(TextBoxPrice.Text))
+            {
+                return false;
+            }
+            if (ComboBoxProductTypes.SelectedItem == null)
+            {
+                return false;
+            }
+            if (!double.TryParse(TextBoxPrice.Text, out double temp))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
