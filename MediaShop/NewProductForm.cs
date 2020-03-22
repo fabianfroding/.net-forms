@@ -1,20 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediaShop.Models;
+using System;
 using System.Windows.Forms;
 
 namespace MediaShop
 {
     public partial class NewProductForm : Form
     {
+        private ProductController productController;
+
         public NewProductForm()
         {
             InitializeComponent();
+            productController = new ProductController();
+            ListProductTypes();
+        }
+
+        private void BTNAddProduct_Click(object sender, EventArgs e)
+        {
+            //TODO: Validate inputs.
+
+            Product product = new Product();
+            product.name = TextBoxName.Text.Replace("|", "");
+            double.TryParse(TextBoxPrice.Text, out double productPrice);
+            product.price = productPrice;
+            product.productType = (Product.ProductType)ComboBoxProductTypes.SelectedItem;
+            productController.Add(product);
+
+            Form.ActiveForm.Close();
         }
 
         private void BTNCancel_Click(object sender, EventArgs e)
@@ -22,11 +34,15 @@ namespace MediaShop
             Form.ActiveForm.Close();
         }
 
-        private void BTNAddProduct_Click(object sender, EventArgs e)
+        private void ListProductTypes()
         {
-            //TODO: Validate inputs.
-            //TODO: Add new product to db.
-            Form.ActiveForm.Close();
+            ComboBoxProductTypes.Items.Clear();
+            ComboBoxProductTypes.BeginUpdate();
+            foreach (var productType in Enum.GetValues(typeof(Product.ProductType)))
+            {
+                ComboBoxProductTypes.Items.Add(productType);
+            }
+            ComboBoxProductTypes.EndUpdate();
         }
     }
 }

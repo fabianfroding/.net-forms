@@ -15,6 +15,7 @@
         {
             idCounter++;
             this.id = idCounter;
+            this.stock = 1;
         }
 
         public enum ProductType

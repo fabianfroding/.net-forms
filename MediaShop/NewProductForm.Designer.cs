@@ -28,49 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ListBoxProductTypes = new System.Windows.Forms.ListBox();
-            this.TextBoxNewProductPrice = new System.Windows.Forms.TextBox();
-            this.TextBoxNewProductName = new System.Windows.Forms.TextBox();
-            this.LabelProductName = new System.Windows.Forms.Label();
+            this.TextBoxPrice = new System.Windows.Forms.TextBox();
+            this.TextBoxName = new System.Windows.Forms.TextBox();
+            this.LabelName = new System.Windows.Forms.Label();
             this.LabelPrice = new System.Windows.Forms.Label();
             this.LabelProductType = new System.Windows.Forms.Label();
             this.LabelNewProduct = new System.Windows.Forms.Label();
-            this.BTNAddProduct = new System.Windows.Forms.Button();
+            this.BTNAdd = new System.Windows.Forms.Button();
             this.BTNCancel = new System.Windows.Forms.Button();
+            this.ComboBoxProductTypes = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // ListBoxProductTypes
+            // TextBoxPrice
             // 
-            this.ListBoxProductTypes.FormattingEnabled = true;
-            this.ListBoxProductTypes.ItemHeight = 20;
-            this.ListBoxProductTypes.Location = new System.Drawing.Point(124, 104);
-            this.ListBoxProductTypes.Name = "ListBoxProductTypes";
-            this.ListBoxProductTypes.Size = new System.Drawing.Size(200, 204);
-            this.ListBoxProductTypes.TabIndex = 9;
+            this.TextBoxPrice.Location = new System.Drawing.Point(124, 72);
+            this.TextBoxPrice.Name = "TextBoxPrice";
+            this.TextBoxPrice.Size = new System.Drawing.Size(100, 26);
+            this.TextBoxPrice.TabIndex = 8;
             // 
-            // TextBoxNewProductPrice
+            // TextBoxName
             // 
-            this.TextBoxNewProductPrice.Location = new System.Drawing.Point(124, 72);
-            this.TextBoxNewProductPrice.Name = "TextBoxNewProductPrice";
-            this.TextBoxNewProductPrice.Size = new System.Drawing.Size(100, 26);
-            this.TextBoxNewProductPrice.TabIndex = 8;
+            this.TextBoxName.Location = new System.Drawing.Point(124, 37);
+            this.TextBoxName.Name = "TextBoxName";
+            this.TextBoxName.Size = new System.Drawing.Size(100, 26);
+            this.TextBoxName.TabIndex = 7;
             // 
-            // TextBoxNewProductName
+            // LabelName
             // 
-            this.TextBoxNewProductName.Location = new System.Drawing.Point(124, 37);
-            this.TextBoxNewProductName.Name = "TextBoxNewProductName";
-            this.TextBoxNewProductName.Size = new System.Drawing.Size(100, 26);
-            this.TextBoxNewProductName.TabIndex = 7;
-            // 
-            // LabelProductName
-            // 
-            this.LabelProductName.AutoSize = true;
-            this.LabelProductName.ForeColor = System.Drawing.Color.White;
-            this.LabelProductName.Location = new System.Drawing.Point(8, 40);
-            this.LabelProductName.Name = "LabelProductName";
-            this.LabelProductName.Size = new System.Drawing.Size(114, 20);
-            this.LabelProductName.TabIndex = 10;
-            this.LabelProductName.Text = "Product Name:";
+            this.LabelName.AutoSize = true;
+            this.LabelName.ForeColor = System.Drawing.Color.White;
+            this.LabelName.Location = new System.Drawing.Point(8, 40);
+            this.LabelName.Name = "LabelName";
+            this.LabelName.Size = new System.Drawing.Size(114, 20);
+            this.LabelName.TabIndex = 10;
+            this.LabelName.Text = "Product Name:";
             // 
             // LabelPrice
             // 
@@ -103,19 +94,19 @@
             this.LabelNewProduct.TabIndex = 13;
             this.LabelNewProduct.Text = "New Product";
             // 
-            // BTNAddProduct
+            // BTNAdd
             // 
-            this.BTNAddProduct.Location = new System.Drawing.Point(124, 314);
-            this.BTNAddProduct.Name = "BTNAddProduct";
-            this.BTNAddProduct.Size = new System.Drawing.Size(108, 28);
-            this.BTNAddProduct.TabIndex = 14;
-            this.BTNAddProduct.Text = "Add Product";
-            this.BTNAddProduct.UseVisualStyleBackColor = true;
-            this.BTNAddProduct.Click += new System.EventHandler(this.BTNAddProduct_Click);
+            this.BTNAdd.Location = new System.Drawing.Point(12, 139);
+            this.BTNAdd.Name = "BTNAdd";
+            this.BTNAdd.Size = new System.Drawing.Size(108, 28);
+            this.BTNAdd.TabIndex = 14;
+            this.BTNAdd.Text = "Add Product";
+            this.BTNAdd.UseVisualStyleBackColor = true;
+            this.BTNAdd.Click += new System.EventHandler(this.BTNAddProduct_Click);
             // 
             // BTNCancel
             // 
-            this.BTNCancel.Location = new System.Drawing.Point(238, 314);
+            this.BTNCancel.Location = new System.Drawing.Point(126, 139);
             this.BTNCancel.Name = "BTNCancel";
             this.BTNCancel.Size = new System.Drawing.Size(86, 28);
             this.BTNCancel.TabIndex = 15;
@@ -123,20 +114,28 @@
             this.BTNCancel.UseVisualStyleBackColor = true;
             this.BTNCancel.Click += new System.EventHandler(this.BTNCancel_Click);
             // 
+            // ComboBoxProductTypes
+            // 
+            this.ComboBoxProductTypes.FormattingEnabled = true;
+            this.ComboBoxProductTypes.Location = new System.Drawing.Point(124, 104);
+            this.ComboBoxProductTypes.Name = "ComboBoxProductTypes";
+            this.ComboBoxProductTypes.Size = new System.Drawing.Size(121, 28);
+            this.ComboBoxProductTypes.TabIndex = 16;
+            // 
             // NewProductForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(339, 357);
+            this.ClientSize = new System.Drawing.Size(265, 186);
+            this.Controls.Add(this.ComboBoxProductTypes);
             this.Controls.Add(this.BTNCancel);
-            this.Controls.Add(this.BTNAddProduct);
+            this.Controls.Add(this.BTNAdd);
             this.Controls.Add(this.LabelNewProduct);
             this.Controls.Add(this.LabelProductType);
             this.Controls.Add(this.LabelPrice);
-            this.Controls.Add(this.LabelProductName);
-            this.Controls.Add(this.ListBoxProductTypes);
-            this.Controls.Add(this.TextBoxNewProductPrice);
-            this.Controls.Add(this.TextBoxNewProductName);
+            this.Controls.Add(this.LabelName);
+            this.Controls.Add(this.TextBoxPrice);
+            this.Controls.Add(this.TextBoxName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "NewProductForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -147,15 +146,14 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox ListBoxProductTypes;
-        private System.Windows.Forms.TextBox TextBoxNewProductPrice;
-        private System.Windows.Forms.TextBox TextBoxNewProductName;
-        private System.Windows.Forms.Label LabelProductName;
+        private System.Windows.Forms.TextBox TextBoxPrice;
+        private System.Windows.Forms.TextBox TextBoxName;
+        private System.Windows.Forms.Label LabelName;
         private System.Windows.Forms.Label LabelPrice;
         private System.Windows.Forms.Label LabelProductType;
         private System.Windows.Forms.Label LabelNewProduct;
-        private System.Windows.Forms.Button BTNAddProduct;
+        private System.Windows.Forms.Button BTNAdd;
         private System.Windows.Forms.Button BTNCancel;
+        private System.Windows.Forms.ComboBox ComboBoxProductTypes;
     }
 }
