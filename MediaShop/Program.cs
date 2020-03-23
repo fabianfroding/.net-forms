@@ -12,7 +12,7 @@ namespace MediaShop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            mainForm = new LoginForm();
+            mainForm = new MainForm();
             Application.Run(mainForm);
         }
     }

@@ -139,7 +139,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "NewProductForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NewProductForm";
+            this.Text = "Media Shop - New Product";
             this.ResumeLayout(false);
             this.PerformLayout();
 

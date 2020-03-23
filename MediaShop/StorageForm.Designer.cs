@@ -32,7 +32,7 @@
             this.BTNExit = new System.Windows.Forms.Button();
             this.BTNNewProduct = new System.Windows.Forms.Button();
             this.ListBoxProducts = new System.Windows.Forms.ListBox();
-            this.BTNLogin = new System.Windows.Forms.Button();
+            this.BTNMainMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BTNExit
@@ -70,29 +70,30 @@
             this.ListBoxProducts.TabIndex = 3;
             this.ListBoxProducts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxProducts_MouseDoubleClick);
             // 
-            // BTNLogin
+            // BTNMainMenu
             // 
-            this.BTNLogin.Location = new System.Drawing.Point(12, 388);
-            this.BTNLogin.Name = "BTNLogin";
-            this.BTNLogin.Size = new System.Drawing.Size(97, 40);
-            this.BTNLogin.TabIndex = 4;
-            this.BTNLogin.Text = "←Login";
-            this.BTNLogin.UseVisualStyleBackColor = true;
-            this.BTNLogin.Click += new System.EventHandler(this.BTNLogin_Click);
+            this.BTNMainMenu.Location = new System.Drawing.Point(12, 388);
+            this.BTNMainMenu.Name = "BTNMainMenu";
+            this.BTNMainMenu.Size = new System.Drawing.Size(113, 40);
+            this.BTNMainMenu.TabIndex = 4;
+            this.BTNMainMenu.Text = "←Main Menu";
+            this.BTNMainMenu.UseVisualStyleBackColor = true;
+            this.BTNMainMenu.Click += new System.EventHandler(this.BTNMainMenu_Click);
             // 
             // StorageForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(330, 439);
-            this.Controls.Add(this.BTNLogin);
+            this.Controls.Add(this.BTNMainMenu);
             this.Controls.Add(this.ListBoxProducts);
             this.Controls.Add(this.BTNNewProduct);
             this.Controls.Add(this.BTNExit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StorageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "Media Shop - Storage";
             this.ResumeLayout(false);
 
         }
@@ -103,7 +104,7 @@
         private System.Windows.Forms.Button BTNExit;
         private System.Windows.Forms.Button BTNNewProduct;
         private System.Windows.Forms.ListBox ListBoxProducts;
-        private System.Windows.Forms.Button BTNLogin;
+        private System.Windows.Forms.Button BTNMainMenu;
     }
 }
 

@@ -50,11 +50,10 @@ namespace MediaShop
             ListBoxProducts.EndUpdate();
         }
 
-        private void BTNLogin_Click(object sender, EventArgs e)
+        private void BTNMainMenu_Click(object sender, EventArgs e)
         {
             Form.ActiveForm.Close();
             Program.mainForm.Show();
-            
         }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace MediaShop
 {
-    public partial class LoginForm : Form
+    public partial class MainForm : Form
     {
-        public LoginForm()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -16,7 +16,9 @@ namespace MediaShop
 
         private void BTNCashierView_Click(object sender, System.EventArgs e)
         {
-
+            Program.mainForm.Hide();
+            CashierForm cashierForm = new CashierForm();
+            cashierForm.ShowDialog();
         }
 
         private void BTNStorageView_Click(object sender, System.EventArgs e)

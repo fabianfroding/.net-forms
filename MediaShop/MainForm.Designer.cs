@@ -1,6 +1,6 @@
 ﻿namespace MediaShop
 {
-    partial class LoginForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -75,7 +75,7 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Media Shop";
             // 
-            // LoginForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -86,7 +86,9 @@
             this.Controls.Add(this.BTNCashierView);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "LoginForm";
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Media Shop";
             this.ResumeLayout(false);
             this.PerformLayout();
 
