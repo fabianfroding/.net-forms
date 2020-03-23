@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace MediaShop
 {
-    public partial class MainForm : Form
+    public partial class StorageForm : Form
     {
         private ProductController productController;
 
-        public MainForm()
+        public StorageForm()
         {
             InitializeComponent();
             productController = new ProductController();
@@ -48,6 +48,13 @@ namespace MediaShop
             ListBoxProducts.DisplayMember = "name";
             ListBoxProducts.ValueMember = "id";
             ListBoxProducts.EndUpdate();
+        }
+
+        private void BTNLogin_Click(object sender, EventArgs e)
+        {
+            Form.ActiveForm.Close();
+            Program.mainForm.Show();
+            
         }
     }
 }

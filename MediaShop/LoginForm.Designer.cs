@@ -42,6 +42,7 @@
             this.BTNStorageView.TabIndex = 2;
             this.BTNStorageView.Text = "Storage";
             this.BTNStorageView.UseVisualStyleBackColor = true;
+            this.BTNStorageView.Click += new System.EventHandler(this.BTNStorageView_Click);
             // 
             // BTNCashierView
             // 
@@ -51,6 +52,7 @@
             this.BTNCashierView.TabIndex = 3;
             this.BTNCashierView.Text = "Cashier";
             this.BTNCashierView.UseVisualStyleBackColor = true;
+            this.BTNCashierView.Click += new System.EventHandler(this.BTNCashierView_Click);
             // 
             // BTNExit
             // 
@@ -60,6 +62,7 @@
             this.BTNExit.TabIndex = 4;
             this.BTNExit.Text = "Exit";
             this.BTNExit.UseVisualStyleBackColor = true;
+            this.BTNExit.Click += new System.EventHandler(this.BTNExit_Click);
             // 
             // label1
             // 

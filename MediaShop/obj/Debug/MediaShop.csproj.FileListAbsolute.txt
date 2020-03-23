@@ -7,4 +7,5 @@ C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.csproj.
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.exe
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.pdb
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.NewProductForm.resources
-C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.MainForm.resources
+C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.LoginForm.resources
+C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.StorageForm.resources
