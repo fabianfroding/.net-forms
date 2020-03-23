@@ -7,8 +7,8 @@
         public string name { get; set; }
         public double price { get; set; }
         public int stock { get; set; }
-        public int unitsSold { get; set; }
-        public string dateSold { get; set; }
+        public int unitsSold { get; set; } // Move to Purchase class
+        public string dateSold { get; set; } // Move to purchase class
         public ProductType productType { get; set; }
 
         public Product()

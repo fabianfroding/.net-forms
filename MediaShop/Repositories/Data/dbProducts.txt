@@ -9,10 +9,3 @@
 12|Mad Max: Fury Road|99|0|DVD
 
 5|Fargo|0|0|DVD
-
-6|Loa|333,33|1|GAME
-
-13|asdasd|12|1|DVD
-
-8|sd|2|1|BOOK
-

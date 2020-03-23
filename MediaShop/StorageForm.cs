@@ -29,6 +29,11 @@ namespace MediaShop
             {
                 Product product = (Product)ListBoxProducts.Items[index];
                 System.Diagnostics.Debug.WriteLine(product.ToString());
+
+                // Open product view
+                ProductForm productForm = new ProductForm();
+                productForm.LabelNameText = product.name;
+                productForm.ShowDialog();
             }
         }
 
