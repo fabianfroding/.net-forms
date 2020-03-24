@@ -20,8 +20,12 @@ namespace MediaShop
 
         public bool Add(Product product)
         {
-            productRepository.Add(product);
-            return true;
+            return productRepository.Add(product);
+        }
+
+        public bool Remove(Product product)
+        {
+            return productRepository.Remove(product.id);
         }
     }
 }
