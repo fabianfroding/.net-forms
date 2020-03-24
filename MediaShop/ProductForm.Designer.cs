@@ -110,6 +110,7 @@
             this.Controls.Add(this.BTNRemove);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProductForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProductForm";
             this.ResumeLayout(false);
             this.PerformLayout();

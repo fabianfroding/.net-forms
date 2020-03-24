@@ -4,4 +4,4 @@
 4|The Legend of Zelda: Breath of the Wild|599|1|GAME
 5|Test1|99|1|GAME
 
-6|Test2|456|1|CD
+6|Test2|44|1|BOOK

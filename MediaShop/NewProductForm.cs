@@ -31,7 +31,16 @@ namespace MediaShop
                 double.TryParse(TextBoxPrice.Text, out double productPrice);
                 product.price = productPrice;
                 product.productType = (Product.ProductType)ComboBoxProductTypes.SelectedItem;
-                productController.Add(product);
+
+                if (productController.Add(product))
+                {
+                    MessageBox.Show("Product succesfully added.");
+                    Form.ActiveForm.Close();
+                }
+                else
+                {
+                    MessageBox.Show("There was a problem adding the product.");
+                }
 
                 Form.ActiveForm.Close();
             }

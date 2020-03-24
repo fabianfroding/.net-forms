@@ -34,6 +34,7 @@ namespace MediaShop
             if (productController.Remove(product))
             {
                 MessageBox.Show("Product succesfully removed.");
+                Form.ActiveForm.Close();
             }
             else
             {
