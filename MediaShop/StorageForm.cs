@@ -22,24 +22,27 @@ namespace MediaShop
             ListProducts();
         }
 
+        private void BTNExit_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void BTNMainMenu_Click(object sender, EventArgs e)
+        {
+            Form.ActiveForm.Close();
+            Program.mainForm.Show();
+        }
+
         private void ListBoxProducts_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int index = this.ListBoxProducts.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches)
             {
                 Product product = (Product)ListBoxProducts.Items[index];
-                System.Diagnostics.Debug.WriteLine(product.ToString());
 
                 // Open product view
-                ProductForm productForm = new ProductForm();
-                productForm.LabelNameText = product.name;
-                productForm.ShowDialog();
+                new ProductForm(product).ShowDialog();
             }
-        }
-
-        private void BTNExit_Click(object sender, System.EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void ListProducts()
@@ -53,12 +56,6 @@ namespace MediaShop
             ListBoxProducts.DisplayMember = "name";
             ListBoxProducts.ValueMember = "id";
             ListBoxProducts.EndUpdate();
-        }
-
-        private void BTNMainMenu_Click(object sender, EventArgs e)
-        {
-            Form.ActiveForm.Close();
-            Program.mainForm.Show();
         }
     }
 }

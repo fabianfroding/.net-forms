@@ -1,6 +1,6 @@
 ﻿namespace MediaShop.Models
 {
-    class Product
+    public class Product
     {
         public static int idCounter { get; set; }
         public int id { get; set; }

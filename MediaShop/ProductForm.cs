@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediaShop.Models;
 using System.Windows.Forms;
 
 namespace MediaShop
 {
     public partial class ProductForm : Form
     {
-        public string LabelNameText
-        {
-            get
-            {
-                return this.LabelName.Text;
-            }
-            set
-            {
-                this.LabelName.Text = value;
-            }
-        }
+        public Product product;
 
-
-        public ProductForm()
+        public ProductForm(Product product)
         {
             InitializeComponent();
+            this.product = product;
+            LabelName.Text = product.name;
+            LabelPrice.Text = product.price.ToString() + " SEK";
+            LabelStock.Text = product.stock.ToString() + " in stock.";
+            LabelProductType.Text = product.productType.ToString();
+        }
+
+        private void BTNCancel_Click(object sender, System.EventArgs e)
+        {
+            Form.ActiveForm.Close();
+        }
+
+        private void BTNRemove_Click(object sender, System.EventArgs e)
+        {
+
         }
     }
 }
