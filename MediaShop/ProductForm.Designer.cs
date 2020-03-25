@@ -34,6 +34,7 @@
             this.LabelStock = new System.Windows.Forms.Label();
             this.LabelProductType = new System.Windows.Forms.Label();
             this.BTNCancel = new System.Windows.Forms.Button();
+            this.BTNAddStock = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BTNRemove
@@ -96,12 +97,23 @@
             this.BTNCancel.UseVisualStyleBackColor = true;
             this.BTNCancel.Click += new System.EventHandler(this.BTNCancel_Click);
             // 
+            // BTNAddStock
+            // 
+            this.BTNAddStock.Location = new System.Drawing.Point(186, 43);
+            this.BTNAddStock.Name = "BTNAddStock";
+            this.BTNAddStock.Size = new System.Drawing.Size(115, 33);
+            this.BTNAddStock.TabIndex = 6;
+            this.BTNAddStock.Text = "Add Stock";
+            this.BTNAddStock.UseVisualStyleBackColor = true;
+            this.BTNAddStock.Click += new System.EventHandler(this.BTNAddStock_Click);
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(313, 203);
+            this.Controls.Add(this.BTNAddStock);
             this.Controls.Add(this.BTNCancel);
             this.Controls.Add(this.LabelProductType);
             this.Controls.Add(this.LabelStock);
@@ -125,5 +137,6 @@
         private System.Windows.Forms.Label LabelStock;
         private System.Windows.Forms.Label LabelProductType;
         private System.Windows.Forms.Button BTNCancel;
+        private System.Windows.Forms.Button BTNAddStock;
     }
 }

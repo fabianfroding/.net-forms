@@ -1,4 +1,5 @@
 ﻿using MediaShop.Models;
+using Microsoft.VisualBasic;
 using System.Windows.Forms;
 
 namespace MediaShop
@@ -39,6 +40,22 @@ namespace MediaShop
             else
             {
                 MessageBox.Show("There was a problem removing the product.");
+            }
+        }
+
+        private void BTNAddStock_Click(object sender, System.EventArgs e)
+        {
+            string input = Interaction.InputBox("Prompt", "Title", "Default", -1, -1);
+
+            if (int.TryParse(input, out int stock))
+            {
+                product.stock += stock;
+                LabelStock.Text = product.stock.ToString() + " in stock.";
+                productController.Update(product);
+            }
+            else
+            {
+                MessageBox.Show("There was a problem adding stock.");
             }
         }
     }

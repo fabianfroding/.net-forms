@@ -27,5 +27,10 @@ namespace MediaShop
         {
             return productRepository.Remove(product.id);
         }
+
+        public bool Update(Product product)
+        {
+            return productRepository.Update(product);
+        }
     }
 }

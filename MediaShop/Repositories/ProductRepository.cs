@@ -92,8 +92,11 @@ namespace MediaShop.Repositories
             return true;
         }
 
-        public bool Update(int id)
+        public bool Update(Product product)
         {
+            Remove(product.id);
+            Add(product);
+            System.Diagnostics.Debug.WriteLine(product.ToString());
             return true;
         }
 
