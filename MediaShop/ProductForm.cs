@@ -32,17 +32,21 @@ namespace MediaShop
         // Denna funktion tar bort en produkt från lagret/lagringsfilen.
         private void BTNRemove_Click(object sender, System.EventArgs e)
         {
-            if (productController.Remove(product))
+            // Kontrollfunktion om varan verkligen vill tas bort.
+            if (MessageBox.Show("Confirm removal of product", "Conf", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                MessageBox.Show("Product succesfully removed.");
-                // Sätt DialogResult.Ok så vi vet att produkten tagits bort när vi återvänder till
-                // StorageForm.
-                this.DialogResult = DialogResult.OK;
-                Form.ActiveForm.Close();
-            }
-            else
-            {
-                MessageBox.Show("There was a problem removing the product.");
+                if (productController.Remove(product))
+                {
+                    MessageBox.Show("Product succesfully removed.");
+                    // Sätt DialogResult.Ok så vi vet att produkten tagits bort när vi återvänder till
+                    // StorageForm.
+                    this.DialogResult = DialogResult.OK;
+                    Form.ActiveForm.Close();
+                }
+                else
+                {
+                    MessageBox.Show("There was a problem removing the product.");
+                }
             }
         }
 
