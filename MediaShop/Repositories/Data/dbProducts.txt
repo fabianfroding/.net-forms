@@ -3,4 +3,4 @@
 3|Mad Max: Fury Road|99|1|DVD
 4|The Legend of Zelda: Breath of the Wild|599|1|GAME
 
-6|Test2|44|45|BOOK
+6|Test2|44|48|BOOK

@@ -54,7 +54,7 @@ namespace MediaShop
         {
             string input = Interaction.InputBox("Prompt", "Title", "Default", -1, -1);
 
-            if (int.TryParse(input, out int stock))
+            if (int.TryParse(input, out int stock) && stock > 0)
             {
                 product.stock += stock;
                 LabelStock.Text = product.stock.ToString() + " in stock.";
