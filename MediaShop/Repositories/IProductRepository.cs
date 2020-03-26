@@ -8,7 +8,7 @@ namespace MediaShop.Repositories
         Product GetById(int id);
         List<Product> GetAll();
         bool Add(Product product);
-        bool Remove(int id);
+        bool Remove(Product product);
         bool Update(Product product);
        
     }

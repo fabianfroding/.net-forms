@@ -25,7 +25,7 @@ namespace MediaShop
 
         public bool Remove(Product product)
         {
-            return productRepository.Remove(product.id);
+            return productRepository.Remove(product);
         }
 
         public bool Update(Product product)

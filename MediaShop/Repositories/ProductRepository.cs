@@ -62,8 +62,9 @@ namespace MediaShop.Repositories
             return true;
         }
 
-        public bool Remove(int id)
+        public bool Remove(Product product)
         {
+            int id = product.id;
             List<string> lines = File.ReadAllLines(dbPath).ToList();
             List<String> newLines = new List<String>();
 
@@ -94,7 +95,7 @@ namespace MediaShop.Repositories
 
         public bool Update(Product product)
         {
-            Remove(product.id);
+            Remove(product);
             Add(product);
             System.Diagnostics.Debug.WriteLine(product.ToString());
             return true;
