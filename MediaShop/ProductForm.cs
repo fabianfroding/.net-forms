@@ -32,21 +32,19 @@ namespace MediaShop
         // Denna funktion tar bort en produkt från lagret/lagringsfilen.
         private void BTNRemove_Click(object sender, System.EventArgs e)
         {
-            // Kontrollfunktion om varan verkligen vill tas bort.
-            if (MessageBox.Show("Confirm removal of product", "Conf", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            // Kontrollfunktion om varan verkligen vill tas bort. Om stock > 0 måste användaren
+            // confirm att varan ska tas bort. Om stock <= 0 frågas användaren inte utan den
+            // tas bort direkt.
+            if (product.stock > 0)
             {
-                if (productController.Remove(product))
+                if (MessageBox.Show("Confirm removal of product", "Conf", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    MessageBox.Show("Product succesfully removed.");
-                    // Sätt DialogResult.Ok så vi vet att produkten tagits bort när vi återvänder till
-                    // StorageForm.
-                    this.DialogResult = DialogResult.OK;
-                    Form.ActiveForm.Close();
+                    RemoveProduct();
                 }
-                else
-                {
-                    MessageBox.Show("There was a problem removing the product.");
-                }
+            }
+            else
+            {
+                RemoveProduct();
             }
         }
 
@@ -63,6 +61,22 @@ namespace MediaShop
             else
             {
                 MessageBox.Show("There was a problem adding stock.");
+            }
+        }
+
+        private void RemoveProduct()
+        {
+            if (productController.Remove(product))
+            {
+                MessageBox.Show("Product succesfully removed.");
+                // Sätt DialogResult.Ok så vi vet att produkten tagits bort när vi återvänder till
+                // StorageForm.
+                this.DialogResult = DialogResult.OK;
+                Form.ActiveForm.Close();
+            }
+            else
+            {
+                MessageBox.Show("There was a problem removing the product.");
             }
         }
     }
