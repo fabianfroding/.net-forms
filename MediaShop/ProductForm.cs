@@ -35,6 +35,9 @@ namespace MediaShop
             if (productController.Remove(product))
             {
                 MessageBox.Show("Product succesfully removed.");
+                // Sätt DialogResult.Ok så vi vet att produkten tagits bort när vi återvänder till
+                // StorageForm.
+                this.DialogResult = DialogResult.OK;
                 Form.ActiveForm.Close();
             }
             else

@@ -41,7 +41,16 @@ namespace MediaShop
                 Product product = (Product)ListBoxProducts.Items[index];
 
                 // Open product view
-                new ProductForm(product).ShowDialog();
+                ProductForm productForm = new ProductForm(product);
+                productForm.ShowDialog();
+
+                // Om ProductForm tar bort en vara så skickas DialogResult.OK så att
+                // listan i denna form förnyas.
+                if (productForm.DialogResult == DialogResult.OK)
+                {
+                    ListProducts();
+                }
+
             }
         }
 
