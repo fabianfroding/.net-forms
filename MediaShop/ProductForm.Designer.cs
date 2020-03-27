@@ -35,6 +35,7 @@
             this.LabelProductType = new System.Windows.Forms.Label();
             this.BTNCancel = new System.Windows.Forms.Button();
             this.BTNAddStock = new System.Windows.Forms.Button();
+            this.BTNAddToCart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BTNRemove
@@ -99,7 +100,7 @@
             // 
             // BTNAddStock
             // 
-            this.BTNAddStock.Location = new System.Drawing.Point(186, 43);
+            this.BTNAddStock.Location = new System.Drawing.Point(186, 48);
             this.BTNAddStock.Name = "BTNAddStock";
             this.BTNAddStock.Size = new System.Drawing.Size(115, 33);
             this.BTNAddStock.TabIndex = 6;
@@ -107,12 +108,23 @@
             this.BTNAddStock.UseVisualStyleBackColor = true;
             this.BTNAddStock.Click += new System.EventHandler(this.BTNAddStock_Click);
             // 
+            // BTNAddToCart
+            // 
+            this.BTNAddToCart.Location = new System.Drawing.Point(168, 9);
+            this.BTNAddToCart.Name = "BTNAddToCart";
+            this.BTNAddToCart.Size = new System.Drawing.Size(133, 33);
+            this.BTNAddToCart.TabIndex = 7;
+            this.BTNAddToCart.Text = "Add To Cart";
+            this.BTNAddToCart.UseVisualStyleBackColor = true;
+            this.BTNAddToCart.Click += new System.EventHandler(this.BTNAddToCart_Click);
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(313, 203);
+            this.Controls.Add(this.BTNAddToCart);
             this.Controls.Add(this.BTNAddStock);
             this.Controls.Add(this.BTNCancel);
             this.Controls.Add(this.LabelProductType);
@@ -138,5 +150,6 @@
         private System.Windows.Forms.Label LabelProductType;
         private System.Windows.Forms.Button BTNCancel;
         private System.Windows.Forms.Button BTNAddStock;
+        private System.Windows.Forms.Button BTNAddToCart;
     }
 }

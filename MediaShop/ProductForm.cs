@@ -16,6 +16,34 @@ namespace MediaShop
         public ProductForm(Product product)
         {
             InitializeComponent();
+
+            
+
+            this.product = product;
+            LabelName.Text = product.name;
+            LabelPrice.Text = product.price.ToString() + " SEK";
+            LabelStock.Text = product.stock.ToString() + " in stock.";
+            LabelProductType.Text = product.productType.ToString();
+            productController = new ProductController();
+        }
+
+        public ProductForm(Product product, bool storage)
+        {
+            InitializeComponent();
+
+            // Beroende på om denna form öppnas från CashierForm eller StorageForm visas olika element.
+            if (storage)
+            {
+
+            }
+            else
+            {
+                BTNAddStock.Hide();
+                BTNRemove.Hide();
+                BTNAddStock.Enabled = false;
+                BTNRemove.Enabled = false;
+            }
+
             this.product = product;
             LabelName.Text = product.name;
             LabelPrice.Text = product.price.ToString() + " SEK";
@@ -78,6 +106,11 @@ namespace MediaShop
             {
                 MessageBox.Show("There was a problem removing the product.");
             }
+        }
+
+        private void BTNAddToCart_Click(object sender, System.EventArgs e)
+        {
+
         }
     }
 }
