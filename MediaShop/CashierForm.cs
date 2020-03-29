@@ -7,11 +7,15 @@ namespace MediaShop
     public partial class CashierForm : Form
     {
         ProductController productController;
+        Cart cart;
+        Product selectedProduct;
 
         public CashierForm()
         {
             InitializeComponent();
             productController = new ProductController();
+            cart = new Cart();
+            BTNAddToCart.Enabled = false;
             ListProducts();
         }
 
@@ -53,6 +57,59 @@ namespace MediaShop
             ListBoxProducts.DisplayMember = "name";
             ListBoxProducts.ValueMember = "id";
             ListBoxProducts.EndUpdate();
+        }
+
+        private void ListBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedProduct = (Product)ListBoxProducts.SelectedItem;
+
+            if (selectedProduct != null)
+            {
+                LabelProductName.Text = selectedProduct.name;
+                LabelProductPrice.Text = selectedProduct.price.ToString() + " SEK";
+                LabelProductStock.Text = selectedProduct.stock.ToString() + " in stock.";
+                LabelProductType.Text = selectedProduct.productType.ToString();
+                BTNAddToCart.Enabled = true;
+            }
+            else
+            {
+                LabelProductName.Text = "Product Info";
+                LabelProductPrice.Text = "... SEK";
+                LabelProductStock.Text = "... in stock.";
+                LabelProductType.Text = "";
+                BTNAddToCart.Enabled = false;
+            }
+
+        }
+
+        private void BTNAddToCart_Click(object sender, EventArgs e)
+        {
+
+            if (selectedProduct.stock > 0)
+            {
+                cart.products.Add(selectedProduct);
+                selectedProduct.stock--;
+            }
+            else
+            {
+                MessageBox.Show("Product is out of stock.");
+            }
+
+            //TODO: Update lists and product info.
+
+            System.Diagnostics.Debug.WriteLine("BTNAddToCart");
+        }
+
+        private void BTNCheckout_Click(object sender, EventArgs e)
+        {
+            if (cart.products.Count > 0)
+            {
+                // Open Checkout form?
+            }
+            else
+            {
+                MessageBox.Show("Cart is empty.");
+            }
         }
     }
 }

@@ -110,7 +110,7 @@ namespace MediaShop
 
         private void BTNAddToCart_Click(object sender, System.EventArgs e)
         {
-
+            this.DialogResult = DialogResult.Yes;
         }
     }
 }
