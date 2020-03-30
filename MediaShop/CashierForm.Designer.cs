@@ -64,7 +64,6 @@
             this.ListBoxProducts.Size = new System.Drawing.Size(210, 304);
             this.ListBoxProducts.TabIndex = 6;
             this.ListBoxProducts.SelectedIndexChanged += new System.EventHandler(this.ListBoxProducts_SelectedIndexChanged);
-            this.ListBoxProducts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxProducts_MouseDoubleClick);
             // 
             // LabelProducts
             // 
@@ -84,6 +83,7 @@
             this.ListBoxCart.Name = "ListBoxCart";
             this.ListBoxCart.Size = new System.Drawing.Size(210, 304);
             this.ListBoxCart.TabIndex = 9;
+            this.ListBoxCart.SelectedIndexChanged += new System.EventHandler(this.ListBoxCart_SelectedIndexChanged);
             // 
             // LabelCart
             // 

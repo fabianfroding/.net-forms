@@ -8,14 +8,12 @@ namespace MediaShop
     {
         ProductController productController;
         Cart cart;
-        Product selectedProduct;
 
         public CashierForm()
         {
             InitializeComponent();
             productController = new ProductController();
             cart = new Cart();
-            BTNAddToCart.Enabled = false;
             ListProducts();
         }
 
@@ -25,25 +23,66 @@ namespace MediaShop
             Program.mainForm.Show();
         }
 
-        private void ListBoxProducts_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void BTNAddToCart_Click(object sender, EventArgs e)
         {
-            int index = this.ListBoxProducts.IndexFromPoint(e.Location);
-            if (index != ListBox.NoMatches)
+            Product selectedProduct = (Product)ListBoxProducts.SelectedItem;
+            if(selectedProduct != null)
             {
-                Product product = (Product)ListBoxProducts.Items[index];
-
-                // Open product view
-                ProductForm productForm = new ProductForm(product, false);
-                productForm.ShowDialog();
-
-                // Om ProductForm tar bort en vara så skickas DialogResult.OK så att
-                // listan i denna form förnyas.
-                if (productForm.DialogResult == DialogResult.OK)
+                if (selectedProduct.stock > 0)
                 {
+                    // TODO: Check if same item is in cart, if it is, quantity++
+                    cart.products.Add(selectedProduct);
                     ListProducts();
+                    ListProductsInCart();
                 }
-
+                else
+                {
+                    MessageBox.Show("Product is out of stock.");
+                }
             }
+            else
+            {
+                MessageBox.Show("Select a product to add it to the cart.");
+            }
+        }
+
+        private void BTNCheckout_Click(object sender, EventArgs e)
+        {
+            if (cart.products.Count > 0)
+            {
+                // Öppna checkout form?
+                // selectedProduct.stock--;
+                // Kolla stock igen så att inte en annan instans köpt produkten etc...?
+                // Töm cart lista
+                // Uppdatera produkter i lagret.
+                ListProducts();
+                ListProductsInCart();
+            }
+            else
+            {
+                MessageBox.Show("Cart is empty.");
+            }
+        }
+
+        private void ListBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Inaktivera dessa event för att hindra att de triggas av ClearSelected.
+            ListBoxProducts.SelectedIndexChanged -= ListBoxProducts_SelectedIndexChanged;
+            ListBoxCart.SelectedIndexChanged -= ListBoxCart_SelectedIndexChanged;
+            ListBoxCart.ClearSelected();
+            ListBoxProducts.SelectedIndexChanged += ListBoxProducts_SelectedIndexChanged;
+            ListBoxCart.SelectedIndexChanged += ListBoxCart_SelectedIndexChanged;
+            UpdateSelectedProductInfo((Product)ListBoxProducts.SelectedItem);
+        }
+
+        private void ListBoxCart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBoxProducts.SelectedIndexChanged -= ListBoxProducts_SelectedIndexChanged;
+            ListBoxCart.SelectedIndexChanged -= ListBoxCart_SelectedIndexChanged;
+            ListBoxProducts.ClearSelected();
+            ListBoxProducts.SelectedIndexChanged += ListBoxProducts_SelectedIndexChanged;
+            ListBoxCart.SelectedIndexChanged += ListBoxCart_SelectedIndexChanged;
+            UpdateSelectedProductInfo((Product)ListBoxCart.SelectedItem);
         }
 
         private void ListProducts()
@@ -52,24 +91,43 @@ namespace MediaShop
             ListBoxProducts.BeginUpdate();
             foreach (Product product in productController.ListProducts())
             {
-                ListBoxProducts.Items.Add(product);
+                // Visa endast produkten om den finns i lager.
+                if (product.stock > 0)
+                {
+                    ListBoxProducts.Items.Add(product);
+                }
             }
             ListBoxProducts.DisplayMember = "name";
             ListBoxProducts.ValueMember = "id";
             ListBoxProducts.EndUpdate();
         }
 
-        private void ListBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListProductsInCart()
         {
-            selectedProduct = (Product)ListBoxProducts.SelectedItem;
-
-            if (selectedProduct != null)
+            ListBoxCart.Items.Clear();
+            ListBoxCart.BeginUpdate();
+            foreach (Product product in cart.products)
             {
-                LabelProductName.Text = selectedProduct.name;
-                LabelProductPrice.Text = selectedProduct.price.ToString() + " SEK";
-                LabelProductStock.Text = selectedProduct.stock.ToString() + " in stock.";
-                LabelProductType.Text = selectedProduct.productType.ToString();
-                BTNAddToCart.Enabled = true;
+                ListBoxCart.Items.Add(product);
+            }
+            ListBoxCart.DisplayMember = "name";
+            ListBoxCart.ValueMember = "id";
+            ListBoxCart.EndUpdate();
+        }
+
+        private void MergeDuplicatesInCart()
+        {
+            //TODO Merge duplicates.
+        }
+
+        private void UpdateSelectedProductInfo(Product product)
+        {
+            if (product != null)
+            {
+                LabelProductName.Text = product.name;
+                LabelProductPrice.Text = product.price.ToString() + " SEK";
+                LabelProductStock.Text = product.stock.ToString() + " in stock.";
+                LabelProductType.Text = product.productType.ToString();
             }
             else
             {
@@ -77,38 +135,6 @@ namespace MediaShop
                 LabelProductPrice.Text = "... SEK";
                 LabelProductStock.Text = "... in stock.";
                 LabelProductType.Text = "";
-                BTNAddToCart.Enabled = false;
-            }
-
-        }
-
-        private void BTNAddToCart_Click(object sender, EventArgs e)
-        {
-
-            if (selectedProduct.stock > 0)
-            {
-                cart.products.Add(selectedProduct);
-                selectedProduct.stock--;
-            }
-            else
-            {
-                MessageBox.Show("Product is out of stock.");
-            }
-
-            //TODO: Update lists and product info.
-
-            System.Diagnostics.Debug.WriteLine("BTNAddToCart");
-        }
-
-        private void BTNCheckout_Click(object sender, EventArgs e)
-        {
-            if (cart.products.Count > 0)
-            {
-                // Open Checkout form?
-            }
-            else
-            {
-                MessageBox.Show("Cart is empty.");
             }
         }
     }

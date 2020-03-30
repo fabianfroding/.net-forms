@@ -4,7 +4,7 @@ namespace MediaShop.Models
 {
     class Cart
     {
-        public List<Product> products { get; set; }
+        public List<Product> products;
 
         public Cart()
         {
