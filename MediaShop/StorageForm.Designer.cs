@@ -63,6 +63,7 @@
             // ListBoxProducts
             // 
             this.ListBoxProducts.FormattingEnabled = true;
+            this.ListBoxProducts.HorizontalScrollbar = true;
             this.ListBoxProducts.ItemHeight = 20;
             this.ListBoxProducts.Location = new System.Drawing.Point(12, 58);
             this.ListBoxProducts.Name = "ListBoxProducts";

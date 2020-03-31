@@ -58,6 +58,7 @@
             // ListBoxProducts
             // 
             this.ListBoxProducts.FormattingEnabled = true;
+            this.ListBoxProducts.HorizontalScrollbar = true;
             this.ListBoxProducts.ItemHeight = 20;
             this.ListBoxProducts.Location = new System.Drawing.Point(3, 69);
             this.ListBoxProducts.Name = "ListBoxProducts";
@@ -78,6 +79,7 @@
             // ListBoxCart
             // 
             this.ListBoxCart.FormattingEnabled = true;
+            this.ListBoxCart.HorizontalScrollbar = true;
             this.ListBoxCart.ItemHeight = 20;
             this.ListBoxCart.Location = new System.Drawing.Point(290, 69);
             this.ListBoxCart.Name = "ListBoxCart";
@@ -97,7 +99,7 @@
             // 
             // BTNAddToCart
             // 
-            this.BTNAddToCart.Location = new System.Drawing.Point(270, 166);
+            this.BTNAddToCart.Location = new System.Drawing.Point(143, 166);
             this.BTNAddToCart.Name = "BTNAddToCart";
             this.BTNAddToCart.Size = new System.Drawing.Size(133, 33);
             this.BTNAddToCart.TabIndex = 15;
@@ -109,7 +111,7 @@
             // 
             this.LabelProductType.AutoSize = true;
             this.LabelProductType.ForeColor = System.Drawing.Color.White;
-            this.LabelProductType.Location = new System.Drawing.Point(266, 124);
+            this.LabelProductType.Location = new System.Drawing.Point(139, 124);
             this.LabelProductType.Name = "LabelProductType";
             this.LabelProductType.Size = new System.Drawing.Size(98, 20);
             this.LabelProductType.TabIndex = 12;
@@ -119,7 +121,7 @@
             // 
             this.LabelProductStock.AutoSize = true;
             this.LabelProductStock.ForeColor = System.Drawing.Color.White;
-            this.LabelProductStock.Location = new System.Drawing.Point(266, 87);
+            this.LabelProductStock.Location = new System.Drawing.Point(139, 87);
             this.LabelProductStock.Name = "LabelProductStock";
             this.LabelProductStock.Size = new System.Drawing.Size(50, 20);
             this.LabelProductStock.TabIndex = 11;
@@ -129,7 +131,7 @@
             // 
             this.LabelProductPrice.AutoSize = true;
             this.LabelProductPrice.ForeColor = System.Drawing.Color.White;
-            this.LabelProductPrice.Location = new System.Drawing.Point(266, 51);
+            this.LabelProductPrice.Location = new System.Drawing.Point(139, 51);
             this.LabelProductPrice.Name = "LabelProductPrice";
             this.LabelProductPrice.Size = new System.Drawing.Size(44, 20);
             this.LabelProductPrice.TabIndex = 10;
@@ -139,7 +141,7 @@
             // 
             this.LabelProductName.AutoSize = true;
             this.LabelProductName.ForeColor = System.Drawing.Color.White;
-            this.LabelProductName.Location = new System.Drawing.Point(345, 23);
+            this.LabelProductName.Location = new System.Drawing.Point(218, 23);
             this.LabelProductName.Name = "LabelProductName";
             this.LabelProductName.Size = new System.Drawing.Size(106, 20);
             this.LabelProductName.TabIndex = 9;
@@ -153,7 +155,7 @@
             this.PanelSelectedProduct.Controls.Add(this.LabelProductStock);
             this.PanelSelectedProduct.Controls.Add(this.LabelProductPrice);
             this.PanelSelectedProduct.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PanelSelectedProduct.Location = new System.Drawing.Point(315, 0);
+            this.PanelSelectedProduct.Location = new System.Drawing.Point(554, 0);
             this.PanelSelectedProduct.Name = "PanelSelectedProduct";
             this.PanelSelectedProduct.Size = new System.Drawing.Size(550, 459);
             this.PanelSelectedProduct.TabIndex = 16;
@@ -187,7 +189,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(865, 459);
+            this.ClientSize = new System.Drawing.Size(1104, 459);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.PanelSelectedProduct);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

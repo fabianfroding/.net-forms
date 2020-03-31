@@ -5,3 +5,14 @@
 2|Wacom One 13"|4390|20|OTHER
 3|Mad Max: Fury Road|99|30|DVD
 4|The Legend of Zelda: Breath of the Wild|599|40|GAME
+7|Test1|99|1|BOOK
+8|Test12|99|1|BOOK
+9|Test13|99|1|BOOK
+10|Test14|99|1|BOOK
+11|Test15|99|1|BOOK
+12|Test16|99|1|BOOK
+13|Test17|99|1|BOOK
+14|Test18|99|1|BOOK
+15|Test19|99|1|BOOK
+16|Test10|99|1|BOOK
+17|re|34|1|DVD
