@@ -17,23 +17,35 @@ namespace MediaShop
             ListProducts();
         }
 
+        // För användaren tillbaka till start-vyn.
         private void BTNMainMenu_Click(object sender, EventArgs e)
         {
+            ReturnCartItemsToStorage();
             Form.ActiveForm.Close();
             Program.mainForm.Show();
         }
 
+        // Lägger till en produkt i varukorgen.
         private void BTNAddToCart_Click(object sender, EventArgs e)
         {
-            Product selectedProduct = (Product)ListBoxProducts.SelectedItem;
-            if(selectedProduct != null)
+            ListViewItem selectedItem = ListViewProducts.SelectedItems[0];
+            if (selectedItem != null)
             {
+                ListViewItem cartItem = (ListViewItem)selectedItem.Clone();
+                int.TryParse(cartItem.SubItems[1].Text, out int id);
+                Product selectedProduct = productController.GetProductById(id);
+
+                // Kolla så att produkten finns i lagret.
+                // Minska stock i lagret så att användaren inte kan lägga till fler varor 
+                // än vad som finns i lagret.
                 if (selectedProduct.stock > 0)
                 {
-                    // TODO: Check if same item is in cart, if it is, quantity++
+                    ListViewCart.Items.Add(cartItem);
                     cart.products.Add(selectedProduct);
-                    ListProducts();
                     ListProductsInCart();
+                    selectedProduct.stock--;
+                    productController.Update(selectedProduct);
+                    ListProducts();
                 }
                 else
                 {
@@ -50,11 +62,10 @@ namespace MediaShop
         {
             if (cart.products.Count > 0)
             {
-                // Öppna checkout form?
-                // selectedProduct.stock--;
-                // Kolla stock igen så att inte en annan instans köpt produkten etc...?
+                //TODO:
+                // Visa message box att köp genomförts. Totalt pris
+                // Uppdatera db.
                 // Töm cart lista
-                // Uppdatera produkter i lagret.
                 ListProducts();
                 ListProductsInCart();
             }
@@ -64,77 +75,51 @@ namespace MediaShop
             }
         }
 
-        private void ListBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Inaktivera dessa event för att hindra att de triggas av ClearSelected.
-            ListBoxProducts.SelectedIndexChanged -= ListBoxProducts_SelectedIndexChanged;
-            ListBoxCart.SelectedIndexChanged -= ListBoxCart_SelectedIndexChanged;
-            ListBoxCart.ClearSelected();
-            ListBoxProducts.SelectedIndexChanged += ListBoxProducts_SelectedIndexChanged;
-            ListBoxCart.SelectedIndexChanged += ListBoxCart_SelectedIndexChanged;
-            UpdateSelectedProductInfo((Product)ListBoxProducts.SelectedItem);
-        }
-
-        private void ListBoxCart_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListBoxProducts.SelectedIndexChanged -= ListBoxProducts_SelectedIndexChanged;
-            ListBoxCart.SelectedIndexChanged -= ListBoxCart_SelectedIndexChanged;
-            ListBoxProducts.ClearSelected();
-            ListBoxProducts.SelectedIndexChanged += ListBoxProducts_SelectedIndexChanged;
-            ListBoxCart.SelectedIndexChanged += ListBoxCart_SelectedIndexChanged;
-            UpdateSelectedProductInfo((Product)ListBoxCart.SelectedItem);
-        }
-
         private void ListProducts()
         {
-            ListBoxProducts.Items.Clear();
-            ListBoxProducts.BeginUpdate();
+            ListViewProducts.Items.Clear();
+            ListViewProducts.BeginUpdate();
             foreach (Product product in productController.ListProducts())
             {
-                // Visa endast produkten om den finns i lager.
-                if (product.stock > 0)
-                {
-                    ListBoxProducts.Items.Add(product);
-                }
+                string[] productValues = new string[5];
+                productValues[0] = product.name;
+                productValues[1] = product.id.ToString();
+                productValues[2] = product.price.ToString();
+                productValues[3] = product.stock.ToString();
+                productValues[4] = product.productType.ToString();
+                ListViewProducts.Items.Add(new ListViewItem(productValues));
             }
-            ListBoxProducts.DisplayMember = "name";
-            ListBoxProducts.ValueMember = "id";
-            ListBoxProducts.EndUpdate();
+            ListViewProducts.EndUpdate();
         }
 
         private void ListProductsInCart()
         {
-            ListBoxCart.Items.Clear();
-            ListBoxCart.BeginUpdate();
+            ListViewCart.Items.Clear();
+            ListViewCart.BeginUpdate();
             foreach (Product product in cart.products)
             {
-                ListBoxCart.Items.Add(product);
+                string[] productValues = new string[3];
+                productValues[0] = product.name;
+                productValues[1] = product.price.ToString();
+                productValues[2] = product.productType.ToString();
+                ListViewCart.Items.Add(new ListViewItem(productValues));
             }
-            ListBoxCart.DisplayMember = "name";
-            ListBoxCart.ValueMember = "id";
-            ListBoxCart.EndUpdate();
+            ListViewCart.EndUpdate();
         }
 
-        private void MergeDuplicatesInCart()
+        // Denna funktion lägger tillbaka varor från varukorgen till lagret.
+        // Funktionen anropas om t.ex. användaren stänger ner kassavyn med varor fortfarande i
+        // varukorgen utan att ha valt "checkout".
+        private void ReturnCartItemsToStorage()
         {
-            //TODO Merge duplicates.
-        }
-
-        private void UpdateSelectedProductInfo(Product product)
-        {
-            if (product != null)
+            if (cart.products.Count > 0)
             {
-                LabelProductName.Text = product.name;
-                LabelProductPrice.Text = product.price.ToString() + " SEK";
-                LabelProductStock.Text = product.stock.ToString() + " in stock.";
-                LabelProductType.Text = product.productType.ToString();
-            }
-            else
-            {
-                LabelProductName.Text = "Product Info";
-                LabelProductPrice.Text = "... SEK";
-                LabelProductStock.Text = "... in stock.";
-                LabelProductType.Text = "";
+                foreach (Product product in cart.products)
+                {
+                    Product dbProduct = productController.GetProductById(product.id);
+                    dbProduct.stock++;
+                    productController.Update(dbProduct);
+                }
             }
         }
     }

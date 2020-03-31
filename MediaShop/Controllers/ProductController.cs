@@ -18,6 +18,11 @@ namespace MediaShop
             return productRepository.GetAll();
         }
 
+        public Product GetProductById(int id)
+        {
+            return productRepository.GetById(id);
+        }
+
         public bool Add(Product product)
         {
             return productRepository.Add(product);
