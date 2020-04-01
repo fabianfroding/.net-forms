@@ -62,12 +62,21 @@ namespace MediaShop
         {
             if (cart.products.Count > 0)
             {
-                //TODO:
-                // Visa message box att köp genomförts. Totalt pris
-                // Uppdatera db.
-                // Töm cart lista
-                ListProducts();
-                ListProductsInCart();
+                double totalPrice = 0;
+                string products = "";
+                foreach (Product product in cart.products)
+                {
+                    totalPrice += product.price;
+                    products += product.name + ":    " + product.price.ToString() + " SEK" + "\n";
+                }
+                DialogResult dR = MessageBox.Show(products + "\nTotal price: " + totalPrice.ToString() + " SEK", "Checkout", MessageBoxButtons.OKCancel);
+                if (dR == DialogResult.OK)
+                {
+                    cart.products.Clear();
+                    ListProducts();
+                    ListProductsInCart();
+                    MessageBox.Show("Purchase done!");
+                }
             }
             else
             {
