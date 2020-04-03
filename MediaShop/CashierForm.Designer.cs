@@ -32,26 +32,26 @@
             this.LabelProducts = new System.Windows.Forms.Label();
             this.LabelCart = new System.Windows.Forms.Label();
             this.PanelSelectedProduct = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.BTNCheckout = new System.Windows.Forms.Button();
-            this.ListViewProducts = new System.Windows.Forms.ListView();
-            this.ProductName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProductPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProductStock = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProductType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProductId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ListViewCart = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel1 = new System.Windows.Forms.Panel();
             this.BTNAddToCart = new System.Windows.Forms.Button();
+            this.ListViewProducts = new System.Windows.Forms.ListView();
+            this.ProductName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProductId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProductPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProductStock = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProductType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PanelSelectedProduct.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BTNMainMenu
             // 
-            this.BTNMainMenu.Location = new System.Drawing.Point(16, 315);
+            this.BTNMainMenu.Location = new System.Drawing.Point(12, 705);
             this.BTNMainMenu.Name = "BTNMainMenu";
             this.BTNMainMenu.Size = new System.Drawing.Size(138, 40);
             this.BTNMainMenu.TabIndex = 5;
@@ -63,7 +63,7 @@
             // 
             this.LabelProducts.AutoSize = true;
             this.LabelProducts.ForeColor = System.Drawing.Color.White;
-            this.LabelProducts.Location = new System.Drawing.Point(12, 23);
+            this.LabelProducts.Location = new System.Drawing.Point(159, 23);
             this.LabelProducts.Name = "LabelProducts";
             this.LabelProducts.Size = new System.Drawing.Size(76, 20);
             this.LabelProducts.TabIndex = 7;
@@ -73,7 +73,7 @@
             // 
             this.LabelCart.AutoSize = true;
             this.LabelCart.ForeColor = System.Drawing.Color.White;
-            this.LabelCart.Location = new System.Drawing.Point(37, 33);
+            this.LabelCart.Location = new System.Drawing.Point(210, 23);
             this.LabelCart.Name = "LabelCart";
             this.LabelCart.Size = new System.Drawing.Size(43, 20);
             this.LabelCart.TabIndex = 9;
@@ -85,10 +85,52 @@
             this.PanelSelectedProduct.Controls.Add(this.ListViewCart);
             this.PanelSelectedProduct.Controls.Add(this.LabelCart);
             this.PanelSelectedProduct.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PanelSelectedProduct.Location = new System.Drawing.Point(582, 0);
+            this.PanelSelectedProduct.Location = new System.Drawing.Point(562, 0);
             this.PanelSelectedProduct.Name = "PanelSelectedProduct";
-            this.PanelSelectedProduct.Size = new System.Drawing.Size(550, 405);
+            this.PanelSelectedProduct.Size = new System.Drawing.Size(394, 767);
             this.PanelSelectedProduct.TabIndex = 16;
+            // 
+            // BTNCheckout
+            // 
+            this.BTNCheckout.Location = new System.Drawing.Point(34, 705);
+            this.BTNCheckout.Name = "BTNCheckout";
+            this.BTNCheckout.Size = new System.Drawing.Size(138, 40);
+            this.BTNCheckout.TabIndex = 10;
+            this.BTNCheckout.Text = "Checkout";
+            this.BTNCheckout.UseVisualStyleBackColor = true;
+            this.BTNCheckout.Click += new System.EventHandler(this.BTNCheckout_Click);
+            // 
+            // ListViewCart
+            // 
+            this.ListViewCart.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader5});
+            this.ListViewCart.GridLines = true;
+            this.ListViewCart.HideSelection = false;
+            this.ListViewCart.Location = new System.Drawing.Point(34, 65);
+            this.ListViewCart.MultiSelect = false;
+            this.ListViewCart.Name = "ListViewCart";
+            this.ListViewCart.Size = new System.Drawing.Size(325, 611);
+            this.ListViewCart.TabIndex = 17;
+            this.ListViewCart.UseCompatibleStateImageBehavior = false;
+            this.ListViewCart.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Tag = "";
+            this.columnHeader2.Text = "Product";
+            this.columnHeader2.Width = 122;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Price";
+            this.columnHeader3.Width = 93;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Type";
+            this.columnHeader5.Width = 105;
             // 
             // panel1
             // 
@@ -99,18 +141,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(550, 405);
+            this.panel1.Size = new System.Drawing.Size(550, 767);
             this.panel1.TabIndex = 17;
             // 
-            // BTNCheckout
+            // BTNAddToCart
             // 
-            this.BTNCheckout.Location = new System.Drawing.Point(373, 331);
-            this.BTNCheckout.Name = "BTNCheckout";
-            this.BTNCheckout.Size = new System.Drawing.Size(138, 40);
-            this.BTNCheckout.TabIndex = 10;
-            this.BTNCheckout.Text = "Checkout";
-            this.BTNCheckout.UseVisualStyleBackColor = true;
-            this.BTNCheckout.Click += new System.EventHandler(this.BTNCheckout_Click);
+            this.BTNAddToCart.Location = new System.Drawing.Point(278, 705);
+            this.BTNAddToCart.Name = "BTNAddToCart";
+            this.BTNAddToCart.Size = new System.Drawing.Size(138, 40);
+            this.BTNAddToCart.TabIndex = 18;
+            this.BTNAddToCart.Text = "Add To Cart";
+            this.BTNAddToCart.UseVisualStyleBackColor = true;
+            this.BTNAddToCart.Click += new System.EventHandler(this.BTNAddToCart_Click);
             // 
             // ListViewProducts
             // 
@@ -122,10 +164,11 @@
             this.ProductType});
             this.ListViewProducts.GridLines = true;
             this.ListViewProducts.HideSelection = false;
-            this.ListViewProducts.Location = new System.Drawing.Point(16, 65);
+            this.ListViewProducts.Location = new System.Drawing.Point(25, 65);
             this.ListViewProducts.MultiSelect = false;
             this.ListViewProducts.Name = "ListViewProducts";
-            this.ListViewProducts.Size = new System.Drawing.Size(400, 230);
+            this.ListViewProducts.Size = new System.Drawing.Size(502, 611);
+            this.ListViewProducts.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ListViewProducts.TabIndex = 16;
             this.ListViewProducts.UseCompatibleStateImageBehavior = false;
             this.ListViewProducts.View = System.Windows.Forms.View.Details;
@@ -134,76 +177,34 @@
             // 
             this.ProductName.Tag = "";
             this.ProductName.Text = "Product";
-            this.ProductName.Width = 75;
-            // 
-            // ProductPrice
-            // 
-            this.ProductPrice.Text = "Price";
-            this.ProductPrice.Width = 59;
-            // 
-            // ProductStock
-            // 
-            this.ProductStock.Text = "Stock";
-            this.ProductStock.Width = 64;
-            // 
-            // ProductType
-            // 
-            this.ProductType.Text = "Type";
-            this.ProductType.Width = 63;
+            this.ProductName.Width = 135;
             // 
             // ProductId
             // 
             this.ProductId.Text = "Id";
-            this.ProductId.Width = 39;
+            this.ProductId.Width = 65;
             // 
-            // ListViewCart
+            // ProductPrice
             // 
-            this.ListViewCart.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader5});
-            this.ListViewCart.GridLines = true;
-            this.ListViewCart.HideSelection = false;
-            this.ListViewCart.Location = new System.Drawing.Point(28, 65);
-            this.ListViewCart.MultiSelect = false;
-            this.ListViewCart.Name = "ListViewCart";
-            this.ListViewCart.Size = new System.Drawing.Size(400, 246);
-            this.ListViewCart.TabIndex = 17;
-            this.ListViewCart.UseCompatibleStateImageBehavior = false;
-            this.ListViewCart.View = System.Windows.Forms.View.Details;
+            this.ProductPrice.Text = "Price";
+            this.ProductPrice.Width = 97;
             // 
-            // columnHeader2
+            // ProductStock
             // 
-            this.columnHeader2.Tag = "";
-            this.columnHeader2.Text = "Product";
-            this.columnHeader2.Width = 75;
+            this.ProductStock.Text = "Stock";
+            this.ProductStock.Width = 83;
             // 
-            // columnHeader3
+            // ProductType
             // 
-            this.columnHeader3.Text = "Price";
-            this.columnHeader3.Width = 59;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Type";
-            this.columnHeader5.Width = 63;
-            // 
-            // BTNAddToCart
-            // 
-            this.BTNAddToCart.Location = new System.Drawing.Point(267, 315);
-            this.BTNAddToCart.Name = "BTNAddToCart";
-            this.BTNAddToCart.Size = new System.Drawing.Size(138, 40);
-            this.BTNAddToCart.TabIndex = 18;
-            this.BTNAddToCart.Text = "Add To Cart";
-            this.BTNAddToCart.UseVisualStyleBackColor = true;
-            this.BTNAddToCart.Click += new System.EventHandler(this.BTNAddToCart_Click);
+            this.ProductType.Text = "Type";
+            this.ProductType.Width = 114;
             // 
             // CashierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(1132, 405);
+            this.ClientSize = new System.Drawing.Size(956, 767);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.PanelSelectedProduct);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

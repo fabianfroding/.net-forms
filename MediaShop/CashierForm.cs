@@ -99,6 +99,7 @@ namespace MediaShop
                 ListViewProducts.Items.Add(new ListViewItem(productValues));
             }
             ListViewProducts.EndUpdate();
+            ListViewProducts.Sort();
         }
 
         private void ListProductsInCart()
