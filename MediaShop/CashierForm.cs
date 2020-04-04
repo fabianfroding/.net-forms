@@ -1,5 +1,6 @@
 ﻿using MediaShop.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace MediaShop
@@ -7,13 +8,13 @@ namespace MediaShop
     public partial class CashierForm : Form
     {
         ProductController productController;
-        Cart cart;
+        List<Product> cartProducts;
 
         public CashierForm()
         {
             InitializeComponent();
             productController = new ProductController();
-            cart = new Cart();
+            cartProducts = new List<Product>();
             ListProducts();
         }
 
@@ -41,7 +42,7 @@ namespace MediaShop
                 if (selectedProduct.stock > 0)
                 {
                     ListViewCart.Items.Add(cartItem);
-                    cart.products.Add(selectedProduct);
+                    cartProducts.Add(selectedProduct);
                     ListProductsInCart();
                     selectedProduct.stock--;
                     productController.Update(selectedProduct);
@@ -58,13 +59,14 @@ namespace MediaShop
             }
         }
 
+        // Köp av varor i varukorgen.
         private void BTNCheckout_Click(object sender, EventArgs e)
         {
-            if (cart.products.Count > 0)
+            if (cartProducts.Count > 0)
             {
                 double totalPrice = 0;
                 string products = "";
-                foreach (Product product in cart.products)
+                foreach (Product product in cartProducts)
                 {
                     totalPrice += product.price;
                     products += product.name + ":    " + product.price.ToString() + " SEK" + "\n";
@@ -72,7 +74,12 @@ namespace MediaShop
                 DialogResult dR = MessageBox.Show(products + "\nTotal price: " + totalPrice.ToString() + " SEK", "Checkout", MessageBoxButtons.OKCancel);
                 if (dR == DialogResult.OK)
                 {
-                    cart.products.Clear();
+                    dR = MessageBox.Show("Get receipt?", "Receipt", MessageBoxButtons.YesNo);
+                    if (dR == DialogResult.Yes)
+                    {
+                        PrintReceipt();
+                    }
+                    cartProducts.Clear();
                     ListProducts();
                     ListProductsInCart();
                     MessageBox.Show("Purchase done!");
@@ -106,7 +113,7 @@ namespace MediaShop
         {
             ListViewCart.Items.Clear();
             ListViewCart.BeginUpdate();
-            foreach (Product product in cart.products)
+            foreach (Product product in cartProducts)
             {
                 string[] productValues = new string[3];
                 productValues[0] = product.name;
@@ -122,15 +129,20 @@ namespace MediaShop
         // varukorgen utan att ha valt "checkout".
         private void ReturnCartItemsToStorage()
         {
-            if (cart.products.Count > 0)
+            if (cartProducts.Count > 0)
             {
-                foreach (Product product in cart.products)
+                foreach (Product product in cartProducts)
                 {
                     Product dbProduct = productController.GetProductById(product.id);
                     dbProduct.stock++;
                     productController.Update(dbProduct);
                 }
             }
+        }
+
+        private void PrintReceipt()
+        {
+
         }
     }
 }
