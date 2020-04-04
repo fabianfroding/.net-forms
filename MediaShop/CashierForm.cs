@@ -142,7 +142,12 @@ namespace MediaShop
 
         private void PrintReceipt()
         {
-
+            Receipt receipt = new Receipt();
+            foreach (Product product in cartProducts)
+            {
+                receipt.products.Add(product);
+            }
+            System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
         }
     }
 }

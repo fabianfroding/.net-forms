@@ -7,8 +7,6 @@
         public string name { get; set; }
         public double price { get; set; }
         public int stock { get; set; }
-        public int unitsSold { get; set; } // Move to Purchase class
-        public string dateSold { get; set; } // Move to purchase class
         public ProductType productType { get; set; }
 
         public Product()
@@ -34,8 +32,6 @@
             s += name + " (Id: " + id + ") " + "[" + productType + "]\n";
             s += price + " SEK\n";
             s += stock + " in stock\n";
-            s += unitsSold + " units sold\n";
-            s += "Sold on " + dateSold;
             return s;
         }
     }
