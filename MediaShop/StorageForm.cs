@@ -54,21 +54,23 @@ namespace MediaShop
             }
         }
 
-        //TODO: Selecting cancel says there was problem adding to stock
+        // Denna funktion är till för att öka en produkts stock/lagerstatus,
+        // d.v.s. "leverans från grossist".
         private void BTNAddStock_Click(object sender, System.EventArgs e)
         {
             Product product = GetSelectedProduct();
-
-            string input = Interaction.InputBox("Specify stock increment amount for \"" + product.name + "\"", "Add stock", "1", -1, -1);
-            if (int.TryParse(input, out int stock) && stock > 0)
-            {
-            product.stock += stock;
-                productController.Update(product);
-                ListProducts();
+            if (product != null) {
+                string input = Interaction.InputBox("Specify stock increment amount for \"" + product.name + "\"", "Add stock", "1", -1, -1);
+                if (int.TryParse(input, out int stock) && stock > 0)
+                {
+                    product.stock += stock;
+                    productController.Update(product);
+                    ListProducts();
+                }
             }
             else
             {
-                MessageBox.Show("There was a problem adding stock.");
+                MessageBox.Show("Select a product to increment stock.");
             }
         }
 
@@ -92,11 +94,18 @@ namespace MediaShop
 
         private Product GetSelectedProduct()
         {
-            ListViewItem selectedItem = ListViewProducts.SelectedItems[0];
-            if (selectedItem != null)
+            try
             {
-                int.TryParse(selectedItem.SubItems[1].Text, out int id);
-                return productController.GetProductById(id);
+                ListViewItem selectedItem = ListViewProducts.SelectedItems[0];
+                if (selectedItem != null)
+                {
+                    int.TryParse(selectedItem.SubItems[1].Text, out int id);
+                    return productController.GetProductById(id);
+                }
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
             }
             return null;
         }
