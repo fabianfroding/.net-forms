@@ -1,4 +1,5 @@
-﻿using MediaShop.Models;
+﻿using MediaShop.Controllers;
+using MediaShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,12 +10,14 @@ namespace MediaShop
     {
         ProductController productController;
         List<Product> cartProducts;
+        ReceiptController receiptController;
 
         public CashierForm()
         {
             InitializeComponent();
             productController = new ProductController();
             cartProducts = new List<Product>();
+            receiptController = new ReceiptController();
             ListProducts();
         }
 
@@ -36,7 +39,7 @@ namespace MediaShop
                 ListViewItem selectedItem = ListViewProducts.SelectedItems[0];
                 ListViewItem cartItem = (ListViewItem)selectedItem.Clone();
                 int.TryParse(cartItem.SubItems[1].Text, out int id);
-                Product selectedProduct = productController.GetProductById(id);
+                Product selectedProduct = productController.GetById(id);
 
                 // Kolla så att produkten finns i lagret.
                 // Minska stock i lagret så att användaren inte kan lägga till fler varor 
@@ -98,7 +101,7 @@ namespace MediaShop
         {
             ListViewProducts.Items.Clear();
             ListViewProducts.BeginUpdate();
-            foreach (Product product in productController.ListProducts())
+            foreach (Product product in productController.GetAll())
             {
                 string[] productValues = new string[5];
                 productValues[0] = product.name;
@@ -136,7 +139,7 @@ namespace MediaShop
             {
                 foreach (Product product in cartProducts)
                 {
-                    Product dbProduct = productController.GetProductById(product.id);
+                    Product dbProduct = productController.GetById(product.id);
                     dbProduct.stock++;
                     productController.Update(dbProduct);
                 }
@@ -150,6 +153,7 @@ namespace MediaShop
             {
                 receipt.products.Add(product);
             }
+            receiptController.Add(receipt);
             System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
         }
     }

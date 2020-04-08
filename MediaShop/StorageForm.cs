@@ -78,7 +78,7 @@ namespace MediaShop
         {
             ListViewProducts.Items.Clear();
             ListViewProducts.BeginUpdate();
-            foreach (Product product in productController.ListProducts())
+            foreach (Product product in productController.GetAll())
             {
                 string[] productValues = new string[5];
                 productValues[0] = product.name;
@@ -100,7 +100,7 @@ namespace MediaShop
                 if (selectedItem != null)
                 {
                     int.TryParse(selectedItem.SubItems[1].Text, out int id);
-                    return productController.GetProductById(id);
+                    return productController.GetById(id);
                 }
             }
             catch (ArgumentOutOfRangeException e)

@@ -13,12 +13,12 @@ namespace MediaShop
             productRepository = new ProductRepository();
         }
 
-        public List<Product> ListProducts()
+        public List<Product> GetAll()
         {
             return productRepository.GetAll();
         }
 
-        public Product GetProductById(int id)
+        public Product GetById(int id)
         {
             return productRepository.GetById(id);
         }

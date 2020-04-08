@@ -53,6 +53,7 @@
     <Compile Include="CashierForm.Designer.cs">
       <DependentUpon>CashierForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +67,8 @@
     <Compile Include="NewProductForm.Designer.cs">
       <DependentUpon>NewProductForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\IReceiptRepository.cs" />
+    <Compile Include="Repositories\ReceiptRepository.cs" />
     <Compile Include="StorageForm.cs">
       <SubType>Form</SubType>
     </Compile>

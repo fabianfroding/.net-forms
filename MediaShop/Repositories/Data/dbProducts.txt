@@ -5,10 +5,10 @@
 12|Test16|99|0|BOOK
 8|Test12|99|0|BOOK
 9|Test13|99|0|BOOK
-1|Hollow Knight|449|47|GAME
 3|Mad Max: Fury Road|99|28|DVD
 4|The Legend of Zelda: Breath of the Wild|599|38|GAME
-2|Wacom One 13"|4390|17|OTHER
 16|Test10|99|2|BOOK
-7|Test1|99|34|BOOK
-18|APCRM|999|41|OTHER
+2|Wacom One 13"|4390|16|OTHER
+7|Test1|99|33|BOOK
+18|APCRM|999|38|OTHER
+1|Hollow Knight|449|46|GAME

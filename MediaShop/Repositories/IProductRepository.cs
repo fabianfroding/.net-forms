@@ -10,6 +10,5 @@ namespace MediaShop.Repositories
         bool Add(Product product);
         bool Remove(Product product);
         bool Update(Product product);
-       
     }
 }
