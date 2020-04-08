@@ -156,5 +156,11 @@ namespace MediaShop
             receiptController.Add(receipt);
             System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
         }
+
+        private void BTNRefund_Click(object sender, EventArgs e)
+        {
+            RefundForm refundForm = new RefundForm();
+            refundForm.ShowDialog();
+        }
     }
 }

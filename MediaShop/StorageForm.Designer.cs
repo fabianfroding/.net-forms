@@ -43,7 +43,7 @@
             // 
             // BTNNewProduct
             // 
-            this.BTNNewProduct.Location = new System.Drawing.Point(538, 92);
+            this.BTNNewProduct.Location = new System.Drawing.Point(142, 676);
             this.BTNNewProduct.Name = "BTNNewProduct";
             this.BTNNewProduct.Size = new System.Drawing.Size(127, 40);
             this.BTNNewProduct.TabIndex = 1;
@@ -118,9 +118,9 @@
             // 
             // BTNAddStock
             // 
-            this.BTNAddStock.Location = new System.Drawing.Point(538, 149);
+            this.BTNAddStock.Location = new System.Drawing.Point(383, 676);
             this.BTNAddStock.Name = "BTNAddStock";
-            this.BTNAddStock.Size = new System.Drawing.Size(115, 33);
+            this.BTNAddStock.Size = new System.Drawing.Size(131, 40);
             this.BTNAddStock.TabIndex = 20;
             this.BTNAddStock.Text = "Add Stock";
             this.BTNAddStock.UseVisualStyleBackColor = true;
@@ -128,9 +128,9 @@
             // 
             // BTNRemove
             // 
-            this.BTNRemove.Location = new System.Drawing.Point(538, 198);
+            this.BTNRemove.Location = new System.Drawing.Point(275, 676);
             this.BTNRemove.Name = "BTNRemove";
-            this.BTNRemove.Size = new System.Drawing.Size(96, 33);
+            this.BTNRemove.Size = new System.Drawing.Size(102, 40);
             this.BTNRemove.TabIndex = 19;
             this.BTNRemove.Text = "Remove";
             this.BTNRemove.UseVisualStyleBackColor = true;
@@ -141,7 +141,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(691, 791);
+            this.ClientSize = new System.Drawing.Size(542, 791);
             this.Controls.Add(this.BTNAddStock);
             this.Controls.Add(this.BTNRemove);
             this.Controls.Add(this.LabelProducts);

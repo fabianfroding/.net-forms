@@ -10,3 +10,4 @@ C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.NewProd
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.StorageForm.resources
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.CashierForm.resources
 C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.MainForm.resources
+C:\Users\Fabian\Studier\DVGB07-C#.NET\labs\MediaShop\obj\Debug\MediaShop.RefundForm.resources

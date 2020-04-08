@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace MediaShop.Repositories
 {
@@ -26,7 +27,30 @@ namespace MediaShop.Repositories
 
         public List<Receipt> GetAll()
         {
-            throw new NotImplementedException();
+            List<Receipt> _receipts = new List<Receipt>();
+            List<string> lines = File.ReadAllLines(dbPath).ToList();
+
+            foreach (string line in lines)
+            {
+                if (line != "")
+                {
+                    string[] entries = line.Split('|');
+                    _receipts.Add(GetParsedReceipt(entries));
+                }
+            }
+            return _receipts;
+        }
+
+        private Receipt GetParsedReceipt(string[] entries)
+        {
+            Receipt receipt = new Receipt();
+            receipt.date = entries[0];
+            for (int i = 1; i < entries.Length; i++)
+            {
+                
+            }
+
+            return receipt;
         }
     }
 }
