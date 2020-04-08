@@ -29,9 +29,11 @@ namespace MediaShop
         // Lägger till en produkt i varukorgen.
         private void BTNAddToCart_Click(object sender, EventArgs e)
         {
-            ListViewItem selectedItem = ListViewProducts.SelectedItems[0];
-            if (selectedItem != null)
+            // Här hanteras vad som händer om en användare försöker lägga en produkt i varukorgen
+            // när ingen produkt är "selected" från produktlistan.
+            try
             {
+                ListViewItem selectedItem = ListViewProducts.SelectedItems[0];
                 ListViewItem cartItem = (ListViewItem)selectedItem.Clone();
                 int.TryParse(cartItem.SubItems[1].Text, out int id);
                 Product selectedProduct = productController.GetProductById(id);
@@ -53,8 +55,9 @@ namespace MediaShop
                     MessageBox.Show("Product is out of stock.");
                 }
             }
-            else
+            catch (ArgumentOutOfRangeException exc)
             {
+                System.Diagnostics.Debug.WriteLine(exc.Message);
                 MessageBox.Show("Select a product to add it to the cart.");
             }
         }
