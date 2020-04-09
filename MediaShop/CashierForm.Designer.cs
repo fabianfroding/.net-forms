@@ -32,6 +32,7 @@
             this.LabelProducts = new System.Windows.Forms.Label();
             this.LabelCart = new System.Windows.Forms.Label();
             this.PanelSelectedProduct = new System.Windows.Forms.Panel();
+            this.BTNRefund = new System.Windows.Forms.Button();
             this.BTNCheckout = new System.Windows.Forms.Button();
             this.ListViewCart = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,7 +46,6 @@
             this.ProductPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ProductStock = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ProductType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.BTNRefund = new System.Windows.Forms.Button();
             this.PanelSelectedProduct.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -89,8 +89,18 @@
             this.PanelSelectedProduct.Dock = System.Windows.Forms.DockStyle.Right;
             this.PanelSelectedProduct.Location = new System.Drawing.Point(671, 0);
             this.PanelSelectedProduct.Name = "PanelSelectedProduct";
-            this.PanelSelectedProduct.Size = new System.Drawing.Size(508, 767);
+            this.PanelSelectedProduct.Size = new System.Drawing.Size(508, 796);
             this.PanelSelectedProduct.TabIndex = 16;
+            // 
+            // BTNRefund
+            // 
+            this.BTNRefund.Location = new System.Drawing.Point(312, 705);
+            this.BTNRefund.Name = "BTNRefund";
+            this.BTNRefund.Size = new System.Drawing.Size(145, 40);
+            this.BTNRefund.TabIndex = 18;
+            this.BTNRefund.Text = "Refund Product";
+            this.BTNRefund.UseVisualStyleBackColor = true;
+            this.BTNRefund.Click += new System.EventHandler(this.BTNRefund_Click);
             // 
             // BTNCheckout
             // 
@@ -143,7 +153,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(665, 767);
+            this.panel1.Size = new System.Drawing.Size(665, 796);
             this.panel1.TabIndex = 17;
             // 
             // BTNAddToCart
@@ -201,22 +211,12 @@
             this.ProductType.Text = "Type";
             this.ProductType.Width = 114;
             // 
-            // BTNRefund
-            // 
-            this.BTNRefund.Location = new System.Drawing.Point(312, 705);
-            this.BTNRefund.Name = "BTNRefund";
-            this.BTNRefund.Size = new System.Drawing.Size(145, 40);
-            this.BTNRefund.TabIndex = 18;
-            this.BTNRefund.Text = "Refund Product";
-            this.BTNRefund.UseVisualStyleBackColor = true;
-            this.BTNRefund.Click += new System.EventHandler(this.BTNRefund_Click);
-            // 
             // CashierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(1179, 767);
+            this.ClientSize = new System.Drawing.Size(1179, 796);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.PanelSelectedProduct);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

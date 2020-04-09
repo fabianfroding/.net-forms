@@ -69,6 +69,7 @@
             this.ListViewReceipts.TabIndex = 19;
             this.ListViewReceipts.UseCompatibleStateImageBehavior = false;
             this.ListViewReceipts.View = System.Windows.Forms.View.Details;
+            this.ListViewReceipts.SelectedIndexChanged += new System.EventHandler(this.ListViewReceipts_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -101,7 +102,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(643, 778);
+            this.ClientSize = new System.Drawing.Size(643, 793);
             this.Controls.Add(this.BTNRefund);
             this.Controls.Add(this.BTNBack);
             this.Controls.Add(this.ListViewReceipts);

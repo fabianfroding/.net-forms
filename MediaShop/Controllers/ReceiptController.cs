@@ -13,6 +13,11 @@ namespace MediaShop.Controllers
             receiptRepository = new ReceiptRepository();
         }
 
+        public Receipt GetByDate(string date)
+        {
+            return receiptRepository.GetByDate(date);
+        }
+
         public List<Receipt> GetAll()
         {
             return receiptRepository.GetAll();

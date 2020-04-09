@@ -25,6 +25,25 @@ namespace MediaShop.Repositories
             return true;
         }
 
+        public Receipt GetByDate(string date)
+        {
+            List<string> lines = File.ReadAllLines(dbPath).ToList();
+
+            foreach (string line in lines)
+            {
+                if (line != "")
+                {
+                    string[] entries = line.Split('|');
+                    if (date == entries[0])
+                    {
+                        return GetParsedReceipt(entries);
+                    }
+                }
+            }
+            System.Diagnostics.Debug.WriteLine("7");
+            return null;
+        }
+
         public List<Receipt> GetAll()
         {
             List<Receipt> _receipts = new List<Receipt>();
@@ -47,7 +66,8 @@ namespace MediaShop.Repositories
             receipt.date = entries[0];
             for (int i = 1; i < entries.Length; i++)
             {
-                
+                int.TryParse(entries[i], out int id);
+                receipt.productIds.Add(id);
             }
 
             return receipt;

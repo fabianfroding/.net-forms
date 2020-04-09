@@ -5,13 +5,16 @@ namespace MediaShop.Models
 {
     class Receipt
     {
-        public List<Product> products;
         public string date;
+        public List<int> productIds;
 
         public Receipt()
         {
-            products = new List<Product>();
-            date = DateTime.Now.ToString();
+            // Här skapas kvittots skapelse-datum, vilket används som kvittots identifiering.
+            // fff läggs till för att undvika att kvitton skapas med samma identifiering,
+            // d.v.s. alla kvitton är unika.
+            date = DateTime.Now.ToString("yymmssfff");
+            productIds = new List<int>();
         }
     }
 }

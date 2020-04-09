@@ -25,9 +25,15 @@ namespace MediaShop
 
         private void BTNRefund_Click(object sender, EventArgs e)
         {
+            //TODO Handle exception
+            ListViewItem selectedItem = ListViewReceiptProducts.SelectedItems[0];
 
         }
 
+        private void ListViewReceipts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListReceiptProducts();
+        }
 
         private void ListReceipts()
         {
@@ -42,5 +48,35 @@ namespace MediaShop
             ListViewReceipts.EndUpdate();
             ListViewReceipts.Sort();
         }
+
+        private void ListReceiptProducts()
+        {
+            ListViewItem selectedItem = null;
+            try
+            {
+                selectedItem = ListViewReceipts.SelectedItems[0];
+            }
+            catch (ArgumentOutOfRangeException exc)
+            {
+                System.Diagnostics.Debug.WriteLine("Error when selecting receipt.");
+                System.Diagnostics.Debug.WriteLine(exc.Message);
+            }
+
+            if (selectedItem != null)
+            {
+                string receiptDate = selectedItem.SubItems[0].Text;
+                Receipt receipt = receiptController.GetByDate(receiptDate);
+
+                ListViewReceiptProducts.Items.Clear();
+                ListViewReceiptProducts.BeginUpdate();
+                foreach (int id in receipt.productIds)
+                {
+                    ListViewReceiptProducts.Items.Add(new ListViewItem(productController.GetById(id).name));
+                }
+                ListViewReceiptProducts.EndUpdate();
+                ListViewReceiptProducts.Sort();
+            }
+        }
+
     }
 }
