@@ -33,15 +33,23 @@ namespace MediaShop
         private void BTNRemove_Click(object sender, System.EventArgs e)
         {
             Product product = GetSelectedProduct();
-            // Kontrollfunktion om varan verkligen vill tas bort. Om stock > 0 måste användaren
-            // confirm att varan ska tas bort. Om stock <= 0 frågas användaren inte utan den
-            // tas bort direkt.
-            if (product.stock > 0)
+            if (product != null)
             {
-                if (MessageBox.Show(
-                    "The product \"" + product.name + "\" still have units in stock. Are you sure you want to remove it?", 
-                    "Confirm removal", 
-                    MessageBoxButtons.OKCancel) == DialogResult.OK)
+                // Kontrollfunktion om varan verkligen vill tas bort. Om stock > 0 måste användaren
+                // confirm att varan ska tas bort. Om stock <= 0 frågas användaren inte utan den
+                // tas bort direkt.
+                if (product.stock > 0)
+                {
+                    if (MessageBox.Show(
+                        "The product \"" + product.name + "\" still have units in stock. Are you sure you want to remove it?",
+                        "Confirm removal",
+                        MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        RemoveProduct(product);
+                        ListProducts();
+                    }
+                }
+                else
                 {
                     RemoveProduct(product);
                     ListProducts();
@@ -49,8 +57,7 @@ namespace MediaShop
             }
             else
             {
-                RemoveProduct(product);
-                ListProducts();
+                MessageBox.Show("Select a product to remove.");
             }
         }
 
