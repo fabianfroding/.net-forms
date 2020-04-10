@@ -34,18 +34,20 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BTNBack = new System.Windows.Forms.Button();
             this.BTNRefund = new System.Windows.Forms.Button();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // ListViewReceiptProducts
             // 
             this.ListViewReceiptProducts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3});
             this.ListViewReceiptProducts.GridLines = true;
             this.ListViewReceiptProducts.HideSelection = false;
             this.ListViewReceiptProducts.Location = new System.Drawing.Point(363, 56);
             this.ListViewReceiptProducts.MultiSelect = false;
             this.ListViewReceiptProducts.Name = "ListViewReceiptProducts";
-            this.ListViewReceiptProducts.Size = new System.Drawing.Size(243, 611);
+            this.ListViewReceiptProducts.Size = new System.Drawing.Size(337, 611);
             this.ListViewReceiptProducts.TabIndex = 18;
             this.ListViewReceiptProducts.UseCompatibleStateImageBehavior = false;
             this.ListViewReceiptProducts.View = System.Windows.Forms.View.Details;
@@ -89,7 +91,7 @@
             // 
             // BTNRefund
             // 
-            this.BTNRefund.Location = new System.Drawing.Point(468, 687);
+            this.BTNRefund.Location = new System.Drawing.Point(562, 687);
             this.BTNRefund.Name = "BTNRefund";
             this.BTNRefund.Size = new System.Drawing.Size(138, 40);
             this.BTNRefund.TabIndex = 21;
@@ -97,18 +99,23 @@
             this.BTNRefund.UseVisualStyleBackColor = true;
             this.BTNRefund.Click += new System.EventHandler(this.BTNRefund_Click);
             // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Id";
+            // 
             // RefundForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(643, 793);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ClientSize = new System.Drawing.Size(757, 793);
             this.Controls.Add(this.BTNRefund);
             this.Controls.Add(this.BTNBack);
             this.Controls.Add(this.ListViewReceipts);
             this.Controls.Add(this.ListViewReceiptProducts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RefundForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RefundForm";
             this.ResumeLayout(false);
 
@@ -122,5 +129,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Button BTNBack;
         private System.Windows.Forms.Button BTNRefund;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }

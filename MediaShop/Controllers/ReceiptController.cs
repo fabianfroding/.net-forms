@@ -28,5 +28,15 @@ namespace MediaShop.Controllers
             return receiptRepository.Add(receipt);
         }
 
+        public bool Remove(Receipt receipt)
+        {
+            return receiptRepository.Remove(receipt);
+        }
+
+        public bool Update(Receipt receipt)
+        {
+            return receiptRepository.Update(receipt);
+        }
+
     }
 }

@@ -95,10 +95,11 @@ namespace MediaShop.Repositories
 
         public bool Update(Product product)
         {
-            Remove(product);
-            Add(product);
-            System.Diagnostics.Debug.WriteLine(product.ToString());
-            return true;
+            if (Remove(product) && Add(product))
+            {
+                return true;
+            }
+            return false;
         }
 
         private Product GetParsedProduct(string[] entries)

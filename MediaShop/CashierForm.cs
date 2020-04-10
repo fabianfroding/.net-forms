@@ -97,6 +97,13 @@ namespace MediaShop
             }
         }
 
+        private void BTNRefund_Click(object sender, EventArgs e)
+        {
+            RefundForm refundForm = new RefundForm();
+            refundForm.FormClosed += RefundFromClosed;
+            refundForm.ShowDialog();
+        }
+
         private void ListProducts()
         {
             ListViewProducts.Items.Clear();
@@ -151,16 +158,19 @@ namespace MediaShop
             Receipt receipt = new Receipt();
             foreach (Product product in cartProducts)
             {
-                receipt.products.Add(product);
+                receipt.productIds.Add(product.id);
             }
             receiptController.Add(receipt);
             System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
         }
 
-        private void BTNRefund_Click(object sender, EventArgs e)
+        // Denna metod upptäcker när RefundForm stängs för att automatiskt uppdatera produktlistan ifall
+        // ett återköp av en vara har genomförts, för att direkt kunna se att prouktens stock har
+        // uppdaterats.
+        private void RefundFromClosed(object sender, FormClosedEventArgs e)
         {
-            RefundForm refundForm = new RefundForm();
-            refundForm.ShowDialog();
+            ListProducts();
         }
+
     }
 }

@@ -52,7 +52,7 @@
             // 
             // BTNMainMenu
             // 
-            this.BTNMainMenu.Location = new System.Drawing.Point(25, 705);
+            this.BTNMainMenu.Location = new System.Drawing.Point(25, 635);
             this.BTNMainMenu.Name = "BTNMainMenu";
             this.BTNMainMenu.Size = new System.Drawing.Size(138, 40);
             this.BTNMainMenu.TabIndex = 5;
@@ -89,12 +89,12 @@
             this.PanelSelectedProduct.Dock = System.Windows.Forms.DockStyle.Right;
             this.PanelSelectedProduct.Location = new System.Drawing.Point(671, 0);
             this.PanelSelectedProduct.Name = "PanelSelectedProduct";
-            this.PanelSelectedProduct.Size = new System.Drawing.Size(508, 796);
+            this.PanelSelectedProduct.Size = new System.Drawing.Size(508, 745);
             this.PanelSelectedProduct.TabIndex = 16;
             // 
             // BTNRefund
             // 
-            this.BTNRefund.Location = new System.Drawing.Point(312, 705);
+            this.BTNRefund.Location = new System.Drawing.Point(312, 635);
             this.BTNRefund.Name = "BTNRefund";
             this.BTNRefund.Size = new System.Drawing.Size(145, 40);
             this.BTNRefund.TabIndex = 18;
@@ -104,7 +104,7 @@
             // 
             // BTNCheckout
             // 
-            this.BTNCheckout.Location = new System.Drawing.Point(34, 705);
+            this.BTNCheckout.Location = new System.Drawing.Point(34, 635);
             this.BTNCheckout.Name = "BTNCheckout";
             this.BTNCheckout.Size = new System.Drawing.Size(138, 40);
             this.BTNCheckout.TabIndex = 10;
@@ -123,7 +123,7 @@
             this.ListViewCart.Location = new System.Drawing.Point(34, 65);
             this.ListViewCart.MultiSelect = false;
             this.ListViewCart.Name = "ListViewCart";
-            this.ListViewCart.Size = new System.Drawing.Size(423, 611);
+            this.ListViewCart.Size = new System.Drawing.Size(423, 564);
             this.ListViewCart.TabIndex = 17;
             this.ListViewCart.UseCompatibleStateImageBehavior = false;
             this.ListViewCart.View = System.Windows.Forms.View.Details;
@@ -153,12 +153,12 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(665, 796);
+            this.panel1.Size = new System.Drawing.Size(665, 745);
             this.panel1.TabIndex = 17;
             // 
             // BTNAddToCart
             // 
-            this.BTNAddToCart.Location = new System.Drawing.Point(496, 705);
+            this.BTNAddToCart.Location = new System.Drawing.Point(496, 635);
             this.BTNAddToCart.Name = "BTNAddToCart";
             this.BTNAddToCart.Size = new System.Drawing.Size(138, 40);
             this.BTNAddToCart.TabIndex = 18;
@@ -179,7 +179,7 @@
             this.ListViewProducts.Location = new System.Drawing.Point(25, 65);
             this.ListViewProducts.MultiSelect = false;
             this.ListViewProducts.Name = "ListViewProducts";
-            this.ListViewProducts.Size = new System.Drawing.Size(609, 611);
+            this.ListViewProducts.Size = new System.Drawing.Size(609, 564);
             this.ListViewProducts.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ListViewProducts.TabIndex = 16;
             this.ListViewProducts.UseCompatibleStateImageBehavior = false;
@@ -216,7 +216,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(1179, 796);
+            this.ClientSize = new System.Drawing.Size(1179, 745);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.PanelSelectedProduct);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

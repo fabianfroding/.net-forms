@@ -7,6 +7,8 @@ namespace MediaShop.Repositories
     {
         Receipt GetByDate(string date);
         List<Receipt> GetAll();
-        bool Add(Receipt product);
+        bool Add(Receipt receipt);
+        bool Remove(Receipt receipt);
+        bool Update(Receipt receipt);
     }
 }
