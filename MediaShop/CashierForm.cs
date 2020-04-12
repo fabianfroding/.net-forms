@@ -171,6 +171,5 @@ namespace MediaShop
         {
             ListProducts();
         }
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MediaShop.Models;
 using Microsoft.VisualBasic;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace MediaShop
@@ -8,12 +9,22 @@ namespace MediaShop
     public partial class StorageForm : Form
     {
         private ProductController productController;
+        private ProductSearcher productSearcher;
 
         public StorageForm()
         {
             InitializeComponent();
             productController = new ProductController();
-            ListProducts();
+            productSearcher = new ProductSearcher();
+            ListProducts(productController.GetAll());
+
+            ComboBoxSearchProductTypes.BeginUpdate();
+            foreach (Product.ProductType productType in Enum.GetValues(typeof(Product.ProductType)))
+            {
+                ComboBoxSearchProductTypes.Items.Add(productType);
+            }
+            ComboBoxSearchProductTypes.Items.Add("ALL");
+            ComboBoxSearchProductTypes.EndUpdate();
         }
 
         private void BTNMainMenu_Click(object sender, EventArgs e)
@@ -26,7 +37,7 @@ namespace MediaShop
         {
             NewProductForm newProductForm = new NewProductForm();
             newProductForm.ShowDialog();
-            ListProducts();
+            ListProducts(productController.GetAll());
         }
 
         // Denna funktion tar bort en produkt från lagret/lagringsfilen.
@@ -46,13 +57,13 @@ namespace MediaShop
                         MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
                         RemoveProduct(product);
-                        ListProducts();
+                        ListProducts(productController.GetAll());
                     }
                 }
                 else
                 {
                     RemoveProduct(product);
-                    ListProducts();
+                    ListProducts(productController.GetAll());
                 }
             }
             else
@@ -72,7 +83,7 @@ namespace MediaShop
                 {
                     product.stock += stock;
                     productController.Update(product);
-                    ListProducts();
+                    ListProducts(productController.GetAll());
                 }
             }
             else
@@ -81,11 +92,25 @@ namespace MediaShop
             }
         }
 
-        private void ListProducts()
+        private void BTNSearch_Click(object sender, EventArgs e)
+        {
+            string[] productValues = new string[]
+            {
+                TextBoxSearchName.Text,
+                SearchPriceMin.Text,
+                SearchPriceMax.Text,
+                SearchStockMin.Text,
+                SearchStockMax.Text,
+                ComboBoxSearchProductTypes.SelectedItem.ToString()
+            };
+            ListProducts(productSearcher.FindProducts(productValues));
+        }
+
+        private void ListProducts(List<Product> products)
         {
             ListViewProducts.Items.Clear();
             ListViewProducts.BeginUpdate();
-            foreach (Product product in productController.GetAll())
+            foreach (Product product in products)
             {
                 string[] productValues = new string[5];
                 productValues[0] = product.name;
@@ -128,6 +153,5 @@ namespace MediaShop
                 MessageBox.Show("There was a problem removing the product.");
             }
         }
-
     }
 }

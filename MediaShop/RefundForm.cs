@@ -109,14 +109,29 @@ namespace MediaShop
 
                 ListViewReceiptProducts.Items.Clear();
                 ListViewReceiptProducts.BeginUpdate();
+                bool unknownProducts = false;
                 foreach (int id in receipt.productIds)
                 {
-                    Product product = productController.GetById(id);
-                    string[] productValues = new string[2];
-                    productValues[0] = product.name;
-                    productValues[1] = product.id.ToString();
-                    ListViewReceiptProducts.Items.Add(new ListViewItem(productValues));
+                    try
+                    {
+                        Product product = productController.GetById(id);
+                        string[] productValues = new string[2];
+                        productValues[0] = product.name;
+                        productValues[1] = product.id.ToString();
+                        ListViewReceiptProducts.Items.Add(new ListViewItem(productValues));
+                    }
+                    catch (Exception exc)
+                    {
+                        unknownProducts = true;
+                        System.Diagnostics.Debug.WriteLine(exc.Message);
+                    }
                 }
+
+                if (unknownProducts)
+                {
+                    MessageBox.Show("Product(s) from the selected receipt could not be loaded. \nIt may have been removed from the storage.");
+                }
+
                 ListViewReceiptProducts.EndUpdate();
                 ListViewReceiptProducts.Sort();
             }
