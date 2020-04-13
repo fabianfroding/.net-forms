@@ -38,18 +38,28 @@ namespace MediaShop
             }
             if (selectedReceipt != null && selectedProductItem != null)
             {
-                int.TryParse(selectedProductItem.SubItems[1].Text, out int id);
-                Product product = productController.GetById(id);
+                int.TryParse(selectedProductItem.Tag.ToString(), out int id);
+                double price = 0.0;
 
-                System.Diagnostics.Debug.WriteLine(selectedReceipt.date + " " + product.name);
-
-                selectedReceipt.productIds.Remove(id);
+                foreach (Product p in selectedReceipt.products)
+                {
+                    if (p.id == id)
+                    {
+                        price = p.price;
+                        selectedReceipt.products.Remove(p);
+                        break;
+                    }
+                }
                 receiptController.Update(selectedReceipt);
 
-                product.stock++;
-                productController.Update(product);
+                Product product = productController.GetById(id);
+                if (product != null)
+                {
+                    product.stock++;
+                    productController.Update(product);
+                }
 
-                if (selectedReceipt.productIds.Count > 0)
+                if (selectedReceipt.products.Count > 0)
                 {
                     ListReceiptProducts();
                 }
@@ -61,7 +71,7 @@ namespace MediaShop
                     ListReceipts();
                 }
 
-                MessageBox.Show(product.name + " was refunded for " + product.price.ToString() + " SEK.");
+                MessageBox.Show(selectedProductItem.SubItems[0].Text + " was refunded for " + price.ToString() + " SEK.");
             }
             else
             {
@@ -109,27 +119,20 @@ namespace MediaShop
 
                 ListViewReceiptProducts.Items.Clear();
                 ListViewReceiptProducts.BeginUpdate();
-                bool unknownProducts = false;
-                foreach (int id in receipt.productIds)
+                foreach (Product product in receipt.products)
                 {
                     try
                     {
-                        Product product = productController.GetById(id);
-                        string[] productValues = new string[2];
+                        string[] productValues = new string[1];
                         productValues[0] = product.name;
-                        productValues[1] = product.id.ToString();
-                        ListViewReceiptProducts.Items.Add(new ListViewItem(productValues));
+                        ListViewItem item = new ListViewItem(productValues);
+                        item.Tag = product.id;
+                        ListViewReceiptProducts.Items.Add(item);
                     }
                     catch (Exception exc)
                     {
-                        unknownProducts = true;
                         System.Diagnostics.Debug.WriteLine(exc.Message);
                     }
-                }
-
-                if (unknownProducts)
-                {
-                    MessageBox.Show("Product(s) from the selected receipt could not be loaded. \nIt may have been removed from the storage.");
                 }
 
                 ListViewReceiptProducts.EndUpdate();

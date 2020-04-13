@@ -88,11 +88,8 @@ namespace MediaShop
                 DialogResult dR = MessageBox.Show(products + "\nTotal price: " + totalPrice.ToString() + " SEK", "Checkout", MessageBoxButtons.OKCancel);
                 if (dR == DialogResult.OK)
                 {
-                    dR = MessageBox.Show("Get receipt?", "Receipt", MessageBoxButtons.YesNo);
-                    if (dR == DialogResult.Yes)
-                    {
-                        PrintReceipt();
-                    }
+                    dR = MessageBox.Show("Get receipt?", "Receipt", MessageBoxButtons.OK);
+                    PrintReceipt();
                     cartProducts.Clear();
                     BTNSearch.PerformClick();
                     ListProductsInCart();
@@ -181,7 +178,6 @@ namespace MediaShop
             Receipt receipt = new Receipt();
             foreach (Product product in cartProducts)
             {
-                receipt.productIds.Add(product.id);
                 receipt.products.Add(product);
             }
             receiptController.Add(receipt);

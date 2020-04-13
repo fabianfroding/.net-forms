@@ -6,7 +6,6 @@ namespace MediaShop.Models
     class Receipt
     {
         public string date;
-        public List<int> productIds;
         public List<Product> products;
 
         public Receipt()
@@ -15,7 +14,6 @@ namespace MediaShop.Models
             // fff läggs till för att undvika att kvitton skapas med samma identifiering,
             // d.v.s. alla kvitton är unika.
             date = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-            productIds = new List<int>();
             products = new List<Product>();
         }
     }
