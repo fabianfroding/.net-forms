@@ -182,6 +182,7 @@ namespace MediaShop
             foreach (Product product in cartProducts)
             {
                 receipt.productIds.Add(product.id);
+                receipt.products.Add(product);
             }
             receiptController.Add(receipt);
             System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
