@@ -346,6 +346,7 @@
             this.BTNSearch.TabIndex = 54;
             this.BTNSearch.Text = "Search";
             this.BTNSearch.UseVisualStyleBackColor = true;
+            this.BTNSearch.Click += new System.EventHandler(this.BTNSearch_Click);
             // 
             // CashierForm
             // 

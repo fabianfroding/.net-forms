@@ -18,7 +18,15 @@ namespace MediaShop
             productController = new ProductController();
             cartProducts = new List<Product>();
             receiptController = new ReceiptController();
-            ListProducts();
+            ListProducts(productController.GetAll());
+            ComboBoxSearchProductTypes.BeginUpdate();
+            foreach (Product.ProductType productType in Enum.GetValues(typeof(Product.ProductType)))
+            {
+                ComboBoxSearchProductTypes.Items.Add(productType);
+            }
+            ComboBoxSearchProductTypes.Items.Add("ALL");
+            ComboBoxSearchProductTypes.EndUpdate();
+            ComboBoxSearchProductTypes.SelectedIndex = ComboBoxSearchProductTypes.Items.Count - 1;
         }
 
         // För användaren tillbaka till start-vyn.
@@ -51,7 +59,7 @@ namespace MediaShop
                     ListProductsInCart();
                     selectedProduct.stock--;
                     productController.Update(selectedProduct);
-                    ListProducts();
+                    BTNSearch.PerformClick();
                 }
                 else
                 {
@@ -86,7 +94,7 @@ namespace MediaShop
                         PrintReceipt();
                     }
                     cartProducts.Clear();
-                    ListProducts();
+                    BTNSearch.PerformClick();
                     ListProductsInCart();
                     MessageBox.Show("Purchase done!");
                 }
@@ -104,11 +112,26 @@ namespace MediaShop
             refundForm.ShowDialog();
         }
 
-        private void ListProducts()
+        private void BTNSearch_Click(object sender, EventArgs e)
+        {
+            ProductSearcher productSearcher = new ProductSearcher();
+            string[] productValues = new string[]
+            {
+                TextBoxSearchName.Text,
+                SearchPriceMin.Text,
+                SearchPriceMax.Text,
+                SearchStockMin.Text,
+                SearchStockMax.Text,
+                ComboBoxSearchProductTypes.SelectedItem.ToString()
+            };
+            ListProducts(productSearcher.FindProducts(productValues));
+        }
+
+        private void ListProducts(List<Product> products)
         {
             ListViewProducts.Items.Clear();
             ListViewProducts.BeginUpdate();
-            foreach (Product product in productController.GetAll())
+            foreach (Product product in products)
             {
                 string[] productValues = new string[5];
                 productValues[0] = product.name;
@@ -169,7 +192,8 @@ namespace MediaShop
         // uppdaterats.
         private void RefundFromClosed(object sender, FormClosedEventArgs e)
         {
-            ListProducts();
+            ListProducts(productController.GetAll());
         }
+
     }
 }

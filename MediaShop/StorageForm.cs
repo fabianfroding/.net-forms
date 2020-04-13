@@ -9,15 +9,12 @@ namespace MediaShop
     public partial class StorageForm : Form
     {
         private ProductController productController;
-        private ProductSearcher productSearcher;
 
         public StorageForm()
         {
             InitializeComponent();
             productController = new ProductController();
-            productSearcher = new ProductSearcher();
             ListProducts(productController.GetAll());
-
             ComboBoxSearchProductTypes.BeginUpdate();
             foreach (Product.ProductType productType in Enum.GetValues(typeof(Product.ProductType)))
             {
@@ -58,13 +55,13 @@ namespace MediaShop
                         MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
                         RemoveProduct(product);
-                        ListProducts(productController.GetAll());
+                        BTNSearch.PerformClick();
                     }
                 }
                 else
                 {
                     RemoveProduct(product);
-                    ListProducts(productController.GetAll());
+                    BTNSearch.PerformClick();
                 }
             }
             else
@@ -84,7 +81,7 @@ namespace MediaShop
                 {
                     product.stock += stock;
                     productController.Update(product);
-                    ListProducts(productController.GetAll());
+                    BTNSearch.PerformClick();
                 }
             }
             else
@@ -95,6 +92,7 @@ namespace MediaShop
 
         private void BTNSearch_Click(object sender, EventArgs e)
         {
+            ProductSearcher productSearcher = new ProductSearcher();
             string[] productValues = new string[]
             {
                 TextBoxSearchName.Text,
