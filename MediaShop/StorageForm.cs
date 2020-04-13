@@ -25,6 +25,7 @@ namespace MediaShop
             }
             ComboBoxSearchProductTypes.Items.Add("ALL");
             ComboBoxSearchProductTypes.EndUpdate();
+            ComboBoxSearchProductTypes.SelectedIndex = ComboBoxSearchProductTypes.Items.Count - 1;
         }
 
         private void BTNMainMenu_Click(object sender, EventArgs e)
