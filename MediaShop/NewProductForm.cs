@@ -22,27 +22,34 @@ namespace MediaShop
         {
             if (isInputValid())
             {
-                Product product = new Product();
-
-                // Här tas | bort eftersom den används som separator för klassens attributes i
-                // lagringsfilen.
-                product.name = TextBoxName.Text.Replace("|", "");
-
-                double.TryParse(TextBoxPrice.Text, out double productPrice);
-                product.price = productPrice;
-                product.productType = (Product.ProductType)ComboBoxProductTypes.SelectedItem;
-
-                if (productController.Add(product))
+                if (CheckPriceLimit())
                 {
-                    MessageBox.Show("Product succesfully added.");
+                    Product product = new Product();
+
+                    // Här tas | bort eftersom den används som separator för klassens attributes i
+                    // lagringsfilen.
+                    product.name = TextBoxName.Text.Replace("|", "");
+
+                    double.TryParse(TextBoxPrice.Text, out double productPrice);
+                    product.price = productPrice;
+                    product.productType = (Product.ProductType)ComboBoxProductTypes.SelectedItem;
+
+                    if (productController.Add(product))
+                    {
+                        MessageBox.Show("Product succesfully added.");
+                        Form.ActiveForm.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("There was a problem adding the product.");
+                    }
+
                     Form.ActiveForm.Close();
                 }
                 else
                 {
-                    MessageBox.Show("There was a problem adding the product.");
+                    MessageBox.Show("Max price is 99999");
                 }
-
-                Form.ActiveForm.Close();
             }
             else
             {
@@ -79,6 +86,16 @@ namespace MediaShop
                 return false;
             }
             if (!double.TryParse(TextBoxPrice.Text, out double temp))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool CheckPriceLimit()
+        {
+            double.TryParse(TextBoxPrice.Text, out double temp);
+            if (temp > 99999)
             {
                 return false;
             }

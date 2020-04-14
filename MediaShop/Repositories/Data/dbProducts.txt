@@ -1,10 +1,9 @@
 
-10|Test14|99|0|BOOK
-11|Test15|99|0|BOOK
-12|Test16|99|0|BOOK
-9|Test13|99|0|BOOK
-4|The Legend of Zelda: Breath of the Wild|599|34|GAME
-2|Wacom One 13"|4390|14|OTHER
-3|Mad Max: Fury Road|99|22|DVD
-7|Test1|99|40|BOOK
-1|Hollow Knight|449|39|GAME
+1|The Legend of Zelda: Breath of the Wild|599|50|GAME
+2|Wacom One 13"|4390|50|OTHER
+3|Mad Max: Fury Road|99|50|DVD
+4|Atomic Habits|189|50|BOOK
+5|Hollow Knight|449|50|GAME
+6|Sicario OST|179|50|CD7|Test1|99|1|CD
+8|Test2|4|78|CD
+7|Test1|99|9999|BOOK

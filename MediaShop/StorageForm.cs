@@ -79,9 +79,16 @@ namespace MediaShop
                 string input = Interaction.InputBox("Specify stock increment amount for \"" + product.name + "\"", "Add stock", "1", -1, -1);
                 if (int.TryParse(input, out int stock) && stock > 0)
                 {
-                    product.stock += stock;
-                    productController.Update(product);
-                    BTNSearch.PerformClick();
+                    if (!(product.stock + stock > 9999))
+                    {
+                        product.stock += stock;
+                        productController.Update(product);
+                        BTNSearch.PerformClick();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Max stock is 9999");
+                    }
                 }
             }
             else
