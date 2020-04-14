@@ -1,4 +1,5 @@
-﻿using MediaShop.Models;
+﻿using MediaShop.Controllers;
+using MediaShop.Models;
 using System;
 using System.Windows.Forms;
 

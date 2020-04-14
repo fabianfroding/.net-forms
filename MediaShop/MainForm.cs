@@ -1,4 +1,5 @@
-﻿using MediaShop.Models;
+﻿using MediaShop.Controllers;
+using MediaShop.Models;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,15 @@ namespace MediaShop
     public partial class MainForm : Form
     {
         private ProductController productController;
+        private ReceiptController receiptController;
+        private List<Product> cartProducts;
 
         public MainForm()
         {
             InitializeComponent();
             productController = new ProductController();
+            receiptController = new ReceiptController();
+            cartProducts = new List<Product>();
             ListProducts(productController.GetAll());
             ListProductTypesInComboBox(ComboBoxSearchProductTypes);
         }
@@ -38,7 +43,111 @@ namespace MediaShop
             ListProducts(productSearcher.FindProducts(productValues));
         }
 
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TabControl1.SelectedIndex == 1)
+            {
+                BTNAddToCart.Enabled = false;
+                BTNAddToCart.Hide();
+            }
+            else
+            {
+                BTNAddToCart.Enabled = true;
+                BTNAddToCart.Show();
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Om användaren stänger programmet medans det finns produkter i varukorgen läggs
+            // dessa tillbaka till lagret.
+            if (cartProducts.Count > 0)
+            {
+                foreach (Product product in cartProducts)
+                {
+                    Product dbProduct = productController.GetById(product.id);
+                    dbProduct.stock++;
+                    productController.Update(dbProduct);
+                }
+            }
+        }
+
+
+
         //--------------- Cashier Tab Interactives ---------------//
+        private void BTNAddToCart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListViewItem selectedItem = ListViewProducts.SelectedItems[0];
+                ListViewItem cartItem = (ListViewItem)selectedItem.Clone();
+                int.TryParse(cartItem.SubItems[1].Text, out int id);
+                Product selectedProduct = productController.GetById(id);
+
+                if (selectedProduct.stock > 0)
+                {
+                    ListViewCart.Items.Add(cartItem);
+                    cartProducts.Add(selectedProduct);
+                    ListProductsInCart();
+                    selectedProduct.stock--;
+                    productController.Update(selectedProduct);
+                    BTNSearch.PerformClick();
+                }
+                else
+                {
+                    MessageBox.Show("Product is out of stock.");
+                }
+            }
+            catch (ArgumentOutOfRangeException exc)
+            {
+                System.Diagnostics.Debug.WriteLine(exc.Message);
+                MessageBox.Show("Select a product to add it to the cart.");
+            }
+        }
+
+        private void BTNCheckout_Click(object sender, EventArgs e)
+        {
+            if (cartProducts.Count > 0)
+            {
+                double totalPrice = 0;
+                string products = "";
+                foreach (Product product in cartProducts)
+                {
+                    totalPrice += product.price;
+                    products += product.name + ":    " + product.price.ToString() + " SEK" + "\n";
+                }
+                DialogResult dR = MessageBox.Show(products + "\nTotal price: " + totalPrice.ToString() + " SEK", "Checkout", MessageBoxButtons.OKCancel);
+                if (dR == DialogResult.OK)
+                {
+                    MessageBox.Show("Get receipt?", "Receipt", MessageBoxButtons.OK);
+
+                    Receipt receipt = new Receipt();
+                    foreach (Product product in cartProducts)
+                    {
+                        receipt.products.Add(product);
+                    }
+                    receiptController.Add(receipt);
+                    System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
+
+                    cartProducts.Clear();
+                    BTNSearch.PerformClick();
+                    ListProductsInCart();
+                    MessageBox.Show("Purchase done!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cart is empty.");
+            }
+        }
+
+        private void BTNRefund_Click(object sender, EventArgs e)
+        {
+            RefundForm refundForm = new RefundForm();
+            refundForm.FormClosed += RefundFormClosed;
+            refundForm.ShowDialog();
+        }
+
 
 
         //--------------- Storage Tab Interactives ---------------//
@@ -104,6 +213,8 @@ namespace MediaShop
             }
         }
 
+
+
         //=============== Private Methods ===============//
         private void ListProducts(List<Product> products)
         {
@@ -133,6 +244,21 @@ namespace MediaShop
             cB.Items.Add("ALL");
             cB.EndUpdate();
             cB.SelectedIndex = cB.Items.Count - 1;
+        }
+
+        private void ListProductsInCart()
+        {
+            ListViewCart.Items.Clear();
+            ListViewCart.BeginUpdate();
+            foreach (Product product in cartProducts)
+            {
+                string[] productValues = new string[3];
+                productValues[0] = product.name;
+                productValues[1] = product.price.ToString();
+                productValues[2] = product.productType.ToString();
+                ListViewCart.Items.Add(new ListViewItem(productValues));
+            }
+            ListViewCart.EndUpdate();
         }
 
         private Product GetSelectedProductFromListView(ListView listView)
@@ -165,13 +291,9 @@ namespace MediaShop
             }
         }
 
-        //==================================================
-        // TODO: Remove
-        private void BTNCashierView_Click(object sender, System.EventArgs e)
+        private void RefundFormClosed(object sender, FormClosedEventArgs e)
         {
-            Program.mainForm.Hide();
-            CashierForm cashierForm = new CashierForm();
-            cashierForm.ShowDialog();
+            ListProducts(productController.GetAll());
         }
 
     }

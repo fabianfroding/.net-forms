@@ -1,4 +1,5 @@
-﻿using MediaShop.Models;
+﻿using MediaShop.Controllers;
+using MediaShop.Models;
 using System.Collections.Generic;
 
 namespace MediaShop

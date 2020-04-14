@@ -2,7 +2,7 @@
 using MediaShop.Repositories;
 using System.Collections.Generic;
 
-namespace MediaShop
+namespace MediaShop.Controllers
 {
     class ProductController
     {
