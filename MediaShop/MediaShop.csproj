@@ -76,12 +76,6 @@
     </Compile>
     <Compile Include="Repositories\IReceiptRepository.cs" />
     <Compile Include="Repositories\ReceiptRepository.cs" />
-    <Compile Include="StorageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StorageForm.Designer.cs">
-      <DependentUpon>StorageForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Program.cs" />
@@ -96,9 +90,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RefundForm.resx">
       <DependentUpon>RefundForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StorageForm.resx">
-      <DependentUpon>StorageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewProductForm.resx">
       <DependentUpon>NewProductForm.cs</DependentUpon>

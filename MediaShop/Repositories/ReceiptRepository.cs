@@ -102,7 +102,6 @@ namespace MediaShop.Repositories
                         {
                             string data = product.id + "|" + product.name + "|" + product.price + "|" + product.stock + "|" + product.productType;
                             sw.WriteLine(data);
-                            System.Diagnostics.Debug.WriteLine("Doing shit");
                         }
                     }
                     return true;
