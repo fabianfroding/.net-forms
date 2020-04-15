@@ -4,6 +4,8 @@
 3|Mad Max: Fury Road|99|50|DVD
 4|Atomic Habits|189|50|BOOK
 5|Hollow Knight|449|50|GAME
-6|Sicario OST|179|50|CD7|Test1|99|1|CD
+6|Sicario OST|179|50|CD
+7|Test1|99|1|CD
 9|Test4|89|0|OTHER
 8|Test2|4|75|CD
+10|Test44|7|1|CD
