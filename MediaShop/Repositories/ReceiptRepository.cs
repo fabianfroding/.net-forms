@@ -9,6 +9,7 @@ namespace MediaShop.Repositories
     class ReceiptRepository : IReceiptRepository
     {
         private string dbPath = @"..\..\Repositories\Data\Receipts\";
+        private string dbPathBackups = @"..\..\Repositories\Data\ReceiptsBackup\";
 
         public Receipt GetByDate(string date)
         {
@@ -58,6 +59,29 @@ namespace MediaShop.Repositories
             return receipts;
         }
 
+        public List<Receipt> GetAllBackups()
+        {
+            List<Receipt> receipts = new List<Receipt>();
+            DirectoryInfo di = new DirectoryInfo(dbPathBackups);
+            FileInfo[] files = di.GetFiles();
+            foreach (FileInfo fi in files)
+            {
+                Receipt receipt = new Receipt();
+                receipt.date = fi.Name.Replace(".txt", "");
+                List<string> lines = File.ReadAllLines(fi.FullName).ToList();
+                foreach (string line in lines)
+                {
+                    if (line != "")
+                    {
+                        string[] entries = line.Split('|');
+                        receipt.products.Add(GetParsedProduct(entries));
+                    }
+                }
+                receipts.Add(receipt);
+            }
+            return receipts;
+        }
+
         public bool Add(Receipt receipt)
         {
             FileInfo fi = new FileInfo(dbPath + receipt.date + ".txt");
@@ -69,6 +93,7 @@ namespace MediaShop.Repositories
                     sw.WriteLine(data);
                 }
             }
+            CreateBackup(receipt);
             return true;
         }
 
@@ -124,6 +149,19 @@ namespace MediaShop.Repositories
             product.productType = productType;
 
             return product;
+        }
+
+        private void CreateBackup(Receipt receipt)
+        {
+            FileInfo fi = new FileInfo(dbPathBackups + receipt.date + ".txt");
+            using (StreamWriter sw = fi.CreateText())
+            {
+                foreach (Product product in receipt.products)
+                {
+                    string data = product.id + "|" + product.name + "|" + product.price + "|" + product.stock + "|" + product.productType;
+                    sw.WriteLine(data);
+                }
+            }
         }
     }
 }

@@ -21,6 +21,7 @@ namespace MediaShop
             cartProducts = new List<Product>();
             ListProducts(productController.GetAll());
             ListProductTypesInComboBox(ComboBoxSearchProductTypes);
+            
         }
 
         private void BTNExit_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace MediaShop
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (TabControl1.SelectedIndex == 1)
+            /*if (TabControl1.SelectedIndex == 1)
             {
                 BTNAddToCart.Enabled = false;
                 BTNAddToCart.Hide();
@@ -53,7 +54,7 @@ namespace MediaShop
             {
                 BTNAddToCart.Enabled = true;
                 BTNAddToCart.Show();
-            }
+            }*/
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -69,6 +70,11 @@ namespace MediaShop
                     productController.Update(dbProduct);
                 }
             }
+        }
+
+        private void BTNTop10_Click(object sender, EventArgs e)
+        {
+            
         }
 
 
@@ -124,6 +130,11 @@ namespace MediaShop
                     foreach (Product product in cartProducts)
                     {
                         receipt.products.Add(product);
+
+                        // Increment units sold.
+                        Product p = productController.GetById(product.id);
+                        p.unitsSold++;
+                        productController.Update(p);
                     }
                     receiptController.Add(receipt);
                     System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
@@ -295,7 +306,7 @@ namespace MediaShop
             ListProducts(productController.GetAll());
         }
 
-        public List<Product> FindProducts(string[] values)
+        private List<Product> FindProducts(string[] values)
         {
             List<Product> products = productController.GetAll();
             List<Product> productsFound = new List<Product>();

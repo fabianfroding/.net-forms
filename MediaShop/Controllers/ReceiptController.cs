@@ -23,6 +23,11 @@ namespace MediaShop.Controllers
             return receiptRepository.GetAll();
         }
 
+        public List<Receipt> GetAllBackups()
+        {
+            return receiptRepository.GetAllBackups();
+        }
+
         public bool Add(Receipt receipt)
         {
             return receiptRepository.Add(receipt);

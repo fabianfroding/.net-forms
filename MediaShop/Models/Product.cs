@@ -8,6 +8,7 @@
         public double price { get; set; }
         public int stock { get; set; }
         public ProductType productType { get; set; }
+        public int unitsSold { get; set; }
 
         public Product()
         {
@@ -32,6 +33,7 @@
             s += name + " (Id: " + id + ") " + "[" + productType + "]\n";
             s += price + " SEK\n";
             s += stock + " in stock\n";
+            s += unitsSold + " units sold\n";
             return s;
         }
     }
