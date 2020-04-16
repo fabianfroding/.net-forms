@@ -65,7 +65,7 @@
             this.TextBoxSearchName = new System.Windows.Forms.TextBox();
             this.BTNSearch = new System.Windows.Forms.Button();
             this.DateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.DateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.LabelStats = new System.Windows.Forms.Label();
             this.LabelStatsFrom = new System.Windows.Forms.Label();
             this.LabelStatsTo = new System.Windows.Forms.Label();
@@ -86,7 +86,7 @@
             this.BTNExit.FlatAppearance.BorderSize = 0;
             this.BTNExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNExit.ForeColor = System.Drawing.Color.White;
-            this.BTNExit.Location = new System.Drawing.Point(1151, 9);
+            this.BTNExit.Location = new System.Drawing.Point(1166, 9);
             this.BTNExit.Name = "BTNExit";
             this.BTNExit.Size = new System.Drawing.Size(36, 36);
             this.BTNExit.TabIndex = 4;
@@ -211,7 +211,7 @@
             this.tabPage2.Controls.Add(this.BTNNewProduct);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1186, 696);
+            this.tabPage2.Size = new System.Drawing.Size(1186, 611);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Storage";
             // 
@@ -438,20 +438,22 @@
             // DateTimePickerFrom
             // 
             this.DateTimePickerFrom.CustomFormat = "";
-            this.DateTimePickerFrom.Location = new System.Drawing.Point(390, 531);
+            this.DateTimePickerFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DateTimePickerFrom.Location = new System.Drawing.Point(431, 547);
             this.DateTimePickerFrom.Name = "DateTimePickerFrom";
-            this.DateTimePickerFrom.Size = new System.Drawing.Size(271, 26);
+            this.DateTimePickerFrom.Size = new System.Drawing.Size(112, 26);
             this.DateTimePickerFrom.TabIndex = 68;
             this.DateTimePickerFrom.Value = new System.DateTime(2020, 4, 15, 14, 58, 40, 0);
             // 
-            // dateTimePickerTo
+            // DateTimePickerTo
             // 
-            this.dateTimePickerTo.CustomFormat = "";
-            this.dateTimePickerTo.Location = new System.Drawing.Point(390, 583);
-            this.dateTimePickerTo.Name = "dateTimePickerTo";
-            this.dateTimePickerTo.Size = new System.Drawing.Size(271, 26);
-            this.dateTimePickerTo.TabIndex = 69;
-            this.dateTimePickerTo.Value = new System.DateTime(2020, 4, 15, 14, 58, 40, 0);
+            this.DateTimePickerTo.CustomFormat = "";
+            this.DateTimePickerTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DateTimePickerTo.Location = new System.Drawing.Point(549, 547);
+            this.DateTimePickerTo.Name = "DateTimePickerTo";
+            this.DateTimePickerTo.Size = new System.Drawing.Size(112, 26);
+            this.DateTimePickerTo.TabIndex = 69;
+            this.DateTimePickerTo.Value = new System.DateTime(2020, 4, 15, 14, 58, 40, 0);
             // 
             // LabelStats
             // 
@@ -468,7 +470,7 @@
             // 
             this.LabelStatsFrom.AutoSize = true;
             this.LabelStatsFrom.ForeColor = System.Drawing.Color.White;
-            this.LabelStatsFrom.Location = new System.Drawing.Point(386, 508);
+            this.LabelStatsFrom.Location = new System.Drawing.Point(427, 524);
             this.LabelStatsFrom.Name = "LabelStatsFrom";
             this.LabelStatsFrom.Size = new System.Drawing.Size(50, 20);
             this.LabelStatsFrom.TabIndex = 71;
@@ -478,7 +480,7 @@
             // 
             this.LabelStatsTo.AutoSize = true;
             this.LabelStatsTo.ForeColor = System.Drawing.Color.White;
-            this.LabelStatsTo.Location = new System.Drawing.Point(386, 560);
+            this.LabelStatsTo.Location = new System.Drawing.Point(545, 524);
             this.LabelStatsTo.Name = "LabelStatsTo";
             this.LabelStatsTo.Size = new System.Drawing.Size(31, 20);
             this.LabelStatsTo.TabIndex = 72;
@@ -486,16 +488,17 @@
             // 
             // BTNViewSales
             // 
-            this.BTNViewSales.Location = new System.Drawing.Point(389, 473);
+            this.BTNViewSales.Location = new System.Drawing.Point(431, 489);
             this.BTNViewSales.Name = "BTNViewSales";
             this.BTNViewSales.Size = new System.Drawing.Size(113, 32);
             this.BTNViewSales.TabIndex = 73;
             this.BTNViewSales.Text = "View Sales";
             this.BTNViewSales.UseVisualStyleBackColor = true;
+            this.BTNViewSales.Click += new System.EventHandler(this.BTNViewSales_Click);
             // 
             // BTNTop10
             // 
-            this.BTNTop10.Location = new System.Drawing.Point(389, 431);
+            this.BTNTop10.Location = new System.Drawing.Point(431, 435);
             this.BTNTop10.Name = "BTNTop10";
             this.BTNTop10.Size = new System.Drawing.Size(120, 32);
             this.BTNTop10.TabIndex = 74;
@@ -514,8 +517,8 @@
             this.Controls.Add(this.LabelStatsTo);
             this.Controls.Add(this.LabelStatsFrom);
             this.Controls.Add(this.LabelStats);
-            this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(this.DateTimePickerFrom);
+            this.Controls.Add(this.DateTimePickerTo);
             this.Controls.Add(this.LabelSearchHeading);
             this.Controls.Add(this.LabelSearchPriceMax);
             this.Controls.Add(this.LabelSearchPriceMin);
@@ -590,7 +593,7 @@
         private System.Windows.Forms.Button BTNCheckout;
         private System.Windows.Forms.Button BTNAddToCart;
         private System.Windows.Forms.DateTimePicker DateTimePickerFrom;
-        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
+        private System.Windows.Forms.DateTimePicker DateTimePickerTo;
         private System.Windows.Forms.Label LabelStats;
         private System.Windows.Forms.Label LabelStatsFrom;
         private System.Windows.Forms.Label LabelStatsTo;

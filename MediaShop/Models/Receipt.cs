@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MediaShop.Models
 {
-    class Receipt
+    public class Receipt
     {
         public string date;
         public List<Product> products;

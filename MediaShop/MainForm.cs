@@ -21,7 +21,6 @@ namespace MediaShop
             cartProducts = new List<Product>();
             ListProducts(productController.GetAll());
             ListProductTypesInComboBox(ComboBoxSearchProductTypes);
-            
         }
 
         private void BTNExit_Click(object sender, EventArgs e)
@@ -75,6 +74,26 @@ namespace MediaShop
         private void BTNTop10_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void BTNViewSales_Click(object sender, EventArgs e)
+        {
+            Product selectedProduct = GetSelectedProductFromListView(ListViewProducts);
+
+            if (selectedProduct != null)
+            {
+                List<Receipt> receiptsFound = receiptController.GetAllBetweenDates(
+                DateTimePickerFrom.Value.ToString("yyyyMMdd"),
+                DateTimePickerTo.Value.ToString("yyyyMMdd"));
+                StatsForm statsForm = new StatsForm(selectedProduct, receiptsFound);
+                statsForm.Show();
+
+                
+            }
+            else
+            {
+                MessageBox.Show("Select a product to view sales.");
+            }
         }
 
 
