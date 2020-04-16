@@ -73,22 +73,22 @@ namespace MediaShop
 
         private void BTNTop10_Click(object sender, EventArgs e)
         {
-            
+            StatsForm statsForm = new StatsForm();
+            statsForm.DrawTop10Graph(productController.GetAll(), receiptController.GetAll());
+            statsForm.Show();
         }
 
         private void BTNViewSales_Click(object sender, EventArgs e)
         {
             Product selectedProduct = GetSelectedProductFromListView(ListViewProducts);
-
             if (selectedProduct != null)
             {
                 List<Receipt> receiptsFound = receiptController.GetAllBetweenDates(
                 DateTimePickerFrom.Value.ToString("yyyyMMdd"),
                 DateTimePickerTo.Value.ToString("yyyyMMdd"));
-                StatsForm statsForm = new StatsForm(selectedProduct, receiptsFound);
+                StatsForm statsForm = new StatsForm();
+                statsForm.DrawSalesGraph(selectedProduct, receiptsFound);
                 statsForm.Show();
-
-                
             }
             else
             {
@@ -149,11 +149,6 @@ namespace MediaShop
                     foreach (Product product in cartProducts)
                     {
                         receipt.products.Add(product);
-
-                        // Increment units sold.
-                        Product p = productController.GetById(product.id);
-                        p.unitsSold++;
-                        productController.Update(p);
                     }
                     receiptController.Add(receipt);
                     System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);

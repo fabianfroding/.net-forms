@@ -42,7 +42,7 @@
             this.BTNExit.FlatAppearance.BorderSize = 0;
             this.BTNExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNExit.ForeColor = System.Drawing.Color.White;
-            this.BTNExit.Location = new System.Drawing.Point(776, 12);
+            this.BTNExit.Location = new System.Drawing.Point(1166, 12);
             this.BTNExit.Name = "BTNExit";
             this.BTNExit.Size = new System.Drawing.Size(36, 36);
             this.BTNExit.TabIndex = 5;
@@ -62,7 +62,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Product Name";
             this.StatsChart.Series.Add(series1);
-            this.StatsChart.Size = new System.Drawing.Size(758, 490);
+            this.StatsChart.Size = new System.Drawing.Size(1135, 716);
             this.StatsChart.TabIndex = 6;
             // 
             // StatsForm
@@ -70,7 +70,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(833, 583);
+            this.ClientSize = new System.Drawing.Size(1214, 786);
             this.Controls.Add(this.StatsChart);
             this.Controls.Add(this.BTNExit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
