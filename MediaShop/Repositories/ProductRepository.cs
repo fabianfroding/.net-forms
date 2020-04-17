@@ -15,6 +15,7 @@ namespace MediaShop.Repositories
             Product.idCounter = findMaxId();
         }
 
+        // Hämtar en produkt från textfilen baserat på produktens id.
         public Product GetById(int id)
         {
             List<string> lines = File.ReadAllLines(dbPath).ToList();
@@ -35,6 +36,7 @@ namespace MediaShop.Repositories
             return null;
         }
 
+        // Hämtar alla produkter från textfilen.
         public List<Product> GetAll()
         {
             List<Product> _products = new List<Product>();
@@ -51,6 +53,7 @@ namespace MediaShop.Repositories
             return _products;
         }
 
+        // Lägger till en produkt till textfilen.
         public bool Add(Product product)
         {
             string data = product.id + "|" + product.name + "|" + product.price + "|" + product.stock + "|" + product.productType;
@@ -62,6 +65,7 @@ namespace MediaShop.Repositories
             return true;
         }
 
+        // Tar bort en produkt från textfilen.
         public bool Remove(Product product)
         {
             int id = product.id;
@@ -93,6 +97,8 @@ namespace MediaShop.Repositories
             return true;
         }
 
+        // Uppdaterar en produkt i textfilen.
+        // (Produkten tas först bort, sedan läggs den modifiera produkten in på nytt).
         public bool Update(Product product)
         {
             if (Remove(product) && Add(product))
@@ -102,6 +108,8 @@ namespace MediaShop.Repositories
             return false;
         }
 
+        // Funktion för att konvertera data från textfilen till en Product-objekt.
+        // En Products fält separeras med | symbolen.
         private Product GetParsedProduct(string[] entries)
         {
             Product product = new Product();
@@ -118,6 +126,7 @@ namespace MediaShop.Repositories
             return product;
         }
 
+        // Funktion som hanterar att varje produkt har ett unikt id.
         private int findMaxId()
         {
             int maxId = 0;

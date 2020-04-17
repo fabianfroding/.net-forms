@@ -11,6 +11,7 @@ namespace MediaShop
     {
         private ProductController productController;
         private ReceiptController receiptController;
+        // cartProducts är en temporär lista som innehåller de produkter som läggs i cart i kassavyn.
         private List<Product> cartProducts;
 
         public MainForm()
@@ -28,6 +29,7 @@ namespace MediaShop
             Application.Exit();
         }
 
+        // Filtrerar listan med produkter baserat på sök-kriterier som användaren angett.
         private void BTNSearch_Click(object sender, EventArgs e)
         {
             string[] productValues = new string[]
@@ -42,24 +44,10 @@ namespace MediaShop
             ListProducts(FindProducts(productValues));
         }
 
-        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*if (TabControl1.SelectedIndex == 1)
-            {
-                BTNAddToCart.Enabled = false;
-                BTNAddToCart.Hide();
-            }
-            else
-            {
-                BTNAddToCart.Enabled = true;
-                BTNAddToCart.Show();
-            }*/
-        }
-
+        // Om användaren stänger programmet medans det finns produkter i varukorgen läggs
+        // dessa tillbaka till lagret.
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Om användaren stänger programmet medans det finns produkter i varukorgen läggs
-            // dessa tillbaka till lagret.
             if (cartProducts.Count > 0)
             {
                 foreach (Product product in cartProducts)
@@ -73,6 +61,7 @@ namespace MediaShop
 
         private void BTNTop10_Click(object sender, EventArgs e)
         {
+            // För att se hur detta fungerar, gå till StatsForm-klassens dokumentation.
             StatsForm statsForm = new StatsForm();
             statsForm.DrawTop10Graph(productController.GetAll(), receiptController.GetAll());
             statsForm.Show();
@@ -80,6 +69,7 @@ namespace MediaShop
 
         private void BTNViewSales_Click(object sender, EventArgs e)
         {
+            // För att se hur detta fungerar, gå till StatsForm-klassens dokumentation.
             Product selectedProduct = GetSelectedProductFromListView(ListViewProducts);
             if (selectedProduct != null)
             {
@@ -99,6 +89,8 @@ namespace MediaShop
 
 
         //--------------- Cashier Tab Interactives ---------------//
+        // Denna funktion lägger till en prdódukt i carten.
+        // Detta kräver att användaren vlat en produkt från listan först.
         private void BTNAddToCart_Click(object sender, EventArgs e)
         {
             try
@@ -108,6 +100,7 @@ namespace MediaShop
                 int.TryParse(cartItem.SubItems[1].Text, out int id);
                 Product selectedProduct = productController.GetById(id);
 
+                // Kolla så att produkten finns i lagret, annars meddela användaren att den är slut.
                 if (selectedProduct.stock > 0)
                 {
                     ListViewCart.Items.Add(cartItem);
@@ -129,8 +122,10 @@ namespace MediaShop
             }
         }
 
+        // Ger användaren bekräftelse på att köpet genomförts, och skapar ett kvitto med de köpta produkterna.
         private void BTNCheckout_Click(object sender, EventArgs e)
         {
+            // Kolla först så att carten inte är tom.
             if (cartProducts.Count > 0)
             {
                 double totalPrice = 0;
@@ -145,15 +140,17 @@ namespace MediaShop
                 {
                     MessageBox.Show("Get receipt?", "Receipt", MessageBoxButtons.OK);
 
+                    // Skapa kvitto
                     Receipt receipt = new Receipt();
                     foreach (Product product in cartProducts)
                     {
                         receipt.products.Add(product);
                     }
                     receiptController.Add(receipt);
-                    System.Diagnostics.Debug.WriteLine("Sold on " + receipt.date);
 
+                    // Töm carten.
                     cartProducts.Clear();
+                    // Uppdatera listan så att vi ser att stock i köpta produkter minskat.
                     BTNSearch.PerformClick();
                     ListProductsInCart();
                     MessageBox.Show("Purchase done!");
@@ -165,6 +162,7 @@ namespace MediaShop
             }
         }
 
+        // Öppnar RefundForm för återköp av produkter. Se  RefundForm för mer detaljer.
         private void BTNRefund_Click(object sender, EventArgs e)
         {
             RefundForm refundForm = new RefundForm();
@@ -175,15 +173,19 @@ namespace MediaShop
 
 
         //--------------- Storage Tab Interactives ---------------//
+        // Öppnar NewProductForm, se NewProductForm för mer detlajer.
         private void BTNNewProduct_Click(object sender, EventArgs e)
         {
             new NewProductForm().ShowDialog();
+            // När NewProductForm stängs uppdaterar vi listan så att vi ser den nya produkten.
             ListProducts(productController.GetAll());
         }
 
+        // Tar bort en produkt. Kräver att användaren valt en produkt från listan först.
         private void BTNRemoveProduct_Click(object sender, EventArgs e)
         {
             Product product = GetSelectedProductFromListView(ListViewProducts);
+            // Kolla så att användare valt en produkt från listan.
             if (product != null)
             {
                 // Kontrollfunktion om produkten verkligen vill tas bort. Om stock > 0 måste användaren
@@ -211,9 +213,13 @@ namespace MediaShop
             }
         }
 
+        // Öppnar en inputbox som tillåter användaren att specifiera hur många exemplar
+        // som ska läggas till för en produkt.
+        // "Leverans från grossit"
         private void BTNAddStock_Click(object sender, EventArgs e)
         {
             Product product = GetSelectedProductFromListView(ListViewProducts);
+            // Kolla så att en produkt valts.
             if (product != null)
             {
                 string input = Interaction.InputBox("Specify stock increment amount for \"" + product.name + "\"", "Add stock", "1", -1, -1);
@@ -240,6 +246,8 @@ namespace MediaShop
 
 
         //=============== Private Methods ===============//
+        // Fyller listview för produkter med produkter. Funktionen tar emot en lista eftersom
+        // listview kan filtreras med sök-funktionen, eller enkelt bara ta alla produkter från lagret.
         private void ListProducts(List<Product> products)
         {
             ListViewProducts.Items.Clear();
@@ -258,6 +266,8 @@ namespace MediaShop
             ListViewProducts.Sort();
         }
 
+        // Fyller dropdown-menyn i sökfunktionerna med product-types så att användaren kan välja
+        // att filtrera produkter efter type.
         private void ListProductTypesInComboBox(ComboBox cB)
         {
             cB.BeginUpdate();
@@ -270,6 +280,7 @@ namespace MediaShop
             cB.SelectedIndex = cB.Items.Count - 1;
         }
 
+        // Fyller cart-listview med produkterna som finns i cartProducts.
         private void ListProductsInCart()
         {
             ListViewCart.Items.Clear();
@@ -285,6 +296,7 @@ namespace MediaShop
             ListViewCart.EndUpdate();
         }
 
+        // Återger den för tllfäller markerade/valda produkten från listviewen.
         private Product GetSelectedProductFromListView(ListView listView)
         {
             try
@@ -303,6 +315,8 @@ namespace MediaShop
             return null;
         }
 
+        // Funktion som hanterar borttagning av produkt.
+        // Kontroll så att det inte var något problem i controller eller repository lagret utförs också.
         private void RemoveProduct(Product product)
         {
             if (productController.Remove(product))
@@ -315,11 +329,16 @@ namespace MediaShop
             }
         }
 
+        // Funktion som uppdaterar listan med produkter efter att ett återköp genomförts.
+        // Ifall den returnerade produkten finns i lagret vill vi direkt kunna se att
+        // lagerstatus uppdaterats.
         private void RefundFormClosed(object sender, FormClosedEventArgs e)
         {
             ListProducts(productController.GetAll());
         }
 
+        // Skapar en lista med produkter baserat på de värden som skickas till funktionen
+        // Och återger en lista med produkter som matchar dessa världen.
         private List<Product> FindProducts(string[] values)
         {
             List<Product> products = productController.GetAll();

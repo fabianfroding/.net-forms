@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace MediaShop.Controllers
 {
+    // Denna klass hanterar receipt-data som skickas mellan databasen (repository) och GUI (windows forms).
     class ReceiptController
     {
         private ReceiptRepository receiptRepository;
@@ -43,6 +44,7 @@ namespace MediaShop.Controllers
 
         //=============== Special Functions ===============//
 
+        // Funktion som filtrerar receipts som endast matchar a specifikt datum-intervall.
         public List<Receipt> GetAllBetweenDates(string from, string to)
         {
             List<Receipt> receipts = GetAll();

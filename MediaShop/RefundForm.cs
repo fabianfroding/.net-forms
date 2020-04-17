@@ -24,6 +24,10 @@ namespace MediaShop
             Form.ActiveForm.Close();
         }
 
+        // Denna funktion kräver att användaren först har valt ett kvitto från receipt-listview, och
+        // sedan även valt en produkt från det valda kvittot.
+        // När användaren sedan klickar Refund bekräftas återköpet och produkten tas bort från kvittot och
+        // produktens lagerstatus(stock) uppdateras (OM produkten inte tagits bort från lagret).
         private void BTNRefund_Click(object sender, EventArgs e)
         {
             ListViewItem selectedProductItem = null;
@@ -79,11 +83,14 @@ namespace MediaShop
             }
         }
 
+        // Funktion som anropas varje gång användaren väljer ett kvitto.
+        // När ett kvitto valts uppdateras listview med produkter från det valda kvittot automatiskt.
         private void ListViewReceipts_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListReceiptProducts();
         }
 
+        // Fyller listview för kvitton med kvitton.
         private void ListReceipts()
         {
             ListViewReceipts.Items.Clear();
@@ -98,6 +105,7 @@ namespace MediaShop
             ListViewReceipts.Sort();
         }
 
+        // Fyller listview för kvittots produkter med kvittots produkter.
         private void ListReceiptProducts()
         {
             ListViewItem selectedItem = null;

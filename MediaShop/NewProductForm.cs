@@ -29,12 +29,15 @@ namespace MediaShop
 
                     // Här tas | bort eftersom den används som separator för klassens attributes i
                     // lagringsfilen.
+                    // Detta betyder att användaren kan inkludera | i produktens namn, men det kommer
+                    // tas bort automatiskt när produkten sparas.
                     product.name = TextBoxName.Text.Replace("|", "");
 
                     double.TryParse(TextBoxPrice.Text, out double productPrice);
                     product.price = productPrice;
                     product.productType = (Product.ProductType)ComboBoxProductTypes.SelectedItem;
 
+                    // Om productController återger false var det något problem och produkten sparas då inte.
                     if (productController.Add(product))
                     {
                         MessageBox.Show("Product succesfully added.");
@@ -63,6 +66,7 @@ namespace MediaShop
             Form.ActiveForm.Close();
         }
 
+        // Skapar en dropdown-meny där användaren får välja vilken product-type den nya produkten ska ha.
         private void ListProductTypes()
         {
             ComboBoxProductTypes.Items.Clear();
@@ -93,6 +97,7 @@ namespace MediaShop
             return true;
         }
 
+        // Denna funktion begränsar en prdukts pris för att förhindra orimliga höga siffror.
         private bool CheckPriceLimit()
         {
             double.TryParse(TextBoxPrice.Text, out double temp);

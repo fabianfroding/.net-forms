@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace MediaShop.Controllers
 {
+    // Denna klass hanterar produkt-data som skickas mellan databasen (repository) och GUI (windows forms).
     class ProductController
     {
         private ProductRepository productRepository;

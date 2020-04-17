@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace MediaShop.Repositories
 {
+    // Denna klass innehåller samma logik som ProductRepository, fast istället för Receipt-objektet.
+    // För att förstå hur denna klass fungerar, hänvisas ProductRepostiory klassen.
     class ReceiptRepository : IReceiptRepository
     {
         private string dbPath = @"..\..\Repositories\Data\Receipts\";
