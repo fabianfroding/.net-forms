@@ -12,7 +12,7 @@ namespace MediaShop.Repositories
 
         public ProductRepository()
         {
-            Product.idCounter = findMaxId();
+            Product.idCounter = FindMaxId();
         }
 
         // Hämtar en produkt från textfilen baserat på produktens id.
@@ -127,7 +127,7 @@ namespace MediaShop.Repositories
         }
 
         // Funktion som hanterar att varje produkt har ett unikt id.
-        private int findMaxId()
+        private int FindMaxId()
         {
             int maxId = 0;
 

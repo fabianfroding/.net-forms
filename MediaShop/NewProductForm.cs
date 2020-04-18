@@ -21,7 +21,7 @@ namespace MediaShop
         // repository lagret och sparas ned till fil.
         private void BTNAddProduct_Click(object sender, EventArgs e)
         {
-            if (isInputValid())
+            if (IsInputValid())
             {
                 if (CheckPriceLimit())
                 {
@@ -80,7 +80,7 @@ namespace MediaShop
 
         // Denna metod kollar så att användaren inte matar inte felaktiga värden som t.ex. bokstäver
         // i produktens pris.
-        private bool isInputValid()
+        private bool IsInputValid()
         {
             if (string.IsNullOrEmpty(TextBoxName.Text) || string.IsNullOrEmpty(TextBoxPrice.Text))
             {
