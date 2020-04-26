@@ -497,6 +497,7 @@
             this.BTNImportProducts.TabIndex = 75;
             this.BTNImportProducts.Text = "Import Products";
             this.BTNImportProducts.UseVisualStyleBackColor = true;
+            this.BTNImportProducts.Click += new System.EventHandler(this.BTNImportProducts_Click);
             // 
             // BTNExportProducts
             // 

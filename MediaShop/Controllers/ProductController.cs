@@ -43,5 +43,11 @@ namespace MediaShop.Controllers
         {
             return productRepository.ExportProducts(path);
         }
+
+        public bool ImportProducts(string path)
+        {
+            productRepository.ImportProducts(path);
+            return true;
+        }
     }
 }

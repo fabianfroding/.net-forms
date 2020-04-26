@@ -10,6 +10,7 @@ namespace MediaShop
     public partial class MainForm : Form
     {
         private static readonly string exportPath = @"..\..\bin\Debug\Export\products.txt";
+        private static readonly string importPath = @"..\..\bin\Debug\Import\";
 
         private ProductController productController;
         private ReceiptController receiptController;
@@ -83,10 +84,27 @@ namespace MediaShop
             }
         }
 
+        private void BTNExportProducts_Click(object sender, EventArgs e)
+        {
+            if (productController.ExportProducts(exportPath))
+            {
+                MessageBox.Show("Products exported to " + exportPath);
+            }
+            else
+            {
+                MessageBox.Show("There was a problem exporting the products.");
+            }
+        }
+
+        private void BTNImportProducts_Click(object sender, EventArgs e)
+        {
+            productController.ImportProducts(importPath);
+            ListProducts(productController.GetAll());
+        }
 
 
         //--------------- Cashier Tab Interactives ---------------//
-        // Denna funktion lägger till en prdódukt i carten.
+        // Denna funktion lägger till en produkt i carten.
         // Detta kräver att användaren vlat en produkt från listan först.
         private void BTNAddToCart_Click(object sender, EventArgs e)
         {
@@ -377,16 +395,5 @@ namespace MediaShop
             return productsFound;
         }
 
-        private void BTNExportProducts_Click(object sender, EventArgs e)
-        {
-            if (productController.ExportProducts(exportPath))
-            {
-                MessageBox.Show("Products exported to " + exportPath);
-            }
-            else
-            {
-               MessageBox.Show("There was a problem exporting the products.");
-            }
-        }
     }
 }

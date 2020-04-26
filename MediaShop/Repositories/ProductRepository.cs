@@ -9,15 +9,6 @@ namespace MediaShop.Repositories
     class ProductRepository : IProductRepository
     {
         private static string _dbPath = @"..\..\Repositories\Data\dbProducts.txt";
-        public string dbPath { get
-            {
-                return _dbPath;
-            }
-            set
-            {
-                _dbPath = value;
-            }
-        }
 
         public ProductRepository()
         {
@@ -121,6 +112,21 @@ namespace MediaShop.Repositories
         {
             List<string> lines = File.ReadAllLines(_dbPath).ToList();
             StreamWriter sw = File.AppendText(path);
+            foreach (string line in lines)
+            {
+                sw.WriteLine(line);
+            }
+            sw.Close();
+            return true;
+        }
+
+        public bool ImportProducts(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            FileInfo fi = di.GetFiles("*.txt")[0];
+            List<string> lines = File.ReadAllLines(fi.FullName).ToList();
+            File.WriteAllText(_dbPath, String.Empty);
+            StreamWriter sw = File.AppendText(_dbPath);
             foreach (string line in lines)
             {
                 sw.WriteLine(line);
