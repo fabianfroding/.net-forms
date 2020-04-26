@@ -8,7 +8,16 @@ namespace MediaShop.Repositories
 {
     class ProductRepository : IProductRepository
     {
-        private string dbPath = @"..\..\Repositories\Data\dbProducts.txt";
+        private static string _dbPath = @"..\..\Repositories\Data\dbProducts.txt";
+        public string dbPath { get
+            {
+                return _dbPath;
+            }
+            set
+            {
+                _dbPath = value;
+            }
+        }
 
         public ProductRepository()
         {
@@ -18,7 +27,7 @@ namespace MediaShop.Repositories
         // Hämtar en produkt från textfilen baserat på produktens id.
         public Product GetById(int id)
         {
-            List<string> lines = File.ReadAllLines(dbPath).ToList();
+            List<string> lines = File.ReadAllLines(_dbPath).ToList();
 
             foreach (string line in lines)
             {
@@ -40,7 +49,7 @@ namespace MediaShop.Repositories
         public List<Product> GetAll()
         {
             List<Product> _products = new List<Product>();
-            List<string> lines = File.ReadAllLines(dbPath).ToList();
+            List<string> lines = File.ReadAllLines(_dbPath).ToList();
 
             foreach(string line in lines)
             {
@@ -58,7 +67,7 @@ namespace MediaShop.Repositories
         {
             string data = product.id + "|" + product.name + "|" + product.price + "|" + product.stock + "|" + product.productType;
 
-            StreamWriter sw = File.AppendText(dbPath);
+            StreamWriter sw = File.AppendText(_dbPath);
             sw.WriteLine(data);
             sw.Close();
 
@@ -69,7 +78,7 @@ namespace MediaShop.Repositories
         public bool Remove(Product product)
         {
             int id = product.id;
-            List<string> lines = File.ReadAllLines(dbPath).ToList();
+            List<string> lines = File.ReadAllLines(_dbPath).ToList();
             List<String> newLines = new List<String>();
 
             // Copy all existing lines except for the one that matches id.
@@ -84,10 +93,10 @@ namespace MediaShop.Repositories
             }
 
             // Remove all content from file.
-            File.WriteAllText(dbPath, String.Empty);
+            File.WriteAllText(_dbPath, String.Empty);
 
             // Rewrite the copied content to file.
-            StreamWriter sw = File.AppendText(dbPath);
+            StreamWriter sw = File.AppendText(_dbPath);
             foreach (string line in newLines)
             {
                 sw.WriteLine(line);
@@ -106,6 +115,18 @@ namespace MediaShop.Repositories
                 return true;
             }
             return false;
+        }
+
+        public bool ExportProducts(string path)
+        {
+            List<string> lines = File.ReadAllLines(_dbPath).ToList();
+            StreamWriter sw = File.AppendText(path);
+            foreach (string line in lines)
+            {
+                sw.WriteLine(line);
+            }
+            sw.Close();
+            return true;
         }
 
         // Funktion för att konvertera data från textfilen till en Product-objekt.
@@ -131,7 +152,7 @@ namespace MediaShop.Repositories
         {
             int maxId = 0;
 
-            List<string> lines = File.ReadAllLines(dbPath).ToList();
+            List<string> lines = File.ReadAllLines(_dbPath).ToList();
             foreach (string line in lines)
             {
                 if (line != "")

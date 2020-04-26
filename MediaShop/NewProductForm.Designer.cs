@@ -125,7 +125,7 @@
             // NewProductForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(265, 186);
             this.Controls.Add(this.ComboBoxProductTypes);
             this.Controls.Add(this.BTNCancel);

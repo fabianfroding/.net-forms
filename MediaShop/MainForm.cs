@@ -9,6 +9,8 @@ namespace MediaShop
 {
     public partial class MainForm : Form
     {
+        private static readonly string exportPath = @"..\..\bin\Debug\Export\products.txt";
+
         private ProductController productController;
         private ReceiptController receiptController;
         // cartProducts är en temporär lista som innehåller de produkter som läggs i cart i kassavyn.
@@ -22,11 +24,6 @@ namespace MediaShop
             cartProducts = new List<Product>();
             ListProducts(productController.GetAll());
             ListProductTypesInComboBox(ComboBoxSearchProductTypes);
-        }
-
-        private void BTNExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         // Filtrerar listan med produkter baserat på sök-kriterier som användaren angett.
@@ -380,5 +377,16 @@ namespace MediaShop
             return productsFound;
         }
 
+        private void BTNExportProducts_Click(object sender, EventArgs e)
+        {
+            if (productController.ExportProducts(exportPath))
+            {
+                MessageBox.Show("Products exported to " + exportPath);
+            }
+            else
+            {
+               MessageBox.Show("There was a problem exporting the products.");
+            }
+        }
     }
 }

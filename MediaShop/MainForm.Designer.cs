@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BTNExit = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.TabPage1 = new System.Windows.Forms.TabPage();
             this.LabelCart = new System.Windows.Forms.Label();
@@ -71,6 +69,8 @@
             this.LabelStatsTo = new System.Windows.Forms.Label();
             this.BTNViewSales = new System.Windows.Forms.Button();
             this.BTNTop10 = new System.Windows.Forms.Button();
+            this.BTNImportProducts = new System.Windows.Forms.Button();
+            this.BTNExportProducts = new System.Windows.Forms.Button();
             this.TabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -80,52 +80,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.SearchPriceMin)).BeginInit();
             this.SuspendLayout();
             // 
-            // BTNExit
-            // 
-            this.BTNExit.BackColor = System.Drawing.Color.Firebrick;
-            this.BTNExit.FlatAppearance.BorderSize = 0;
-            this.BTNExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNExit.ForeColor = System.Drawing.Color.White;
-            this.BTNExit.Location = new System.Drawing.Point(1166, 9);
-            this.BTNExit.Name = "BTNExit";
-            this.BTNExit.Size = new System.Drawing.Size(36, 36);
-            this.BTNExit.TabIndex = 4;
-            this.BTNExit.Text = "X";
-            this.BTNExit.UseVisualStyleBackColor = false;
-            this.BTNExit.Click += new System.EventHandler(this.BTNExit_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(586, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 25);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Media Shop";
-            // 
             // TabControl1
             // 
             this.TabControl1.Controls.Add(this.TabPage1);
             this.TabControl1.Controls.Add(this.tabPage2);
-            this.TabControl1.Location = new System.Drawing.Point(12, 51);
+            this.TabControl1.Location = new System.Drawing.Point(12, 366);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(1194, 644);
+            this.TabControl1.Size = new System.Drawing.Size(505, 267);
             this.TabControl1.TabIndex = 0;
             // 
             // TabPage1
             // 
-            this.TabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.TabPage1.BackColor = System.Drawing.Color.DarkGray;
             this.TabPage1.Controls.Add(this.LabelCart);
             this.TabPage1.Controls.Add(this.ListViewCart);
             this.TabPage1.Controls.Add(this.BTNRefund);
             this.TabPage1.Controls.Add(this.BTNCheckout);
-            this.TabPage1.Controls.Add(this.BTNAddToCart);
             this.TabPage1.Location = new System.Drawing.Point(4, 29);
             this.TabPage1.Name = "TabPage1";
-            this.TabPage1.Size = new System.Drawing.Size(1186, 611);
+            this.TabPage1.Size = new System.Drawing.Size(497, 234);
             this.TabPage1.TabIndex = 0;
             this.TabPage1.Text = "Cashier";
             // 
@@ -134,7 +108,7 @@
             this.LabelCart.AutoSize = true;
             this.LabelCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelCart.ForeColor = System.Drawing.Color.White;
-            this.LabelCart.Location = new System.Drawing.Point(141, 14);
+            this.LabelCart.Location = new System.Drawing.Point(7, 9);
             this.LabelCart.Name = "LabelCart";
             this.LabelCart.Size = new System.Drawing.Size(57, 29);
             this.LabelCart.TabIndex = 19;
@@ -148,10 +122,10 @@
             this.columnHeader5});
             this.ListViewCart.GridLines = true;
             this.ListViewCart.HideSelection = false;
-            this.ListViewCart.Location = new System.Drawing.Point(15, 50);
+            this.ListViewCart.Location = new System.Drawing.Point(7, 41);
             this.ListViewCart.MultiSelect = false;
             this.ListViewCart.Name = "ListViewCart";
-            this.ListViewCart.Size = new System.Drawing.Size(320, 286);
+            this.ListViewCart.Size = new System.Drawing.Size(329, 180);
             this.ListViewCart.TabIndex = 21;
             this.ListViewCart.UseCompatibleStateImageBehavior = false;
             this.ListViewCart.View = System.Windows.Forms.View.Details;
@@ -174,7 +148,7 @@
             // 
             // BTNRefund
             // 
-            this.BTNRefund.Location = new System.Drawing.Point(190, 342);
+            this.BTNRefund.Location = new System.Drawing.Point(342, 87);
             this.BTNRefund.Name = "BTNRefund";
             this.BTNRefund.Size = new System.Drawing.Size(145, 40);
             this.BTNRefund.TabIndex = 23;
@@ -184,9 +158,9 @@
             // 
             // BTNCheckout
             // 
-            this.BTNCheckout.Location = new System.Drawing.Point(15, 342);
+            this.BTNCheckout.Location = new System.Drawing.Point(342, 41);
             this.BTNCheckout.Name = "BTNCheckout";
-            this.BTNCheckout.Size = new System.Drawing.Size(138, 40);
+            this.BTNCheckout.Size = new System.Drawing.Size(145, 40);
             this.BTNCheckout.TabIndex = 20;
             this.BTNCheckout.Text = "Checkout";
             this.BTNCheckout.UseVisualStyleBackColor = true;
@@ -194,7 +168,7 @@
             // 
             // BTNAddToCart
             // 
-            this.BTNAddToCart.Location = new System.Drawing.Point(507, 549);
+            this.BTNAddToCart.Location = new System.Drawing.Point(580, 320);
             this.BTNAddToCart.Name = "BTNAddToCart";
             this.BTNAddToCart.Size = new System.Drawing.Size(138, 40);
             this.BTNAddToCart.TabIndex = 22;
@@ -204,13 +178,13 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.tabPage2.BackColor = System.Drawing.Color.DarkGray;
             this.tabPage2.Controls.Add(this.BTNAddStock);
             this.tabPage2.Controls.Add(this.BTNRemoveProduct);
             this.tabPage2.Controls.Add(this.BTNNewProduct);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1186, 611);
+            this.tabPage2.Size = new System.Drawing.Size(497, 234);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Storage";
             // 
@@ -218,7 +192,7 @@
             // 
             this.BTNAddStock.Location = new System.Drawing.Point(3, 96);
             this.BTNAddStock.Name = "BTNAddStock";
-            this.BTNAddStock.Size = new System.Drawing.Size(176, 40);
+            this.BTNAddStock.Size = new System.Drawing.Size(188, 40);
             this.BTNAddStock.TabIndex = 23;
             this.BTNAddStock.Text = "Add Stock To Product";
             this.BTNAddStock.UseVisualStyleBackColor = true;
@@ -228,7 +202,7 @@
             // 
             this.BTNRemoveProduct.Location = new System.Drawing.Point(3, 50);
             this.BTNRemoveProduct.Name = "BTNRemoveProduct";
-            this.BTNRemoveProduct.Size = new System.Drawing.Size(176, 40);
+            this.BTNRemoveProduct.Size = new System.Drawing.Size(188, 40);
             this.BTNRemoveProduct.TabIndex = 22;
             this.BTNRemoveProduct.Text = "Remove Product";
             this.BTNRemoveProduct.UseVisualStyleBackColor = true;
@@ -238,7 +212,7 @@
             // 
             this.BTNNewProduct.Location = new System.Drawing.Point(3, 8);
             this.BTNNewProduct.Name = "BTNNewProduct";
-            this.BTNNewProduct.Size = new System.Drawing.Size(176, 40);
+            this.BTNNewProduct.Size = new System.Drawing.Size(188, 40);
             this.BTNNewProduct.TabIndex = 21;
             this.BTNNewProduct.Text = "New Product";
             this.BTNNewProduct.UseVisualStyleBackColor = true;
@@ -254,10 +228,10 @@
             this.ProductType});
             this.ListViewProducts.GridLines = true;
             this.ListViewProducts.HideSelection = false;
-            this.ListViewProducts.Location = new System.Drawing.Point(666, 98);
+            this.ListViewProducts.Location = new System.Drawing.Point(12, 12);
             this.ListViewProducts.MultiSelect = false;
             this.ListViewProducts.Name = "ListViewProducts";
-            this.ListViewProducts.Size = new System.Drawing.Size(521, 571);
+            this.ListViewProducts.Size = new System.Drawing.Size(562, 348);
             this.ListViewProducts.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ListViewProducts.TabIndex = 18;
             this.ListViewProducts.UseCompatibleStateImageBehavior = false;
@@ -292,9 +266,10 @@
             // LabelSearchHeading
             // 
             this.LabelSearchHeading.AutoSize = true;
+            this.LabelSearchHeading.BackColor = System.Drawing.Color.Gray;
             this.LabelSearchHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelSearchHeading.ForeColor = System.Drawing.Color.White;
-            this.LabelSearchHeading.Location = new System.Drawing.Point(498, 98);
+            this.LabelSearchHeading.Location = new System.Drawing.Point(687, 13);
             this.LabelSearchHeading.Name = "LabelSearchHeading";
             this.LabelSearchHeading.Size = new System.Drawing.Size(89, 29);
             this.LabelSearchHeading.TabIndex = 67;
@@ -303,8 +278,9 @@
             // LabelSearchPriceMax
             // 
             this.LabelSearchPriceMax.AutoSize = true;
+            this.LabelSearchPriceMax.BackColor = System.Drawing.Color.Gray;
             this.LabelSearchPriceMax.ForeColor = System.Drawing.Color.White;
-            this.LabelSearchPriceMax.Location = new System.Drawing.Point(536, 177);
+            this.LabelSearchPriceMax.Location = new System.Drawing.Point(725, 92);
             this.LabelSearchPriceMax.Name = "LabelSearchPriceMax";
             this.LabelSearchPriceMax.Size = new System.Drawing.Size(81, 20);
             this.LabelSearchPriceMax.TabIndex = 66;
@@ -313,8 +289,9 @@
             // LabelSearchPriceMin
             // 
             this.LabelSearchPriceMin.AutoSize = true;
+            this.LabelSearchPriceMin.BackColor = System.Drawing.Color.Gray;
             this.LabelSearchPriceMin.ForeColor = System.Drawing.Color.White;
-            this.LabelSearchPriceMin.Location = new System.Drawing.Point(410, 177);
+            this.LabelSearchPriceMin.Location = new System.Drawing.Point(599, 92);
             this.LabelSearchPriceMin.Name = "LabelSearchPriceMin";
             this.LabelSearchPriceMin.Size = new System.Drawing.Size(77, 20);
             this.LabelSearchPriceMin.TabIndex = 65;
@@ -323,8 +300,9 @@
             // LabelSearchStockMax
             // 
             this.LabelSearchStockMax.AutoSize = true;
+            this.LabelSearchStockMax.BackColor = System.Drawing.Color.Gray;
             this.LabelSearchStockMax.ForeColor = System.Drawing.Color.White;
-            this.LabelSearchStockMax.Location = new System.Drawing.Point(536, 244);
+            this.LabelSearchStockMax.Location = new System.Drawing.Point(725, 159);
             this.LabelSearchStockMax.Name = "LabelSearchStockMax";
             this.LabelSearchStockMax.Size = new System.Drawing.Size(87, 20);
             this.LabelSearchStockMax.TabIndex = 64;
@@ -333,8 +311,9 @@
             // LabelSearchStockMin
             // 
             this.LabelSearchStockMin.AutoSize = true;
+            this.LabelSearchStockMin.BackColor = System.Drawing.Color.Gray;
             this.LabelSearchStockMin.ForeColor = System.Drawing.Color.White;
-            this.LabelSearchStockMin.Location = new System.Drawing.Point(410, 244);
+            this.LabelSearchStockMin.Location = new System.Drawing.Point(599, 159);
             this.LabelSearchStockMin.Name = "LabelSearchStockMin";
             this.LabelSearchStockMin.Size = new System.Drawing.Size(83, 20);
             this.LabelSearchStockMin.TabIndex = 63;
@@ -343,8 +322,9 @@
             // LabelSearchProductType
             // 
             this.LabelSearchProductType.AutoSize = true;
+            this.LabelSearchProductType.BackColor = System.Drawing.Color.Gray;
             this.LabelSearchProductType.ForeColor = System.Drawing.Color.White;
-            this.LabelSearchProductType.Location = new System.Drawing.Point(410, 302);
+            this.LabelSearchProductType.Location = new System.Drawing.Point(599, 217);
             this.LabelSearchProductType.Name = "LabelSearchProductType";
             this.LabelSearchProductType.Size = new System.Drawing.Size(106, 20);
             this.LabelSearchProductType.TabIndex = 62;
@@ -352,7 +332,7 @@
             // 
             // SearchStockMax
             // 
-            this.SearchStockMax.Location = new System.Drawing.Point(540, 267);
+            this.SearchStockMax.Location = new System.Drawing.Point(729, 182);
             this.SearchStockMax.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -369,14 +349,14 @@
             // 
             // SearchStockMin
             // 
-            this.SearchStockMin.Location = new System.Drawing.Point(414, 267);
+            this.SearchStockMin.Location = new System.Drawing.Point(603, 182);
             this.SearchStockMin.Name = "SearchStockMin";
             this.SearchStockMin.Size = new System.Drawing.Size(120, 26);
             this.SearchStockMin.TabIndex = 60;
             // 
             // SearchPriceMax
             // 
-            this.SearchPriceMax.Location = new System.Drawing.Point(540, 200);
+            this.SearchPriceMax.Location = new System.Drawing.Point(729, 115);
             this.SearchPriceMax.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -393,7 +373,7 @@
             // 
             // SearchPriceMin
             // 
-            this.SearchPriceMin.Location = new System.Drawing.Point(414, 200);
+            this.SearchPriceMin.Location = new System.Drawing.Point(603, 115);
             this.SearchPriceMin.Name = "SearchPriceMin";
             this.SearchPriceMin.Size = new System.Drawing.Size(120, 26);
             this.SearchPriceMin.TabIndex = 58;
@@ -402,7 +382,7 @@
             // 
             this.ComboBoxSearchProductTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxSearchProductTypes.FormattingEnabled = true;
-            this.ComboBoxSearchProductTypes.Location = new System.Drawing.Point(540, 299);
+            this.ComboBoxSearchProductTypes.Location = new System.Drawing.Point(729, 214);
             this.ComboBoxSearchProductTypes.Name = "ComboBoxSearchProductTypes";
             this.ComboBoxSearchProductTypes.Size = new System.Drawing.Size(121, 28);
             this.ComboBoxSearchProductTypes.TabIndex = 57;
@@ -410,8 +390,9 @@
             // LabelSearchName
             // 
             this.LabelSearchName.AutoSize = true;
+            this.LabelSearchName.BackColor = System.Drawing.Color.Gray;
             this.LabelSearchName.ForeColor = System.Drawing.Color.White;
-            this.LabelSearchName.Location = new System.Drawing.Point(410, 145);
+            this.LabelSearchName.Location = new System.Drawing.Point(599, 60);
             this.LabelSearchName.Name = "LabelSearchName";
             this.LabelSearchName.Size = new System.Drawing.Size(114, 20);
             this.LabelSearchName.TabIndex = 56;
@@ -419,14 +400,14 @@
             // 
             // TextBoxSearchName
             // 
-            this.TextBoxSearchName.Location = new System.Drawing.Point(540, 142);
+            this.TextBoxSearchName.Location = new System.Drawing.Point(729, 57);
             this.TextBoxSearchName.Name = "TextBoxSearchName";
             this.TextBoxSearchName.Size = new System.Drawing.Size(120, 26);
             this.TextBoxSearchName.TabIndex = 55;
             // 
             // BTNSearch
             // 
-            this.BTNSearch.Location = new System.Drawing.Point(503, 333);
+            this.BTNSearch.Location = new System.Drawing.Point(692, 248);
             this.BTNSearch.Name = "BTNSearch";
             this.BTNSearch.Size = new System.Drawing.Size(82, 35);
             this.BTNSearch.TabIndex = 54;
@@ -438,7 +419,7 @@
             // 
             this.DateTimePickerFrom.CustomFormat = "";
             this.DateTimePickerFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateTimePickerFrom.Location = new System.Drawing.Point(431, 547);
+            this.DateTimePickerFrom.Location = new System.Drawing.Point(887, 170);
             this.DateTimePickerFrom.Name = "DateTimePickerFrom";
             this.DateTimePickerFrom.Size = new System.Drawing.Size(112, 26);
             this.DateTimePickerFrom.TabIndex = 68;
@@ -448,7 +429,7 @@
             // 
             this.DateTimePickerTo.CustomFormat = "";
             this.DateTimePickerTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateTimePickerTo.Location = new System.Drawing.Point(549, 547);
+            this.DateTimePickerTo.Location = new System.Drawing.Point(1005, 170);
             this.DateTimePickerTo.Name = "DateTimePickerTo";
             this.DateTimePickerTo.Size = new System.Drawing.Size(112, 26);
             this.DateTimePickerTo.TabIndex = 69;
@@ -457,9 +438,10 @@
             // LabelStats
             // 
             this.LabelStats.AutoSize = true;
+            this.LabelStats.BackColor = System.Drawing.Color.Gray;
             this.LabelStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelStats.ForeColor = System.Drawing.Color.White;
-            this.LabelStats.Location = new System.Drawing.Point(479, 390);
+            this.LabelStats.Location = new System.Drawing.Point(935, 13);
             this.LabelStats.Name = "LabelStats";
             this.LabelStats.Size = new System.Drawing.Size(108, 29);
             this.LabelStats.TabIndex = 70;
@@ -468,8 +450,9 @@
             // LabelStatsFrom
             // 
             this.LabelStatsFrom.AutoSize = true;
+            this.LabelStatsFrom.BackColor = System.Drawing.Color.Gray;
             this.LabelStatsFrom.ForeColor = System.Drawing.Color.White;
-            this.LabelStatsFrom.Location = new System.Drawing.Point(427, 524);
+            this.LabelStatsFrom.Location = new System.Drawing.Point(883, 147);
             this.LabelStatsFrom.Name = "LabelStatsFrom";
             this.LabelStatsFrom.Size = new System.Drawing.Size(50, 20);
             this.LabelStatsFrom.TabIndex = 71;
@@ -478,8 +461,9 @@
             // LabelStatsTo
             // 
             this.LabelStatsTo.AutoSize = true;
+            this.LabelStatsTo.BackColor = System.Drawing.Color.Gray;
             this.LabelStatsTo.ForeColor = System.Drawing.Color.White;
-            this.LabelStatsTo.Location = new System.Drawing.Point(545, 524);
+            this.LabelStatsTo.Location = new System.Drawing.Point(1001, 147);
             this.LabelStatsTo.Name = "LabelStatsTo";
             this.LabelStatsTo.Size = new System.Drawing.Size(31, 20);
             this.LabelStatsTo.TabIndex = 72;
@@ -487,7 +471,7 @@
             // 
             // BTNViewSales
             // 
-            this.BTNViewSales.Location = new System.Drawing.Point(431, 489);
+            this.BTNViewSales.Location = new System.Drawing.Point(887, 112);
             this.BTNViewSales.Name = "BTNViewSales";
             this.BTNViewSales.Size = new System.Drawing.Size(113, 32);
             this.BTNViewSales.TabIndex = 73;
@@ -497,7 +481,7 @@
             // 
             // BTNTop10
             // 
-            this.BTNTop10.Location = new System.Drawing.Point(431, 435);
+            this.BTNTop10.Location = new System.Drawing.Point(887, 58);
             this.BTNTop10.Name = "BTNTop10";
             this.BTNTop10.Size = new System.Drawing.Size(120, 32);
             this.BTNTop10.TabIndex = 74;
@@ -505,16 +489,38 @@
             this.BTNTop10.UseVisualStyleBackColor = true;
             this.BTNTop10.Click += new System.EventHandler(this.BTNTop10_Click);
             // 
+            // BTNImportProducts
+            // 
+            this.BTNImportProducts.Location = new System.Drawing.Point(1043, 320);
+            this.BTNImportProducts.Name = "BTNImportProducts";
+            this.BTNImportProducts.Size = new System.Drawing.Size(138, 40);
+            this.BTNImportProducts.TabIndex = 75;
+            this.BTNImportProducts.Text = "Import Products";
+            this.BTNImportProducts.UseVisualStyleBackColor = true;
+            // 
+            // BTNExportProducts
+            // 
+            this.BTNExportProducts.Location = new System.Drawing.Point(899, 320);
+            this.BTNExportProducts.Name = "BTNExportProducts";
+            this.BTNExportProducts.Size = new System.Drawing.Size(138, 40);
+            this.BTNExportProducts.TabIndex = 76;
+            this.BTNExportProducts.Text = "Export Products";
+            this.BTNExportProducts.UseVisualStyleBackColor = true;
+            this.BTNExportProducts.Click += new System.EventHandler(this.BTNExportProducts_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(1218, 756);
+            this.BackColor = System.Drawing.Color.Gray;
+            this.ClientSize = new System.Drawing.Size(1193, 651);
+            this.Controls.Add(this.BTNExportProducts);
+            this.Controls.Add(this.BTNImportProducts);
             this.Controls.Add(this.BTNTop10);
             this.Controls.Add(this.BTNViewSales);
             this.Controls.Add(this.LabelStatsTo);
             this.Controls.Add(this.LabelStatsFrom);
+            this.Controls.Add(this.BTNAddToCart);
             this.Controls.Add(this.LabelStats);
             this.Controls.Add(this.DateTimePickerFrom);
             this.Controls.Add(this.DateTimePickerTo);
@@ -534,9 +540,6 @@
             this.Controls.Add(this.BTNSearch);
             this.Controls.Add(this.ListViewProducts);
             this.Controls.Add(this.TabControl1);
-            this.Controls.Add(this.BTNExit);
-            this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Media Shop";
@@ -555,8 +558,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button BTNExit;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl TabControl1;
         private System.Windows.Forms.TabPage TabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -598,5 +599,7 @@
         private System.Windows.Forms.Label LabelStatsTo;
         private System.Windows.Forms.Button BTNViewSales;
         private System.Windows.Forms.Button BTNTop10;
+        private System.Windows.Forms.Button BTNImportProducts;
+        private System.Windows.Forms.Button BTNExportProducts;
     }
 }

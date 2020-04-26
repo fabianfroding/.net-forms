@@ -38,5 +38,10 @@ namespace MediaShop.Controllers
         {
             return productRepository.Update(product);
         }
+
+        public bool ExportProducts(string path)
+        {
+            return productRepository.ExportProducts(path);
+        }
     }
 }

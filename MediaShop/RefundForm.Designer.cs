@@ -42,7 +42,7 @@
             this.columnHeader2});
             this.ListViewReceiptProducts.GridLines = true;
             this.ListViewReceiptProducts.HideSelection = false;
-            this.ListViewReceiptProducts.Location = new System.Drawing.Point(354, 56);
+            this.ListViewReceiptProducts.Location = new System.Drawing.Point(293, 12);
             this.ListViewReceiptProducts.MultiSelect = false;
             this.ListViewReceiptProducts.Name = "ListViewReceiptProducts";
             this.ListViewReceiptProducts.Size = new System.Drawing.Size(288, 341);
@@ -62,7 +62,7 @@
             this.columnHeader1});
             this.ListViewReceipts.GridLines = true;
             this.ListViewReceipts.HideSelection = false;
-            this.ListViewReceipts.Location = new System.Drawing.Point(63, 56);
+            this.ListViewReceipts.Location = new System.Drawing.Point(12, 12);
             this.ListViewReceipts.MultiSelect = false;
             this.ListViewReceipts.Name = "ListViewReceipts";
             this.ListViewReceipts.Size = new System.Drawing.Size(275, 611);
@@ -79,7 +79,7 @@
             // 
             // BTNBack
             // 
-            this.BTNBack.Location = new System.Drawing.Point(63, 687);
+            this.BTNBack.Location = new System.Drawing.Point(12, 629);
             this.BTNBack.Name = "BTNBack";
             this.BTNBack.Size = new System.Drawing.Size(138, 40);
             this.BTNBack.TabIndex = 20;
@@ -89,7 +89,7 @@
             // 
             // BTNRefund
             // 
-            this.BTNRefund.Location = new System.Drawing.Point(504, 403);
+            this.BTNRefund.Location = new System.Drawing.Point(443, 359);
             this.BTNRefund.Name = "BTNRefund";
             this.BTNRefund.Size = new System.Drawing.Size(138, 40);
             this.BTNRefund.TabIndex = 21;
@@ -101,8 +101,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(722, 793);
+            this.BackColor = System.Drawing.Color.Gray;
+            this.ClientSize = new System.Drawing.Size(633, 725);
             this.Controls.Add(this.BTNRefund);
             this.Controls.Add(this.BTNBack);
             this.Controls.Add(this.ListViewReceipts);
