@@ -111,6 +111,7 @@ namespace MediaShop.Repositories
         public bool ExportProducts(string path)
         {
             List<string> lines = File.ReadAllLines(_dbPath).ToList();
+            File.WriteAllText(path, String.Empty);
             StreamWriter sw = File.AppendText(path);
             foreach (string line in lines)
             {
